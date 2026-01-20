@@ -1,0 +1,41 @@
+﻿@model INTRANET_SSPVER.Models.Entities.TformatosTecnologia
+
+@{
+    ViewData["Title"] = "Editar formato";
+}
+
+<h2 class="mb-4 text-center text-uppercase text-primary">Editar Formato</h2>
+
+<form asp-action="Editar" enctype="multipart/form-data" method="post" class="mt-3">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre del formato</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Archivo actual</label>
+        <p>
+            <a href="@Model.RutaArchivo" target="_blank" class="btn btn-link">
+                @Model.RutaArchivo
+            </a>
+        </p>
+    </div>
+
+    <div class="mb-3">
+        <label for="archivo" class="form-label">Reemplazar archivo PDF (opcional)</label>
+        <input type="file" name="archivo" id="archivo" class="form-control" accept="application/pdf" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Activo" class="form-label">Activo</label>
+        <input asp-for="Activo" type="checkbox" class="form-check-input" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-save me-2"></i> Guardar cambios
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

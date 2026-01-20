@@ -1,0 +1,76 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>@ViewData["Title"] - INTRANET SSP</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+
+
+</head>
+
+
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+	<header>
+		<nav class="navbar navbar-expand-sm border-bottom">
+			<div class="container px-4 mx-auto d-flex align-items-center justify-content-between" style="max-width: 1200px;">
+				<a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Proceso" asp-action="Inicio">
+					<img src="~/img/logo/Veracruz2026.png" alt="Logo Veracruz" height="40" style="pointer-events: none;" />
+				</a>
+
+				<a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Proceso" asp-action="Inicio">
+					<img src="~/img/logo/Logo_Intranet.png" alt="Logo Intranet" height="40" style="pointer-events: none;" />
+				</a>
+
+				<ul class="navbar-nav flex-row gap-3 align-items-center mb-0">
+					<li class="nav-item">
+						@* <form id="logoutForm" asp-area="Account" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+							<a href="javascript:document.getElementById('logoutForm').submit();" class="nav-link text-dark">
+								<i class="bi bi-box-arrow-left"></i> Salir
+							</a>
+						</form> *@
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+
+	@RenderBody()
+	
+
+	<footer class="border-top footer text-muted py-3 mt-auto">
+		<div class="container px-4 mx-auto d-flex align-items-center justify-content-center gap-3 flex-wrap text-center" style="max-width: 1200px;">
+			<img src="~/img/logo/FooterLogo.png" alt="Logo Veracruz" style="height: 150px;">
+			<span>
+				Sitio desarrollado por la Dirección de Tecnologías de la Información de la Secretaría de Seguridad Pública. <br>
+				Algunos derechos reservados a favor del Gobierno del Estado de Veracruz © @DateTime.Now.Year
+			</span>
+		</div>
+	</footer>
+
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js"></script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>

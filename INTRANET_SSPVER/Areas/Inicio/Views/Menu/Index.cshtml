@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <main class="col-12">
+
+            <div class="container text-center">
+
+                <!-- Fila 1 -->
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                  
+                    <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                        <i class="bi bi-telephone"></i> DIRECTORIO SSP
+                    </a>
+                    <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                        <i class="bi bi-shield-check"></i> CALEA
+                    </a>
+
+                    <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                        <i class="bi bi-file-earmark-text"></i> FORMATOS SSP
+                    </a>
+                   @*  <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                        <i class="bi bi-folder2-open"></i> DOCUMENTACIÓN
+                    </a> *@
+                   @*  <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                        <i class="bi bi-file-earmark-lock"></i> AVISOS DE PRIVACIDAD
+                    </a> *@
+
+                 
+                </div>
+
+                <!-- Fila 2 -->
+               @*  <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                    <a href="#" class="btn-acceso-ssp">
+                        <i class="bi bi-share"></i> REDES Y SEGURIDAD
+                    </a>
+                    <a href="#" class="btn-acceso-ssp">
+                        <i class="bi bi-people"></i> SOPORTE TÉCNICO
+                    </a>
+                    <a href="#" class="btn-acceso-ssp">
+                        <i class="bi bi-code-slash"></i> DESARROLLO DIGITAL
+                    </a>
+                </div> *@
+
+                <!-- Fila 3 -->
+              @*   <div class="d-flex justify-content-center mt-4">
+                    <a href="#" class="btn-acceso-ssp">
+                        <i class="bi bi-headset"></i> MESA DE AYUDA <br /> Ext. 8000
+                    </a>
+                </div> *@
+
+                  <div class="d-flex justify-content-center mt-4">
+                    <a class="btn-acceso-ssp" asp-area="Tecnologias" asp-controller="Inicio" asp-action="Index">
+                        <i class="bi bi-building"></i> DIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN
+                    </a>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+</div>
