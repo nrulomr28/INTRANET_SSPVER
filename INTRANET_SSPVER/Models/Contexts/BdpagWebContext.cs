@@ -9,6 +9,7 @@ public partial class BdpagWebContext : DbContext
 {
     public BdpagWebContext()
     {
+
     }
 
     public BdpagWebContext(DbContextOptions<BdpagWebContext> options)
@@ -16,9 +17,11 @@ public partial class BdpagWebContext : DbContext
     {
     }
 
-    public virtual DbSet<TdirectorioTel> TdirectorioTels { get; set; }
+    public virtual DbSet<CatArea> CatAreas { get; set; }
 
-    public virtual DbSet<TformatosTecnologia> TformatosTecnologias { get; set; }
+    public virtual DbSet<CatFormato> CatFormatos { get; set; }
+
+    public virtual DbSet<TdirectorioTel> TdirectorioTels { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -28,6 +31,33 @@ public partial class BdpagWebContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Modern_Spanish_CI_AS");
+
+        modelBuilder.Entity<CatArea>(entity =>
+        {
+            entity.HasKey(e => e.IdArea);
+
+            entity.ToTable("cat_Area");
+
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<CatFormato>(entity =>
+        {
+            entity.HasKey(e => e.IdFormato).HasName("PK_tformatos_tecnologias");
+
+            entity.ToTable("cat_Formato");
+
+            entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+            entity.Property(e => e.Nombre).HasMaxLength(200);
+            entity.Property(e => e.RutaArchivo).HasMaxLength(300);
+
+            entity.HasOne(d => d.IdAreaNavigation).WithMany(p => p.CatFormatos)
+                .HasForeignKey(d => d.IdArea)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_cat_Formato_cat_Area");
+        });
 
         modelBuilder.Entity<TdirectorioTel>(entity =>
         {
@@ -45,15 +75,6 @@ public partial class BdpagWebContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<TformatosTecnologia>(entity =>
-        {
-            entity.ToTable("tformatos_tecnologias");
-
-            entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
-            entity.Property(e => e.Nombre).HasMaxLength(200);
-            entity.Property(e => e.RutaArchivo).HasMaxLength(300);
         });
 
         OnModelCreatingPartial(modelBuilder);

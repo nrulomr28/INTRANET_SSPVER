@@ -1,25 +1,18 @@
 ﻿using INTRANET_SSPVER.Models.Contexts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace INTRANET_SSPVER.Areas.Inicio.Controllers
+namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
 {
-    public class RedesController : Controller
+    [Area("Tecnologias")]
+    public class SoporteController : Controller
     {
 
         private readonly BdpagWebContext _context;
 
-        public RedesController(BdpagWebContext context)
+        public SoporteController(BdpagWebContext context)
         {
             _context = context;
         }
-
-
-        //public IActionResult Index()
-        //{
-        //    return View("Index");
-        //}
-
 
         public IActionResult Index()
         {
@@ -32,8 +25,9 @@ namespace INTRANET_SSPVER.Areas.Inicio.Controllers
 
 
 
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
     }
-
-
-
 }

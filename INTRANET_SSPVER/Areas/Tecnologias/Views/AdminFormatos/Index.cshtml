@@ -1,54 +1,88 @@
-﻿@model IEnumerable<INTRANET_SSPVER.Models.Entities.TformatosTecnologia>
+﻿@model IEnumerable<INTRANET_SSPVER.Models.Entities.CatFormato>
+
+
 
 @{
-    ViewData["Title"] = "Administración de Formatos";
+	ViewData["Title"] = "Administración de Formatos";
 }
 
-<h2 class="mb-4 text-center text-uppercase text-primary">Administración de Formatos Tecnológicos</h2>
+<h2 class="mb-4 text-center text-uppercase text-primary mt-5">Administración de Formatos</h2>
 
-<a asp-action="Crear" class="btn btn-success mb-3">
-    <i class="bi bi-plus-circle me-2"></i> Subir nuevo formato
-</a>
+
+<div class="d-flex justify-content-between align-items-center">
+	<span></span>
+	<a asp-action="Crear" class="btn btn-secondary mb-3">
+		<i class="bi bi-plus-circle me-2"></i> Subir nuevo formato
+	</a>
+</div>
+
 
 <table class="table table-bordered table-striped">
-    <thead class="table-warning text-center">
-        <tr>
-            <th>Nombre</th>
-            <th>Ruta</th>
-            <th>Activo</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var formato in Model)
-        {
-            <tr>
-                <td>@formato.Nombre</td>
-                <td>@formato.RutaArchivo</td>
-                <td class="text-center">
-                    <span class="badge @(formato.Activo ? "bg-success" : "bg-secondary")">
-                        @(formato.Activo ? "Sí" : "No")
-                    </span>
-                </td>
-                <td>@formato.FechaCreacion.ToString("dd/MM/yyyy")</td>
-                <td class="text-center">
+	@* <thead class="table-warning text-center"> *@
+	<thead class="table-secondary text-center">
+		<tr>
+			<th>Nombre</th>
+			<th>Ruta</th>
+			<th>Activo</th>
+			<th>Fecha</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
 
-                    <a asp-action="Editar" asp-route-id="@formato.Id" class="btn btn-sm btn-primary me-1">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </a>
+		@foreach (var formato in Model)
+		{
+			<tr>
+				<td>@formato.Nombre</td>
+				<td>@formato.RutaArchivo</td>
+				<td class="text-center">
+					<span class="badge @(formato.Activo ? "bg-success" : "bg-secondary")">
+						@(formato.Activo ? "Sí" : "No")
+					</span>
+				</td>
+				<td>@formato.FechaCreacion.ToString("dd/MM/yyyy")</td>
+				<td class="text-center">
 
-                    <a asp-action="CambiarEstado" asp-route-id="@formato.Id" class="btn btn-sm btn-warning me-1">
-                        <i class="bi bi-toggle-on"></i>
-                    </a>
-                    <a asp-action="Eliminar" asp-route-id="@formato.Id" class="btn btn-sm btn-danger me-1">
+					<a asp-action="Editar" asp-route-id="@formato.IdFormato" class="btn btn-sm btn-primary me-1">
+						<i class="bi bi-pencil-square"></i> Editar
+					</a>
+
+					<a asp-action="CambiarEstado" asp-route-id="@formato.IdFormato" class="btn btn-sm btn-warning me-1">
+						<i class="bi bi-toggle-on"></i>
+					</a>
+					@*  <a asp-action="Eliminar" asp-route-id="@formato.Id" class="btn btn-sm btn-danger me-1">
                         <i class="bi bi-trash"></i>
-                    </a>
-                    <a asp-area="Tecnologias" asp-controller="Formatos" asp-action="Descargar" asp-route-id="@formato.Id" class="btn btn-sm btn-info">
-                        <i class="bi bi-download"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
+                    </a> *@
+
+					<a asp-action="Eliminar"
+					   asp-route-id="@formato.IdFormato"
+					   class="btn btn-sm btn-danger me-1"
+					   onclick="return confirm('¿Está seguro de que desea eliminar este formato? Esta acción no se puede deshacer.');">
+						<i class="bi bi-trash"></i>
+					</a>
+
+					<a asp-area="Tecnologias" asp-controller="Formatos" asp-action="Descargar" asp-route-id="@formato.IdFormato" class="btn btn-sm btn-info">
+						<i class="bi bi-download"></i>
+					</a>
+				</td>
+			</tr>
+		}
+
+	</tbody>
+
 </table>
+
+
+<!-- Botón regresar -->
+<div class="mt-4 text-center">
+	<a asp-area="Tecnologias"
+	   asp-controller="Inicio"
+	   asp-action="Index"
+	   class="btn btn-outline-danger btn-lg shadow-sm px-4">
+		<i class="bi bi-arrow-left-circle me-2"></i>
+		Regresar al menú
+	</a>
+</div>
+
+
+

@@ -20,7 +20,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
 
         public IActionResult Descargar(int id)
         {
-            var formato = _context.TformatosTecnologias.FirstOrDefault(f => f.Id == id && f.Activo);
+            var formato = _context.CatFormatos.FirstOrDefault(f => f.IdFormato == id && f.Activo);
             if (formato == null) return NotFound();
 
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", formato.RutaArchivo.TrimStart('/'));
@@ -29,6 +29,9 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, "application/pdf", Path.GetFileName(filePath));
         }
+
+
+
 
 
     }
