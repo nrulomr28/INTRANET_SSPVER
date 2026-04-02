@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Areas\Account\" />
     <Folder Include="Areas\Admin\" />
-    <Folder Include="Areas\Tecnologias\Views\Desarrollo\" />
     <Folder Include="Models\Contexts\" />
     <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\FormatosTecnologias\" />

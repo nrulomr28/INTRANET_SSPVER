@@ -41,22 +41,22 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                     page.Size(PageSizes.A4);
                     page.Margin(2, Unit.Centimetre);
 
-                    // Encabezado institucional
+                    
                     page.Header().Background("#6A1B1B").Padding(10).AlignCenter().Text("Directorio Telefónico SSP")
                         .FontSize(20).Bold().FontColor("#FFFFFF");
 
-                    // Contenido: tabla con numeración y colores
+                    
                     page.Content().Table(table =>
                     {
                         table.ColumnsDefinition(columns =>
                         {
-                            columns.RelativeColumn(1); // #
-                            columns.RelativeColumn(3); // Nombre
-                            columns.RelativeColumn(3); // Área
-                            columns.RelativeColumn(2); // Extensión
+                            columns.RelativeColumn(1); 
+                            columns.RelativeColumn(3); 
+                            columns.RelativeColumn(3); 
+                            columns.RelativeColumn(2); 
                         });
 
-                        // Encabezado de tabla con fondo amarillo
+                        // Encabezado 
                         table.Header(header =>
                         {
                             header.Cell().Background("#F2C94C").AlignCenter().Text("#").Bold().FontSize(12).FontColor("#6A1B1B");
@@ -76,7 +76,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                         }
                     });
 
-                    // Footer institucional
+                    // Footer
                     page.Footer().AlignCenter().Text(text =>
                     {
                         text.Span("Secretaría de Seguridad Pública - Veracruz")

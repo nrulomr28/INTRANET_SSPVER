@@ -20,65 +20,19 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
             _env = env;
         }
 
-        // Listado
+
         public IActionResult Index()
         {
-            //    var formatos = _context.CatAreas.ToList();
-            //    return View(formatos);
-
-            var formatos = _context.CatFormatos.Include(f => f.IdAreaNavigation).ToList();
+            var formatos = _context.Formatos.Include(f => f.IdAreaNavigation).ToList();
             return View(formatos);
         }
-
-
-
-
-        // Formulario de creación
-        //[HttpGet]
-        //public IActionResult Crear()
-        //{
-        //    return View();
-        //}
 
         [HttpGet]
         public IActionResult Crear()
         {
-            ViewBag.Areas = new SelectList(_context.CatAreas, "IdArea", "Nombre");
+            ViewBag.Areas = new SelectList(_context.Areas, "IdArea", "Nombre");
             return View();
         }
-
-
-
-
-        //[HttpPost]
-        //public IActionResult Crear(IFormFile archivo, string nombre)
-        //{
-        //    if (archivo != null && archivo.Length > 0)
-        //    {
-        //        var carpeta = Path.Combine(_env.WebRootPath, "FormatosTecnologias");
-        //        if (!Directory.Exists(carpeta))
-        //            Directory.CreateDirectory(carpeta);
-
-        //        var rutaArchivo = Path.Combine(carpeta, archivo.FileName);
-        //        using (var stream = new FileStream(rutaArchivo, FileMode.Create))
-        //        {
-        //            archivo.CopyTo(stream);
-        //        }
-
-        //        var formato = new CatFormato
-        //        {
-        //            Nombre = nombre,
-        //            RutaArchivo = $"/FormatosTecnologias/{archivo.FileName}",
-        //            FechaCreacion = DateTime.Now,
-        //            Activo = true
-        //        };
-
-        //        _context.CatFormatos.Add(formato);
-        //        _context.SaveChanges();
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
 
 
         [HttpPost]
@@ -96,7 +50,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
                     archivo.CopyTo(stream);
                 }
 
-                var formato = new CatFormato
+                var formato = new Formato
                 {
                     Nombre = nombre,
                     IdArea = idArea,
@@ -105,7 +59,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
                     Activo = true
                 };
 
-                _context.CatFormatos.Add(formato);
+                _context.Formatos.Add(formato);
                 _context.SaveChanges();
             }
 
@@ -117,7 +71,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
         // Activar/Desactivar
         public IActionResult CambiarEstado(int id)
         {
-            var formato = _context.CatFormatos.Find(id);
+            var formato = _context.Formatos.Find(id);
             if (formato != null)
             {
                 formato.Activo = !formato.Activo;
@@ -129,7 +83,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
 
         public IActionResult Eliminar(int id)
         {
-            var formato = _context.CatFormatos.Find(id);
+            var formato = _context.Formatos.Find(id);
             if (formato != null)
             {
                 // Eliminar archivo físico
@@ -140,7 +94,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
                 }
 
                 // Eliminar registro en BD
-                _context.CatFormatos.Remove(formato);
+                _context.Formatos.Remove(formato);
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
@@ -149,30 +103,25 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
 
 
         [HttpGet]
-        //public IActionResult Editar(int id)
-        //{
-        //    var formato = _context.CatFormatos.Find(id);
-        //    if (formato == null) return NotFound();
-        //    return View(formato);
-        //}
         public IActionResult Editar(int id)
         {
-            var formato = _context.CatFormatos.Find(id);
+            var formato = _context.Formatos.Find(id);
             if (formato == null) return NotFound();
 
-            ViewBag.Areas = new SelectList(_context.CatAreas, "IdArea", "Nombre", formato.IdArea);
+            ViewBag.Areas = new SelectList(_context.Areas, "IdArea", "Nombre", formato.IdArea);
             return View(formato);
         }
 
 
         [HttpPost]
-        public IActionResult Editar(int id, IFormFile archivo, TformatosTecnologia model)
+        public IActionResult Editar(int id, IFormFile archivo, Formato model)
         {
-            var formato = _context.CatFormatos.Find(id);
+            var formato = _context.Formatos.Find(id);
             if (formato == null) return NotFound();
 
             formato.Nombre = model.Nombre;
             formato.Activo = model.Activo;
+            formato.IdArea = model.IdArea;
 
             if (archivo != null && archivo.Length > 0)
             {

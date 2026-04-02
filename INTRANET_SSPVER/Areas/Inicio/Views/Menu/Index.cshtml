@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     Layout = "_Layout";
 }
 
@@ -11,48 +11,21 @@
                 <!-- Fila 1 -->
                 <div class="d-flex flex-wrap justify-content-center gap-3">
                   
-                    <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                    <a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
                         <i class="bi bi-telephone"></i> DIRECTORIO SSP
                     </a>
-                    <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                    <a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
                         <i class="bi bi-shield-check"></i> CALEA
                     </a>
 
-                    <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+                    <a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
                         <i class="bi bi-file-earmark-text"></i> FORMATOS SSP
                     </a>
-                   @*  <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-                        <i class="bi bi-folder2-open"></i> DOCUMENTACIÓN
-                    </a> *@
-                   @*  <a class="btn-acceso-ssp" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-                        <i class="bi bi-file-earmark-lock"></i> AVISOS DE PRIVACIDAD
-                    </a> *@
-
-                 
-                </div>
-
-                <!-- Fila 2 -->
-               @*  <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                    <a href="#" class="btn-acceso-ssp">
-                        <i class="bi bi-share"></i> REDES Y SEGURIDAD
-                    </a>
-                    <a href="#" class="btn-acceso-ssp">
-                        <i class="bi bi-people"></i> SOPORTE TÉCNICO
-                    </a>
-                    <a href="#" class="btn-acceso-ssp">
-                        <i class="bi bi-code-slash"></i> DESARROLLO DIGITAL
-                    </a>
-                </div> *@
-
-                <!-- Fila 3 -->
-              @*   <div class="d-flex justify-content-center mt-4">
-                    <a href="#" class="btn-acceso-ssp">
-                        <i class="bi bi-headset"></i> MESA DE AYUDA <br /> Ext. 8000
-                    </a>
-                </div> *@
+                                   
+                </div>             
 
                   <div class="d-flex justify-content-center mt-4">
-                    <a class="btn-acceso-ssp" asp-area="Tecnologias" asp-controller="Inicio" asp-action="Index">
+                    <a class="card-acceso" asp-area="Tecnologias" asp-controller="Inicio" asp-action="Index">
                         <i class="bi bi-building"></i> DIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN
                     </a>
                 </div>
@@ -61,4 +34,69 @@
 
         </main>
     </div>
+</div>
+ *@
+
+
+@{
+	Layout = "_Layout";
+}
+
+
+
+
+
+
+
+<div class="container mt-4">
+
+	<!-- 🔹 Encabezado -->
+	<div class="text-center mb-4">
+		<h3 class="fw-bold">Portal de Servicios SSP</h3>
+		<p class="text-muted">Consulta información o solicita servicios del área</p>
+	</div>
+
+	<!-- 🔹 Grid de opciones -->
+	<div class="row g-4 justify-content-center">
+
+		<!-- Directorio -->
+		<div class="col-md-3 col-sm-6">
+			<a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+				<i class="bi bi-telephone"></i>
+				<h5>Directorio SSP</h5>
+				<p>Consulta extensiones del personal</p>
+			</a>
+		</div>
+
+		<!-- CALEA -->
+		<div class="col-md-3 col-sm-6">
+			<a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+				<i class="bi bi-shield-check"></i>
+				<h5>CALEA</h5>
+				<p>Consulta normativa y documentación</p>
+			</a>
+		</div>
+
+		<!-- Formatos -->
+		<div class="col-md-3 col-sm-6">
+			<a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+				<i class="bi bi-file-earmark-text"></i>
+				<h5>Formatos SSP</h5>
+				<p>Descarga formatos oficiales</p>
+			</a>
+		</div>
+
+		<!-- Tecnologías -->
+		<div class="d-flex justify-content-center mt-4">
+			<div class="col-md-3 col-sm-6">
+				<a class="card-acceso destacado" asp-area="Tecnologias" asp-controller="Inicio" asp-action="Index">
+					<i class="bi bi-building"></i>
+					<h5>Dirección de Tecnologías de la Información</h5>
+					<p>Solicita soporte y servicios TI</p>
+				</a>
+			</div>
+		</div>
+			
+
+	</div>
 </div>

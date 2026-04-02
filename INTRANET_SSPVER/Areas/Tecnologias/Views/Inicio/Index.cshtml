@@ -12,25 +12,72 @@
 				<div class="d-flex flex-wrap justify-content-center gap-3">
 
 
-					<a class="btn-acceso-ssp" asp-area="Tecnologias" asp-controller="Redes" asp-action="Index">
+					@* <a class="card-acceso" asp-area="Tecnologias" asp-controller="Redes" asp-action="Index">
 						<i class="bi bi-share"></i> REDES Y SEGURIDAD
 					</a>
 
 
-					<a class="btn-acceso-ssp" asp-area="Tecnologias" asp-controller="Soporte" asp-action="Index">
+					<a class="card-acceso" asp-area="Tecnologias" asp-controller="Soporte" asp-action="Index">
 						<i class="bi bi-people"></i> SOPORTE TÉCNICO
 					</a>
-					<a class="btn-acceso-ssp" asp-area="Tecnologias" asp-controller="Desarrollo" asp-action="Index">
+					<a class="card-acceso" asp-area="Tecnologias" asp-controller="Desarrollo" asp-action="Index">
 						<i class="bi bi-code-slash"></i> DESARROLLO DIGITAL
 					</a>
 
 				</div>
 
 				<div class="d-flex justify-content-center mt-4">
-					<a href="#" class="btn-acceso-ssp">
+					<a href="#" class="card-acceso">
 						<i class="bi bi-headset"></i> MESA DE AYUDA <br /> Ext. 8000
 					</a>
+				</div> *@
+
+					<div class="col-md-3 col-sm-6">
+						<a class="card-acceso" asp-area="Tecnologias" asp-controller="Redes" asp-action="Index">
+							<i class="bi bi-share"></i>
+							<h5>REDES Y SEGURIDAD</h5>
+							<p>Conectividad</p>
+						</a>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<a class="card-acceso" asp-area="Tecnologias" asp-controller="Soporte" asp-action="Index">
+							<i class="bi bi-people"></i>
+							<h5>SOPORTE TÉCNICO</h5>
+							<p>Asistencia técnica</p>
+						</a>
+					</div>
+
+					<div class="col-md-3 col-sm-6">
+						<a class="card-acceso" asp-area="Tecnologias" asp-controller="Desarrollo" asp-action="Index">
+							<i class="bi bi-code-slash"></i>
+							<h5>DESARROLLO DIGITAL</h5>
+							<p>Sistemas institucionales</p>
+						</a>
+					</div>
+
 				</div>
+
+				@* 	<div class="d-flex justify-content-center mt-4">
+					<a class="card-acceso" asp-area="Tecnologias" asp-controller="Desarrollo" asp-action="Index">
+						<i class="bi bi-headset"></i>
+						<h5>MESA DE AYUDA</h5>
+						<p>Ext. 8000</p>
+					</a>
+				</div> *@
+
+				<div class="d-flex justify-content-center mt-4">
+					<div class="col-md-3 col-sm-6">
+						<a class="card-acceso destacado" asp-area="Tecnologias" asp-controller="Inicio" asp-action="Index">
+							<i class="bi bi-headset"></i>
+							<h5>MESA DE AYUDA</h5>
+							<p>Ext. 8000</p>
+							<span class="badge bg-danger mt-2">Crear Ticket</span>
+						</a>
+					</div>
+				</div>
+
+
 
 			</div>
 

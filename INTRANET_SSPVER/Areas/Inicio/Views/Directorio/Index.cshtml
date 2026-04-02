@@ -2,87 +2,129 @@
 @model List<DirectorioVM>
 
 @{
-    Layout = "_Layout";
+	Layout = "_Layout";
 }
+
+
+<style>
+	.card-acceso {
+		display: block;
+		background: #c9a227;
+		color: white;
+		border-radius: 15px;
+		padding: 25px 15px;
+		text-align: center;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	}
+
+		.card-acceso i {
+			font-size: 40px;
+			margin-bottom: 10px;
+		}
+
+		.card-acceso h5 {
+			font-weight: bold;
+			margin-top: 10px;
+		}
+
+		.card-acceso p {
+			font-size: 14px;
+			opacity: 0.9;
+		}
+
+		.card-acceso:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+		}
+
+		/* 🔥 Tarjeta destacada */
+		.card-acceso.destacado {
+			background: #800000;
+		}
+</style>
+
+
 
 <div class="container mt-4">
 
-    <div class="card shadow-lg border-0">
-        <div class="card-header bg-danger text-white d-flex justify-content-center align-items-center">
-            <i class="bi bi-telephone-fill me-2 fs-4"></i>
-            <h4 class="mb-0">Directorio Telefónico</h4>
-        </div>
+	<div class="card shadow-lg border-0">
+		<div class="card-header bg-danger text-white d-flex justify-content-center align-items-center">
+			<i class="bi bi-telephone-fill me-2 fs-4"></i>
+			<h4 class="mb-0">Directorio Telefónico</h4>
+		</div>
 
-        <div class="card-body">
-            <p class="text-muted mb-3">
-                Consulta de extensiones internas de la Secretaría de Seguridad Pública.
-            </p>
+		<div class="card-body">
+			<p class="text-muted mb-3">
+				Consulta de extensiones internas de la Secretaría de Seguridad Pública.
+			</p>
 
-            <!-- 🔹 Cuadro de búsqueda -->
-            <div class="mb-3">
-                <input type="text" id="searchBox" class="form-control" placeholder="Buscar por nombre o área...">
-            </div>
+			<!-- 🔹 Cuadro de búsqueda -->
+			<div class="mb-3">
+				<input type="text" id="searchBox" class="form-control" placeholder="Buscar por nombre o área...">
+			</div>
 
-            <table class="table table-bordered table-hover table-sm align-middle">
-                <thead class="table-thead text-dark text-center">
-                    <tr>
-                        <th style="width:10%">#</th>
-                        <th style="width:40%">Nombre</th>
-                        <th style="width:40%">Área</th>
-                        <th style="width:20%">Extensión</th>
-                    </tr>
-                </thead>
+			<table class="table table-bordered table-hover table-sm align-middle">
+				<thead class="table-thead text-dark text-center">
+					<tr>
+						<th style="width:10%">#</th>
+						<th style="width:40%">Nombre</th>
+						<th style="width:40%">Área</th>
+						<th style="width:20%">Extensión</th>
+					</tr>
+				</thead>
 
-                @{
-                    int i = 1;
-                }
+				@{
+					int i = 1;
+				}
 
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td class="text-center">@i</td>
-                            <td>@item.Nombre</td>
-                            <td>@item.Area</td>
-                            <td class="text-center">
-                                <i class="bi bi-telephone me-1"></i> @item.Ext
-                            </td>
-                        </tr>
-                        i++;
-                    }
-                </tbody>
-            </table>
-        </div>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td class="text-center">@i</td>
+							<td>@item.Nombre</td>
+							<td>@item.Area</td>
+							<td class="text-center">
+								<i class="bi bi-telephone me-1"></i> @item.Ext
+							</td>
+						</tr>
+						i++;
+					}
+				</tbody>
+			</table>
+		</div>
 
-      @*   <div class="card-footer text-center bg-light">
+		@*   <div class="card-footer text-center bg-light">
             <a asp-area="Inicio" asp-controller="Menu" asp-action="Index" class="btn btn-outline-danger">
                 <i class="bi bi-arrow-left-circle me-2"></i> Regresar al menú
             </a>
         </div> *@
 
-        <div class="mt-3 text-center mb-3">
-            <a asp-area="Inicio" asp-controller="Directorio" asp-action="ExportPdf" class="btn btn-success me-2">
-                <i class="bi bi-file-earmark-pdf me-2"></i> Descargar PDF
-            </a>
+		<div class="mt-3 text-center mb-3">
+			<a asp-area="Inicio" asp-controller="Directorio" asp-action="ExportPdf" class="btn btn-success me-2">
+				<i class="bi bi-file-earmark-pdf me-2"></i> Descargar PDF
+			</a>
 
-            <a asp-area="Inicio" asp-controller="Menu" asp-action="Index" class="btn btn-outline-danger">
-                <i class="bi bi-arrow-left-circle me-2"></i> Regresar al menú
-            </a>
-        </div>
+			<a asp-area="Inicio" asp-controller="Menu" asp-action="Index" class="btn btn-outline-danger">
+				<i class="bi bi-arrow-left-circle me-2"></i> Regresar al menú
+			</a>
+		</div>
 
 
-    </div>
+	</div>
 </div>
 
 <script>
-    document.getElementById("searchBox").addEventListener("keyup", function () {
-        var value = this.value.toLowerCase();
-        var rows = document.querySelectorAll("table tbody tr");
+	document.getElementById("searchBox").addEventListener("keyup", function () {
+		var value = this.value.toLowerCase();
+		var rows = document.querySelectorAll("table tbody tr");
 
-        rows.forEach(function (row) {
-            var text = row.textContent.toLowerCase();
-            row.style.display = text.includes(value) ? "" : "none";
-        });
-    });
+		rows.forEach(function (row) {
+			var text = row.textContent.toLowerCase();
+			row.style.display = text.includes(value) ? "" : "none";
+		});
+	});
 </script>
 

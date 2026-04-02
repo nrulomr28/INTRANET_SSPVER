@@ -20,7 +20,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
 
         public IActionResult Descargar(int id)
         {
-            var formato = _context.CatFormatos.FirstOrDefault(f => f.IdFormato == id && f.Activo);
+            var formato = _context.Formatos.FirstOrDefault(f => f.IdFormato == id && f.Activo);
             if (formato == null) return NotFound();
 
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", formato.RutaArchivo.TrimStart('/'));

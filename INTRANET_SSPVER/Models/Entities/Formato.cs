@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace INTRANET_SSPVER.Models.Entities;
 
-public partial class CatFormato
+public partial class Formato
 {
     public int IdFormato { get; set; }
 
@@ -17,5 +17,5 @@ public partial class CatFormato
 
     public int IdArea { get; set; }
 
-    public virtual CatArea IdAreaNavigation { get; set; } = null!;
+    public virtual Area IdAreaNavigation { get; set; } = null!;
 }

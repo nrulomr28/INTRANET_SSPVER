@@ -18,16 +18,16 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
 
         public List<DirectorioVM> ObtenerDirectorio()
         {
-            return _context.TdirectorioTels
+            return _context.DirectorioTelefonicos
            .OrderBy(x => x.Nombre)
            .Select(x => new DirectorioVM
            {
                Nombre = x.Nombre,
                Area = x.Area,
-               Ext = x.Ext
+               Ext = x.Extension
            })
            .ToList();
-            
+
         }
 
     }

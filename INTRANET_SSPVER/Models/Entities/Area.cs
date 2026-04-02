@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace INTRANET_SSPVER.Models.Entities;
 
-public partial class CatArea
+public partial class Area
 {
     public int IdArea { get; set; }
 
     public string Nombre { get; set; } = null!;
 
-    public virtual ICollection<CatFormato> CatFormatos { get; set; } = new List<CatFormato>();
+    public bool Activo { get; set; }
+
+    public virtual ICollection<Formato> Formatos { get; set; } = new List<Formato>();
 }

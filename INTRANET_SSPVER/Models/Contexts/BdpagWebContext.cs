@@ -9,7 +9,6 @@ public partial class BdpagWebContext : DbContext
 {
     public BdpagWebContext()
     {
-
     }
 
     public BdpagWebContext(DbContextOptions<BdpagWebContext> options)
@@ -17,64 +16,64 @@ public partial class BdpagWebContext : DbContext
     {
     }
 
-    public virtual DbSet<CatArea> CatAreas { get; set; }
+    public virtual DbSet<Area> Areas { get; set; }
 
-    public virtual DbSet<CatFormato> CatFormatos { get; set; }
+    public virtual DbSet<DirectorioTelefonico> DirectorioTelefonicos { get; set; }
 
-    public virtual DbSet<TdirectorioTel> TdirectorioTels { get; set; }
+    public virtual DbSet<Formato> Formatos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
     }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Modern_Spanish_CI_AS");
 
-        modelBuilder.Entity<CatArea>(entity =>
+        modelBuilder.Entity<Area>(entity =>
         {
-            entity.HasKey(e => e.IdArea);
+            entity.HasKey(e => e.IdArea).HasName("PK_cat_Area");
 
-            entity.ToTable("cat_Area");
+            entity.ToTable("Area");
 
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CatFormato>(entity =>
+        modelBuilder.Entity<DirectorioTelefonico>(entity =>
+        {
+            entity.HasKey(e => e.IdDirectorio).HasName("PK_tdirectorio_tel");
+
+            entity.ToTable("DirectorioTelefonico");
+
+            entity.Property(e => e.Area)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.Extension)
+                .HasMaxLength(15)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Formato>(entity =>
         {
             entity.HasKey(e => e.IdFormato).HasName("PK_tformatos_tecnologias");
 
-            entity.ToTable("cat_Formato");
+            entity.ToTable("Formato");
 
             entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
             entity.Property(e => e.Nombre).HasMaxLength(200);
             entity.Property(e => e.RutaArchivo).HasMaxLength(300);
 
-            entity.HasOne(d => d.IdAreaNavigation).WithMany(p => p.CatFormatos)
+            entity.HasOne(d => d.IdAreaNavigation).WithMany(p => p.Formatos)
                 .HasForeignKey(d => d.IdArea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_cat_Formato_cat_Area");
-        });
-
-        modelBuilder.Entity<TdirectorioTel>(entity =>
-        {
-            entity.HasKey(e => e.IdDirectorio);
-
-            entity.ToTable("tdirectorio_tel");
-
-            entity.Property(e => e.IdDirectorio).HasColumnName("idDirectorio");
-            entity.Property(e => e.Area)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-            entity.Property(e => e.Ext)
-                .HasMaxLength(15)
-                .IsUnicode(false);
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(255)
-                .IsUnicode(false);
+                .HasConstraintName("FK_Formato_Area1");
         });
 
         OnModelCreatingPartial(modelBuilder);

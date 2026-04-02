@@ -1,4 +1,4 @@
-﻿@model IEnumerable<INTRANET_SSPVER.Models.Entities.CatFormato>
+﻿@model IEnumerable<INTRANET_SSPVER.Models.Entities.Formato>
 
 @{
 	Layout = "_Layout";
@@ -27,7 +27,7 @@
 					<div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
 						@foreach (var formato in Model)
 						{
-							<a class="btn-acceso-ssp d-flex align-items-center justify-content-center"
+							<a class="card-acceso d-flex align-items-center justify-content-center"
 							   asp-area="Tecnologias"
 							   asp-controller="Formatos"
 							   asp-action="Descargar"
@@ -40,7 +40,7 @@
 				}
 				else
 				{
-					<div class="alert alert-info mt-4">
+					<div class="alert alert-warning mt-4">
 						<i class="bi bi-info-circle me-2"></i>
 						No hay formatos disponibles en este momento.
 					</div>
@@ -63,4 +63,5 @@
 
 
 </div>
+
 <br />

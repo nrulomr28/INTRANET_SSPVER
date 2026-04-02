@@ -16,18 +16,19 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
 
         public IActionResult Index()
         {
-            var formatos = _context.CatFormatos
-                                   .Where(f => f.Activo)
+            var formatos = _context.Formatos
+                                   .Where(f => f.Activo && f.IdArea == 1)
                                    .ToList();
 
-            return View(formatos); // ✅ enviamos la lista
+            return View(formatos);
         }
-
 
 
         //public IActionResult Index()
         //{
         //    return View();
         //}
+
+
     }
 }

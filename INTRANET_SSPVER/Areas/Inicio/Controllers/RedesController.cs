@@ -23,7 +23,7 @@ namespace INTRANET_SSPVER.Areas.Inicio.Controllers
 
         public IActionResult Index()
         {
-            var formatos = _context.CatFormatos
+            var formatos = _context.Formatos
                                    .Where(f => f.Activo)
                                    .ToList();
 
