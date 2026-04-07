@@ -1,0 +1,77 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Calea
+@model DirectivaUploadVM
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Editar Directiva</h4>
+
+
+    <!-- 🔴 ERRORES -->
+    @if (ViewData.ModelState.ErrorCount > 0)
+    {
+        <div asp-validation-summary="All" class="alert alert-danger"></div>
+    }
+
+    <form asp-action="Editar" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" asp-for="IdDirectiva" />
+
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input asp-for="NombreDirectiva" class="form-control" />
+            <span asp-validation-for="NombreDirectiva" class="text-danger"></span>
+        </div>
+
+        <!-- Área -->
+        <div class="mb-3">
+            <label class="form-label">Área</label>
+            <select asp-for="IdAreaCalea" class="form-control">
+                <option value="">-- Seleccione --</option>
+                @foreach (var a in ViewBag.Areas)
+                {
+                    <option value="@a.IdAreaCalea"
+                            selected="@(a.IdAreaCalea == Model.IdAreaCalea)">
+                        @a.NombreAreaCalea
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Archivo actual -->
+        <div class="mb-3">
+            <label class="form-label">Archivo actual</label><br />
+            @if (!string.IsNullOrEmpty(Model.UrlActual))
+            {
+                <a href="@Url.Content(Model.UrlActual)" target="_blank" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-file-earmark-pdf"></i> Ver archivo
+                </a>
+            }
+            else
+            {
+                <span class="text-muted">Sin archivo</span>
+            }
+        </div>
+
+        <!-- Nuevo archivo -->
+        <div class="mb-3">
+            <label class="form-label">Reemplazar archivo (opcional)</label>
+            <input type="file" asp-for="Archivo" class="form-control" />
+            <span asp-validation-for="Archivo" class="text-danger"></span>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                Guardar cambios
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                ← Volver
+            </a>
+        </div>
+
+    </form>
+
+</div>
+

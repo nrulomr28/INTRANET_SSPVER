@@ -18,6 +18,10 @@ public partial class BdpagWebContext : DbContext
 
     public virtual DbSet<Area> Areas { get; set; }
 
+    public virtual DbSet<AreasCalea> AreasCaleas { get; set; }
+
+    public virtual DbSet<DirectivaCalea> DirectivaCaleas { get; set; }
+
     public virtual DbSet<DirectorioTelefonico> DirectorioTelefonicos { get; set; }
 
     public virtual DbSet<Formato> Formatos { get; set; }
@@ -41,6 +45,38 @@ public partial class BdpagWebContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<AreasCalea>(entity =>
+        {
+            entity.HasKey(e => e.IdAreaCalea);
+
+            entity.ToTable("AreasCalea");
+
+            entity.Property(e => e.IdAreaCalea).ValueGeneratedOnAdd();
+            entity.Property(e => e.NombreAreaCalea).HasMaxLength(200);
+
+            entity.HasOne(d => d.IdAreaCaleaNavigation).WithOne(p => p.AreasCalea)
+                .HasForeignKey<AreasCalea>(d => d.IdAreaCalea)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AreasCalea_DirectivaCalea");
+        });
+
+        modelBuilder.Entity<DirectivaCalea>(entity =>
+        {
+            entity.HasKey(e => e.IdDirectiva);
+
+            entity.ToTable("DirectivaCalea");
+
+            entity.Property(e => e.ExtencionArchivo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.FechaActualizacion).HasColumnType("datetime");
+            entity.Property(e => e.NombreDirectiva)
+                .HasMaxLength(250)
+                .IsUnicode(false);
+            entity.Property(e => e.UrlArchivoDirectiva).IsUnicode(false);
+            entity.Property(e => e.UrlImgDirectiva).IsUnicode(false);
         });
 
         modelBuilder.Entity<DirectorioTelefonico>(entity =>

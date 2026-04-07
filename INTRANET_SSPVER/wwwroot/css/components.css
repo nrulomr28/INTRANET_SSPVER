@@ -1,4 +1,7 @@
 ﻿
+/* ========================
+   BOTONES DE ACCESO
+======================== */
 
 .card-acceso {
     display: block;
@@ -35,3 +38,54 @@
     .card-acceso.destacado {
         background: #800000;
     }
+
+
+
+/*Descarga de archivos*/
+/* ========================
+   ARCHIVOS CALEA
+======================== */
+.archivo-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #212529;
+    transition: all 0.25s ease;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+    .archivo-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        background: #fff9e6;
+    }
+
+    /* Icono */
+    .archivo-card .icono {
+        font-size: 30px;
+        color: #c9a227;
+        margin-right: 12px;
+    }
+
+    /* Título */
+    .archivo-card .titulo {
+        font-weight: 600;
+    }
+
+    /* Subtexto */
+    .archivo-card .sub {
+        font-size: 12px;
+        color: #6c757d;
+    }
+
+    /* Icono descarga */
+    .archivo-card .descarga {
+        font-size: 20px;
+        color: #6A1B1B;
+    }
+
+
+
+    

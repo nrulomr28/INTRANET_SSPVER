@@ -26,7 +26,6 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
         {
             var listado = _service.ObtenerDirectorio();
             return View("Index", listado);
-
         }
 
 

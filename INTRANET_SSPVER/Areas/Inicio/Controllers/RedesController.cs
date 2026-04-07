@@ -27,7 +27,7 @@ namespace INTRANET_SSPVER.Areas.Inicio.Controllers
                                    .Where(f => f.Activo)
                                    .ToList();
 
-            return View(formatos); // ✅ enviamos la lista
+            return View(formatos); 
         }
 
 

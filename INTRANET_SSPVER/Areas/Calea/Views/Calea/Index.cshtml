@@ -1,0 +1,112 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Calea
+@model List<AreaCaleaVM>
+
+
+
+<div class="container mb-4">
+
+	<!-- 🔹 Título -->
+	<div class="text-center mb-4 mt-3">
+		<h3 class="fw-bold">CALEA</h3>
+		@* <p class="text-muted">Comisión de Acreditación para Agencias de Aplicación de la Ley</p> *@
+	</div>
+
+	<!-- 🔹 Videos -->
+	<div class="row mb-4 mt-3">
+
+		<div class="col-md-6">
+			<div class="card p-2 shadow-sm">
+				@* <video controls width="100%" style="border-radius:10px;">
+					<source src="~/videos/video1.mp4" type="video/mp4">
+					Tu navegador no soporta video.
+				</video> *@
+
+				<video controls width="100%">
+					<source src="@Url.Content("~/Calea/Videos/Calea.mp4")" type="video/mp4">
+				</video>
+			</div>
+			<p class="text-center">¿Qué es CALEA?</p>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card p-2 shadow-sm">
+				<video controls width="100%" style="border-radius:10px;">
+					@* <source src="~/videos/video2.mp4" type="video/mp4"> *@
+					<source src="@Url.Content("~/Calea/Videos/Beneficios.mp4")" type="video/mp4">
+					Tu navegador no soporta video.
+				</video>
+			</div>
+			<p class="text-center">Beneficios de la acreditación CALEA</p>
+		</div>
+
+	</div>
+
+</div>
+
+
+<div class="text-center mb-4">
+	<h3 class="fw-bold">DIRECTIVAS</h3>
+	<p class="text-muted">Consulta y descarga las directivas institucionales</p>
+</div>
+
+
+<div class="accordion" id="accordionCalea">
+
+	@foreach (var area in Model)
+	{
+		var collapseId = "collapse_" + area.IdArea;
+
+		<div class="accordion-item mb-3 shadow-sm">
+
+			<!-- HEADER -->
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed fw-bold" type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#@collapseId">
+					@area.NombreArea
+				</button>
+			</h2>
+
+			<!-- CONTENIDO -->
+			<div id="@collapseId" class="accordion-collapse collapse"
+				 data-bs-parent="#accordionCalea">
+
+				<div class="accordion-body">
+
+					<div class="row">
+						@foreach (var d in area.Directivas)
+						{
+							<div class="col-md-6 mb-3">
+
+								<a href="@d.UrlArchivo"
+								   target="_blank"
+								   class="archivo-card d-flex align-items-center">
+
+									<div class="icono">
+										<i class="bi bi-file-earmark-pdf"></i>
+									</div>
+
+									<div class="info flex-grow-1">
+										<div class="titulo">
+											@d.NombreDirectiva
+										</div>
+										<div class="sub">
+											Descargar archivo
+										</div>
+									</div>
+
+									<div class="descarga">
+										<i class="bi bi-download"></i>
+									</div>
+
+								</a>
+
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+
+</div>

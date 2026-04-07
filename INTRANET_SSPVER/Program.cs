@@ -26,6 +26,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddScoped<IDirectorioService, DirectorioService>();
+builder.Services.AddScoped<ICaleaService, CaleaService>();
 
 // Configurar licencia de QuestPDF
 QuestPDF.Settings.License = LicenseType.Community;

@@ -1,0 +1,166 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Calea
+@model List<DirectivaVM>
+
+<div class="container-fluid mt-2">
+
+	
+
+
+	<div class="card-header bg-secondary text-white d-flex justify-content-center align-items-center">
+		<i class="bi bi-card-checklist me-2 fs-4"></i>
+		<h4 class="mb-0">Administración de Directivas CALEA</h4>
+	</div>
+
+
+	<!-- 🔹 ENCABEZADO -->
+	<div class="row mt-3 mb-3 align-items-end g-2">
+
+		<!-- 🔍 FILTRO -->
+		<div class="col-12 col-md-4 col-lg-3">
+			<label class="form-label small text-muted mb-1">Filtrar por área</label>
+
+			<select id="filtroArea" class="form-select form-select-sm">
+				<option value="">-- Todas las áreas --</option>
+
+				@foreach (var area in Model.Select(x => x.NombreArea).Distinct())
+				{
+					<option value="@area">@area</option>
+				}
+			</select>
+		</div>
+
+		<!-- 📊 TOTAL -->
+		<div class="col-12 col-md-3 col-lg-2 d-flex align-items-end">
+			<span class="text-muted small">
+				Total:
+				<strong id="contador">@Model.Count</strong>
+			</span>
+		</div>
+
+		<!-- 🔘 BOTONES -->
+		<div class="col-12 col-md-5 col-lg-7 d-flex justify-content-md-end gap-2">
+			<a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+				← Volver
+			</a>
+
+			<a asp-action="Crear" class="btn btn-success btn-sm">
+				+ Nueva Directiva
+			</a>
+		</div>
+
+	</div>
+
+	@if (TempData["Success"] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show">
+			@TempData["Success"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
+
+	<!-- 🔹 Tabla -->
+	<div class="table-responsive">
+		<table class="table table-hover align-middle" id="tablaDirectivas">
+
+			<thead class="table-secondary">
+				<tr>
+					<th>#</th>
+					<th>Nombre</th>
+					<th>Área</th>
+					<th>Archivo</th>
+					<th class="text-end">Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				@{
+					int i = 1;
+				}
+
+				@foreach (var d in Model)
+				{
+					<tr data-area="@d.NombreArea">
+						<td>@i</td>
+						<td>@d.NombreDirectiva</td>
+						<td>@d.NombreArea</td>
+
+						<td>
+							<a href="@Url.Content(d.UrlArchivo)" target="_blank"
+								   class="btn btn-outline-secondary btn-sm">
+								<i class="bi bi-file-earmark-pdf"></i>
+							</a>
+						</td>
+
+						<td class="text-end">
+							<a asp-action="Editar" asp-route-id="@d.IdDirectiva"
+								   class="btn btn-outline-primary btn-sm">
+								<i class="bi bi-pencil"></i>
+							</a>
+
+							<form asp-action="Eliminar" method="post" class="d-inline">
+								<input type="hidden" name="id" value="@d.IdDirectiva" />
+								<button type="submit"
+										class="btn btn-outline-danger btn-sm"
+										onclick="return confirm('¿Eliminar esta directiva?')">
+									<i class="bi bi-trash"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+
+					i++;
+				}
+
+			</tbody>
+
+		</table>
+	</div>
+
+</div>
+
+@section Scripts {
+
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+		const filtro = document.getElementById("filtroArea");
+		const filas = document.querySelectorAll("#tablaDirectivas tbody tr");
+		const contador = document.getElementById("contador");
+
+		filtro.addEventListener("change", function () {
+
+			let seleccion = this.value;
+			let visibles = 0;
+
+			filas.forEach((fila) => {
+				let area = fila.getAttribute("data-area");
+
+				if (seleccion === "" || area === seleccion) {
+					fila.style.display = "";
+					visibles++;
+				} else {
+					fila.style.display = "none";
+				}
+			});
+
+			// 🔥 Reenumerar SOLO visibles
+			let index = 1;
+			filas.forEach((fila) => {
+				if (fila.style.display !== "none") {
+					fila.children[0].textContent = index;
+					index++;
+				}
+			});
+
+			// 🔹 actualizar contador
+			contador.textContent = visibles;
+		});
+
+		// 🔹 ocultar mensaje
+		setTimeout(() => {
+			let alert = document.querySelector('.alert-success');
+			if (alert) alert.style.display = 'none';
+		}, 3000);
+	</script>
+}

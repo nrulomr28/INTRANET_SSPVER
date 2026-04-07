@@ -58,6 +58,6 @@ html, body {
     padding: 0;
 }
 
-
-
-
+a:hover {
+    color: #060606;
+}

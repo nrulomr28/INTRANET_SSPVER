@@ -1,48 +1,6 @@
-﻿@* @{
-    Layout = "_Layout";
-}
-
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <main class="col-12">
-
-            <div class="container text-center">
-
-                <!-- Fila 1 -->
-                <div class="d-flex flex-wrap justify-content-center gap-3">
-                  
-                    <a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-                        <i class="bi bi-telephone"></i> DIRECTORIO SSP
-                    </a>
-                    <a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-                        <i class="bi bi-shield-check"></i> CALEA
-                    </a>
-
-                    <a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-                        <i class="bi bi-file-earmark-text"></i> FORMATOS SSP
-                    </a>
-                                   
-                </div>             
-
-                  <div class="d-flex justify-content-center mt-4">
-                    <a class="card-acceso" asp-area="Tecnologias" asp-controller="Inicio" asp-action="Index">
-                        <i class="bi bi-building"></i> DIRECCIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN
-                    </a>
-                </div>
-
-            </div>
-
-        </main>
-    </div>
-</div>
- *@
-
-
-@{
+﻿@{
 	Layout = "_Layout";
 }
-
-
 
 
 
@@ -70,7 +28,7 @@
 
 		<!-- CALEA -->
 		<div class="col-md-3 col-sm-6">
-			<a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+			<a class="card-acceso" asp-area="Calea" asp-controller="Calea" asp-action="Index">
 				<i class="bi bi-shield-check"></i>
 				<h5>CALEA</h5>
 				<p>Consulta normativa y documentación</p>
@@ -79,7 +37,7 @@
 
 		<!-- Formatos -->
 		<div class="col-md-3 col-sm-6">
-			<a class="card-acceso" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+			<a class="card-acceso" asp-area="" asp-controller="" asp-action="">
 				<i class="bi bi-file-earmark-text"></i>
 				<h5>Formatos SSP</h5>
 				<p>Descarga formatos oficiales</p>
@@ -100,3 +58,16 @@
 
 	</div>
 </div>
+
+
+				
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+		setTimeout(() => {
+			let alert = document.querySelector('.alert-success');
+			if (alert) alert.style.display = 'none';
+		}, 3000);
+	</script>
+}

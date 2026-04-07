@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace INTRANET_SSPVER.Models.Entities;
+
+public partial class DirectivaCalea
+{
+    public int IdDirectiva { get; set; }
+
+    public string NombreDirectiva { get; set; } = null!;
+
+    public byte[]? ImagenDirectiva { get; set; }
+
+    public byte[]? ArchivoDirectiva { get; set; }
+
+    public string? ExtencionArchivo { get; set; }
+
+    public int? IdAreaCalea { get; set; }
+
+    public int? NumLista { get; set; }
+
+    public DateTime? FechaActualizacion { get; set; }
+
+    public string? UrlImgDirectiva { get; set; }
+
+    public string? UrlArchivoDirectiva { get; set; }
+
+    public virtual AreasCalea? AreasCalea { get; set; }
+}

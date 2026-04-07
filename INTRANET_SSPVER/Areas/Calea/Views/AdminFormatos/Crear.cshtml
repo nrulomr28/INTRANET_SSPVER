@@ -1,0 +1,59 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Calea
+@model DirectivaUploadVM
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Nueva Directiva</h4>
+
+    <!-- 🔴 ERRORES -->
+    @if (ViewData.ModelState.ErrorCount > 0)
+    {
+        <div asp-validation-summary="All" class="alert alert-danger"></div>
+    }
+
+    <form asp-action="Crear" method="post" enctype="multipart/form-data">
+
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input asp-for="NombreDirectiva" class="form-control" />
+            <span asp-validation-for="NombreDirectiva" class="text-danger"></span>
+        </div>
+
+        <!-- Área -->
+        <div class="mb-3">
+            <label class="form-label">Área</label>
+            <select asp-for="IdAreaCalea" class="form-control">
+                <option value="">-- Seleccione --</option>
+                @foreach (var a in ViewBag.Areas)
+                {
+                    <option value="@a.IdAreaCalea">@a.NombreAreaCalea</option>
+                }
+            </select>
+        </div>
+
+        <!-- Archivo -->
+        <div class="mb-3">
+            <label class="form-label">Archivo PDF</label>
+            <input type="file" asp-for="Archivo" class="form-control" />
+            <span asp-validation-for="Archivo" class="text-danger"></span>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">
+                Guardar
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                ← Volver
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
