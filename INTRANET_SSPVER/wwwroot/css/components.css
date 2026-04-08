@@ -3,6 +3,16 @@
    BOTONES DE ACCESO
 ======================== */
 
+/*.card-formatos {
+    width: 200px !important;*/ /*mismo ancho para todos */
+/*height: 60px !important;*/ /* opcional: misma altura */
+/*text-align: center !important;
+    flex: 0 0 200px !important;
+    height: 60px !important;
+}*/
+
+
+
 .card-acceso {
     display: block;
     background: #c9a227;
@@ -56,12 +66,12 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-    .archivo-card:hover {
+    /*  .archivo-card:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         background: #fff9e6;
     }
-
+*/
     /* Icono */
     .archivo-card .icono {
         font-size: 30px;
@@ -82,10 +92,37 @@
 
     /* Icono descarga */
     .archivo-card .descarga {
-        font-size: 20px;
+        font-size: 30px;
         color: #6A1B1B;
     }
 
 
+a:hover {
+    color: #060606;
+}
 
-    
+.boton-formatos {
+    display: block;
+    background: #c9a227;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 25px 15px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex: 0 0 210px;
+    height: 100px;
+}
+
+    .boton-formatos:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .boton-formatos .icono {
+        font-size: 30px;
+        color: #c9a227;
+        margin-right: 12px;
+    }

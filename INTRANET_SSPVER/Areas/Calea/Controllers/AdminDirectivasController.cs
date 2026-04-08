@@ -9,12 +9,12 @@ namespace INTRANET_SSPVER.Areas.Calea.Controllers
 {
 
     [Area("Calea")]
-    public class AdminFormatosController : Controller
+    public class AdminDirectivasController : Controller
     {
 
         private readonly BdpagWebContext _context;
 
-        public AdminFormatosController(BdpagWebContext context)
+        public AdminDirectivasController(BdpagWebContext context)
         {
             _context = context;
         }
@@ -85,7 +85,7 @@ namespace INTRANET_SSPVER.Areas.Calea.Controllers
                 }
 
                 var rutaCarpeta = Path.Combine(Directory.GetCurrentDirectory(),
-                    "wwwroot", "Calea", "documentos");
+                    "wwwroot", "Calea", "Formatos");
 
                 if (!Directory.Exists(rutaCarpeta))
                     Directory.CreateDirectory(rutaCarpeta);
@@ -110,7 +110,7 @@ namespace INTRANET_SSPVER.Areas.Calea.Controllers
                     await model.Archivo.CopyToAsync(stream);
                 }
 
-                d.UrlArchivoDirectiva = "/Calea/documentos/" + nombreArchivo;
+                d.UrlArchivoDirectiva = "/Calea/Formatos/" + nombreArchivo;
             }
 
             d.FechaActualizacion = DateTime.Now;
@@ -184,7 +184,7 @@ namespace INTRANET_SSPVER.Areas.Calea.Controllers
 
             // Ruta
             var rutaCarpeta = Path.Combine(Directory.GetCurrentDirectory(),
-                "wwwroot", "Calea", "documentos");
+                "wwwroot", "Calea", "Formatos");
 
             if (!Directory.Exists(rutaCarpeta))
                 Directory.CreateDirectory(rutaCarpeta);
@@ -204,7 +204,7 @@ namespace INTRANET_SSPVER.Areas.Calea.Controllers
             {
                 NombreDirectiva = model.NombreDirectiva,
                 IdAreaCalea = model.IdAreaCalea,
-                UrlArchivoDirectiva = "/Calea/documentos/" + nombreArchivo,
+                UrlArchivoDirectiva = "/Calea/Formatos/" + nombreArchivo,
                 FechaActualizacion = DateTime.Now
             };
 

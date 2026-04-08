@@ -25,8 +25,10 @@
   <ItemGroup>
     <Folder Include="Areas\Account\" />
     <Folder Include="Areas\Admin\" />
+    <Folder Include="Areas\Inicio\Views\Formato\" />
     <Folder Include="Models\Contexts\" />
-    <Folder Include="wwwroot\Calea\Documentos\" />
+    <Folder Include="wwwroot\Calea\Formatos\" />
+    <Folder Include="wwwroot\Calea\Tecnologias\" />
     <Folder Include="wwwroot\Calea\Videos\" />
     <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\FormatosTecnologias\" />

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
+namespace INTRANET_SSPVER.Areas.Inicio.Controllers
 {
-    public class DesarrolloController : Controller
+    public class FormatoController : Controller
     {
         public IActionResult Index()
         {

@@ -50,10 +50,26 @@
 <div class="container mt-4">
 
 	<div class="card shadow-lg border-0">
-		<div class="card-header bg-danger text-white d-flex justify-content-center align-items-center">
-			<i class="bi bi-telephone-fill me-2 fs-4"></i>
-			<h4 class="mb-0">Directorio Telefónico</h4>
+				
+		<div class="card-header bg-secondary text-white d-flex align-items-center justify-content-between">
+
+			<!-- Botón regresar -->
+			<a href="/inicio" class="btn btn-sm btn-light">
+				<i class="bi bi-arrow-left"></i> Regresar
+			</a>
+
+			<!-- Título centrado -->
+			<div class="d-flex align-items-center mx-auto">
+				<i class="bi bi-telephone-fill me-2 fs-4"></i>
+				<h4 class="mb-0">Directorio Telefónico</h4>
+			</div>
+
+			
+
 		</div>
+
+
+
 
 		<div class="card-body">
 			<p class="text-muted mb-3">
@@ -62,7 +78,7 @@
 
 			<!-- 🔹 Cuadro de búsqueda -->
 			<div class="mb-3">
-				<input type="text" id="searchBox" class="form-control" placeholder="Buscar por nombre o área...">
+				<input type="text" id="searchBox" class="form-control" placeholder="Buscar por nombre, área o ext.">
 			</div>
 
 			<table class="table table-bordered table-hover table-sm align-middle">

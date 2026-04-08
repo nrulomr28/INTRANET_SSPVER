@@ -12,9 +12,19 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+
+        public IActionResult Index(int IdArea_)
         {
-            return View();
+            var categoria = _context.Areas
+                .FirstOrDefault(c => c.IdArea == IdArea_);
+
+            var formatos = _context.Formatos
+                .Where(f => f.IdArea == IdArea_)
+                .ToList();
+
+            ViewBag.NombreCategoria = categoria?.Nombre;
+
+            return View(formatos);
         }
 
 
@@ -31,8 +41,7 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
         }
 
 
-
-
-
     }
+
+
 }
