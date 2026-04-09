@@ -2,6 +2,8 @@
 
 namespace INTRANET_SSPVER.Areas.Inicio.Controllers
 {
+
+    [Area("Inicio")]
     public class FormatoController : Controller
     {
         public IActionResult Index()
