@@ -25,5 +25,7 @@ public partial class DirectivaCalea
 
     public string? UrlArchivoDirectiva { get; set; }
 
+    public bool? Activo { get; set; }
+
     public virtual AreasCalea? AreasCalea { get; set; }
 }

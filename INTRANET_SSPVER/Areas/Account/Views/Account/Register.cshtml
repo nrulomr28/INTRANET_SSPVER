@@ -1,0 +1,124 @@
+﻿@using INTRANET_SSPVER.Models.Authentication
+@model RegisterViewModel
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Registro de usuario";
+}
+
+
+
+
+<div class="container mt-5">
+
+
+
+	<div class="row justify-content-center">
+
+		<div class="col-md-6 mb-3">
+			<h2 class="text-primary">
+				<i class="bi bi-people-fill me-2"></i> Registro de usuario
+			</h2>
+		</div>
+	</div>
+
+
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card shadow-sm">
+				<div class="card-header bg-primary text-white text-center">
+					Registro de usuario
+				</div>
+				<div class="card-body">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+					<form asp-action="Register" method="post">
+
+
+
+						<div class="mb-3">
+							<label asp-for="UserName" class="form-label"></label>
+							<input asp-for="UserName" class="form-control" />
+							<span asp-validation-for="UserName" class="text-danger"></span>
+						</div>
+
+
+						@* <div class="mb-3">
+							<label for="Email" class="form-label">Correo electrónico</label>
+							<input class="form-control" id="Email" name="Email" value="@Model?.Email" />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+							<label for="NombreCompleto" class="form-label">Nombre completo</label>
+							<input class="form-control" id="NombreCompleto" name="NombreCompleto" value="@Model?.NombreCompleto" />
+							<span asp-validation-for="NombreCompleto" class="text-danger"></span>
+						</div>
+
+						<div class="mb-4">
+							<label for="Password" class="form-label">Contraseña</label>
+							<input class="form-control" id="Password" name="Password" type="password" />
+							<span asp-validation-for="Password" class="text-danger"></span>
+						</div>
+										
+
+
+						<div class="mb-3">
+							<label asp-for="idtcmodulo" class="form-label">Módulo de Licencia</label>
+							<select asp-for="idtcmodulo" asp-items="Model.ModulosLicencia" class="form-select">
+								<option value="">-- Selecciona un módulo --</option>
+							</select>
+							<span asp-validation-for="idtcmodulo" class="text-danger"></span>
+						</div> *@
+
+						<div class="mb-3">
+							<label asp-for="Email" class="form-label"></label>
+							<input asp-for="Email" class="form-control" />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+							<label asp-for="NombreCompleto" class="form-label"></label>
+							<input asp-for="NombreCompleto" class="form-control" />
+							<span asp-validation-for="NombreCompleto" class="text-danger"></span>
+						</div>
+
+						<div class="mb-4">
+							<label asp-for="Password" class="form-label"></label>
+							<input asp-for="Password" class="form-control" />
+							<span asp-validation-for="Password" class="text-danger"></span>
+						</div>
+
+						<div class="mb-3">
+							<label asp-for="IdUbicacionFisica" class="form-label"></label>
+							<select asp-for="IdUbicacionFisica" asp-items="Model.UbicacionFisica" class="form-select">
+								<option value="">-- Selecciona un centro --</option>
+							</select>
+							<span asp-validation-for="IdUbicacionFisica" class="text-danger"></span>
+						</div>
+
+
+
+						<div class="d-flex justify-content-between mt-4">
+							<button type="submit" class="btn btn-success">
+								<i class="bi bi-person-plus-fill me-1"></i> Registrar
+							</button>
+
+
+							<a asp-area="Admin" asp-controller="Admin" asp-action="MostrarUsuarios" class="btn btn-outline-danger">
+								<i class="bi bi-arrow-left-circle me-1"></i> Regresar
+							</a>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

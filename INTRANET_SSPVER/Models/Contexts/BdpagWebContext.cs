@@ -26,6 +26,8 @@ public partial class BdpagWebContext : DbContext
 
     public virtual DbSet<Formato> Formatos { get; set; }
 
+    public virtual DbSet<UbicacionFisica> UbicacionFisicas { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
@@ -110,6 +112,18 @@ public partial class BdpagWebContext : DbContext
                 .HasForeignKey(d => d.IdArea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Formato_Area1");
+        });
+
+        modelBuilder.Entity<UbicacionFisica>(entity =>
+        {
+            entity.HasKey(e => e.IdUbicacionFisica);
+
+            entity.ToTable("UbicacionFisica");
+
+            entity.Property(e => e.UbicacionFisica1)
+                .HasMaxLength(250)
+                .IsUnicode(false)
+                .HasColumnName("UbicacionFisica");
         });
 
         OnModelCreatingPartial(modelBuilder);
