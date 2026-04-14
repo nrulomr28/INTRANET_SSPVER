@@ -12,6 +12,8 @@ namespace INTRANET_SSPVER.Models.ViewModels.Directorio
 
         public string Nombre { get; set; }
 
+        public int IdArea { get; set; }
+
         public string Area { get; set; }
 
         public string Ext { get; set; }

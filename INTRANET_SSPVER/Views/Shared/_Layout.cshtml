@@ -1,4 +1,8 @@
-﻿@{
+﻿@using INTRANET_SSPVER.Models.Roles
+@inject RolesService RolesService
+
+
+@{
 	Layout = null;
 }
 
@@ -17,161 +21,180 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
 
-
 </head>
-
 
 
 <body class="bg-light d-flex flex-column min-vh-100">
 
 	<header>
 
-		<nav class="navbar navbar-expand-sm border-bottom">
 		
-			<div class="container-fluid px-4">
+		<nav class="navbar navbar-expand-sm border-bottom">
 
+			<div class="container-fluid px-4 d-flex align-items-center">
 
+				<!-- IZQUIERDA: Logo + Inicio -->
+				<div class="d-flex align-items-center gap-3">
 
-				<a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Proceso" asp-action="Inicio">
-					<img src="~/img/logo/Veracruz2026.png" alt="Logo Veracruz" height="40" style="pointer-events: none;" />
-				</a>
-				
+					<a class="navbar-brand d-flex align-items-center gap-2"
+						   asp-controller="Proceso" asp-action="Inicio">
+						<img src="~/img/logo/Veracruz2026.png"
+							 alt="Logo Veracruz"
+							 height="40"
+							 style="pointer-events: none;" />
+					</a>
 
-				<li class="nav-item">
-					<a class="nav-link text-dark" asp-area="Inicio" asp-controller="Menu" asp-action="Index">
+					<a class="nav-link text-dark"
+						   asp-area="Inicio"
+						   asp-controller="Menu"
+						   asp-action="Index">
 						<i class="bi bi-house-door-fill me-1"></i> Inicio
 					</a>
-				</li>
 
-				
+				</div>
 
+				<!-- CENTRO (opcional: bienvenida) -->
+				@if (User.Identity.IsAuthenticated)
+				{
+					<span class="ms-3 text-white fw-bold d-flex align-items-center">
+						<i class="bi bi-person-circle me-2"></i>
+						Bienvenido @User.Identity.Name
+						<span class="ms-2 text-warning">
+							(
+							@{
+								var roles1 = RolesService.GetRoleNames();
+								var perfil = roles1.FirstOrDefault() ?? "Sin perfil";
+								@perfil
+								;
+							}
+							)
+						</span>
+					</span>
+				}
 
-				<ul class="navbar-nav me-auto">
-					
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-dark" href="#"
-							   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user-plus me-2"></i>
-							<i class="bi bi-telephone-fill"></i> Directorio tel.
-						</a>
+				<!-- DERECHA -->
+				<ul class="navbar-nav ms-auto">
 
-						<ul class="dropdown-menu" aria-labelledby="registerDropdown">
-
-							<li>
-								<a class="dropdown-item" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-									<i class="bi bi-card-checklist"></i> Directorio
+					@if (User.Identity.IsAuthenticated)
+					{
+						if (User.IsInRole(RolesCatalog.Sysadmin))
+						{
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-dark" href="#"
+									   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fas fa-user-plus me-2"></i>
+									<i class="bi bi-people-fill"></i> Usuarios
 								</a>
+
+								<ul class="dropdown-menu" aria-labelledby="registerDropdown">
+									<li>
+										<a class="dropdown-item" asp-area="Account" asp-controller="Account" asp-action="Register">
+											<i class="bi bi-person-plus-fill"></i> Registrar Usuario
+										</a>
+									</li>
+									<li>
+
+										<a class="dropdown-item" asp-area="Admin" asp-controller="Admin" asp-action="MostrarUsuarios">
+											<i class="bi bi-gear"></i> Administrador de Usuarios
+										</a>
+
+
+									</li>
+								</ul>
 							</li>
 
-							<li>
-								<a class="dropdown-item" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
-									<i class="bi bi-gear"></i> Admon. directorio
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-dark" href="#"
+									   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fas fa-user-plus me-2"></i>
+									<i class="bi bi-telephone-fill"></i> Directorio tel.
 								</a>
+
+								<ul class="dropdown-menu" aria-labelledby="registerDropdown">
+
+									<li>
+										<a class="dropdown-item" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+											<i class="bi bi-card-checklist"></i> Directorio
+										</a>
+									</li>
+
+									<li>
+										<a class="dropdown-item" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+											<i class="bi bi-gear"></i> Admon. directorio
+										</a>
+									</li>
+
+								</ul>
 							</li>
-							
-						</ul>
-					</li>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-dark" href="#"
-							   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user-plus me-2"></i>
-							<i class="bi bi-people-fill"></i> Usuarios
-						</a>
-
-						<ul class="dropdown-menu" aria-labelledby="registerDropdown">
-							<li>
-								<a class="dropdown-item" asp-area="Account" asp-controller="Account" asp-action="Register">
-									<i class="bi bi-person-plus-fill"></i> Registrar Usuario
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-dark" href="#"
+									   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fas fa-user-plus me-2"></i>
+									<i class="bi bi-award-fill"></i> CALEA
 								</a>
+
+								<ul class="dropdown-menu" aria-labelledby="registerDropdown">
+									<li>
+										<a class="dropdown-item" asp-area="Calea" asp-controller="Calea" asp-action="Index">
+											<i class="bi bi-card-checklist"></i> Directivas
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item" asp-area="Calea" asp-controller="AdminDirectivas" asp-action="Index">
+											<i class="bi bi-gear"></i> Admon. directivas
+										</a>
+
+									</li>
+								</ul>
 							</li>
-							<li>
-									
-																			
 
-								<a class="dropdown-item" asp-area="Admin" asp-controller="Admin" asp-action="MostrarUsuarios">
-									<i class="bi bi-gear"></i> Administrador de Usuarios
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-dark" href="#"
+									   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fas fa-user-plus me-2"></i>
+									<i class="bi bi-people-fill"></i> Formatos
 								</a>
 
+								<ul class="dropdown-menu" aria-labelledby="registerDropdown">
 
+									<li>
+										<a class="dropdown-item" asp-area="Tecnologias" asp-controller="AdminFormatos" asp-action="Index">
+											<i class="bi bi-gear"></i> Admon. Formatos
+										</a>
+									</li>
+								</ul>
 							</li>
-						</ul>
-					</li>
 
+						}
 
-
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-dark" href="#"
-							   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user-plus me-2"></i>
-							<i class="bi bi-award-fill"></i> CALEA
-						</a>
-
-						<ul class="dropdown-menu" aria-labelledby="registerDropdown">
-							<li>
-								<a class="dropdown-item" asp-area="Calea" asp-controller="Calea" asp-action="Index">
-									<i class="bi bi-card-checklist"></i> Directivas
+						<li class="nav-item">
+							<form id="logoutForm" asp-area="Account" asp-controller="Account" asp-action="Salir" method="post" style="display:inline;">
+								<a href="javascript:document.getElementById('logoutForm').submit();" class="nav-link text-dark">
+									<i class="bi bi-box-arrow-left"></i> Salir
 								</a>
-							</li>
-							<li>
-								<a class="dropdown-item" asp-area="Calea" asp-controller="AdminDirectivas" asp-action="Index">
-									<i class="bi bi-gear"></i> Admon. directivas
-								</a>
-
-							</li>
-						</ul>
-					</li>
-
-
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-dark" href="#"
-							   id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-user-plus me-2"></i>
-							<i class="bi bi-people-fill"></i> Formatos
-						</a>
-
-						<ul class="dropdown-menu" aria-labelledby="registerDropdown">
-							@* <li>
-								<a class="dropdown-item" asp-area="Account" asp-controller="Account" asp-action="Register">
-									<i class="bi bi-person-plus-fill"></i> Registrar Usuario
-								</a>
-							</li> *@
-							
-							<li>
-								<a class="dropdown-item" asp-area="Tecnologias" asp-controller="AdminFormatos" asp-action="Index">
-									<i class="bi bi-gear"></i> Admon. Formatos
-								</a>
-							</li>
-						</ul>
-					</li>
-
-
-
-							
-
-
-
-
+							</form>
+						</li>
+					}
+					else
+					{
+						<li class="nav-item">
+							<a class="nav-link text-dark"
+								   asp-area="Account"
+								   asp-controller="Account"
+								   asp-action="Login">
+								<i class="bi bi-person-fill"></i> Iniciar Sesión
+							</a>
+						</li>
+					}
 
 				</ul>
 
-
-				<li class="nav-item">
-					<form id="logoutForm" asp-area="Account" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
-						<a href="javascript:document.getElementById('logoutForm').submit();" class="nav-link text-dark">
-							<i class="bi bi-box-arrow-left"></i> Salir
-						</a>
-					</form>
-				</li>
-
-
-			
 			</div>
 
-			
-
-
 		</nav>
+	
 
 	</header>
 

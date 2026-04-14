@@ -1,0 +1,66 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Admin
+
+@model AssignRoleViewModel
+
+@{
+    ViewData["Title"] = "Asignar Rol";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    Asignar Rol a @Model.UserName
+                </div>
+                <div class="card-body">
+
+                    <!-- Roles actuales -->
+                    <h5 class="mb-3">Roles actuales del usuario:</h5>
+                    @if (Model.CurrentRoles != null && Model.CurrentRoles.Any())
+                    {
+                        <ul class="list-group mb-4">
+                            @foreach (var role in Model.CurrentRoles)
+                            {
+                                <li class="list-group-item">@role</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted"><em>Este usuario no tiene roles asignados.</em></p>
+                    }
+
+                    <!-- Formulario -->
+                    <form asp-action="AssignRole" method="post">
+                        <input type="hidden" asp-for="UserId" />
+
+                        <div class="mb-3">
+                            <label for="SelectedRole" class="form-label">Selecciona un rol</label>
+                            <select asp-for="SelectedRole" class="form-select">
+                                @foreach (var role in Model.Roles)
+                                {
+                                    <option value="@role.Name">@role.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Botones alineados y separados -->
+                        <div class="d-flex justify-content-sm-start mt-4  gap-3">
+
+                            <button type="submit" class="btn btn-outline-success">
+                                <i class="bi bi-person-plus-fill me-1"></i> Asignar
+                            </button>
+
+                            <a asp-action="MostrarUsuarios" class="btn btn-outline-danger">
+                                <i class="bi bi-arrow-left-circle me-1"></i> Regresar
+                            </a>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

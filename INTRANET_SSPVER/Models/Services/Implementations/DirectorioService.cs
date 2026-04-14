@@ -18,16 +18,18 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
 
         public List<DirectorioVM> ObtenerDirectorio()
         {
-            return _context.DirectorioTelefonicos
-           .OrderBy(x => x.Nombre)
-           .Select(x => new DirectorioVM
-           {
-               Nombre = x.Nombre,
-               Area = x.Area,
-               Ext = x.Extension
-           })
-           .ToList();
+            var query = from a in _context.DirectorioTelefonicos
+                        join b in _context.AreaDirectorios
+                        on a.IdArea equals b.IdArea
+                        orderby a.Nombre
+                        select new DirectorioVM
+                        {
+                            Nombre = a.Nombre,
+                            Area = b.Area,
+                            Ext = a.Extension
+                        };
 
+            return query.AsNoTracking().ToList();
         }
 
     }

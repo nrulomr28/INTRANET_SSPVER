@@ -18,6 +18,8 @@ public partial class BdpagWebContext : DbContext
 
     public virtual DbSet<Area> Areas { get; set; }
 
+    public virtual DbSet<AreaDirectorio> AreaDirectorios { get; set; }
+
     public virtual DbSet<AreasCalea> AreasCaleas { get; set; }
 
     public virtual DbSet<DirectivaCalea> DirectivaCaleas { get; set; }
@@ -30,7 +32,6 @@ public partial class BdpagWebContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
     }
 
 
@@ -47,6 +48,15 @@ public partial class BdpagWebContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<AreaDirectorio>(entity =>
+        {
+            entity.HasKey(e => e.IdArea);
+
+            entity.ToTable("AreaDirectorio");
+
+            entity.Property(e => e.Area).HasMaxLength(250);
         });
 
         modelBuilder.Entity<AreasCalea>(entity =>

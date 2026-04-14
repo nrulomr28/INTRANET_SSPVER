@@ -1,7 +1,12 @@
-﻿@{
-	Layout = "_Layout";
+﻿
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
+ 
 
 <div class="container mt-4">
 
@@ -10,29 +15,21 @@
 		<p class="subtitulo">Acceso rápido a servicios institucionales</p>
 		<div class="separador"></div>
 	</div>
-
-
-
-	@* 	<div class="container mb-3">
-		<div id="carouselExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
-			<div class="carousel-inner rounded">
-
-				<div class="carousel-item active">
-					<img src="/img/banner/075.png" class="d-block w-100 carousel-img">
-				</div>
-
-				<div class="carousel-item">
-					<img src="/img/banner/banner1.jpg" class="d-block w-100 carousel-img">
-				</div>
-
-			</div>
-		</div>
-	</div>
- *@
+	
 
 
 	<!-- 🔹 Grid de opciones -->
 	<div class="row mt-3 g-4 justify-content-center">
+
+		
+		<!-- CALEA -->
+		<div class="col-md-3 col-sm-6">
+			<a class="card-acceso" asp-area="Calea" asp-controller="Calea" asp-action="Index">
+				<i class="bi bi-shield-check"></i>
+				<h5>CALEA</h5>
+				<p>Consulta normativa y documentación</p>
+			</a>
+		</div>
 
 		<!-- Directorio -->
 		<div class="col-md-3 col-sm-6">
@@ -43,14 +40,7 @@
 			</a>
 		</div>
 
-		<!-- CALEA -->
-		<div class="col-md-3 col-sm-6">
-			<a class="card-acceso" asp-area="Calea" asp-controller="Calea" asp-action="Index">
-				<i class="bi bi-shield-check"></i>
-				<h5>CALEA</h5>
-				<p>Consulta normativa y documentación</p>
-			</a>
-		</div>
+
 
 		<!-- Formatos -->
 		<div class="col-md-3 col-sm-6">
@@ -71,9 +61,10 @@
 				</a>
 			</div>
 		</div>
-			
 
 	</div>
+
+
 </div>
 
 

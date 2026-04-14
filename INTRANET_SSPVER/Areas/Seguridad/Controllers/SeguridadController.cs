@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace INTRANET_SSPVER.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminController : Controller
+    public class SeguridadController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IRolCatalogoService _rolCatalogoService;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IRolCatalogoService rolCatalogoService, SignInManager<ApplicationUser> signInManager)
+        public SeguridadController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IRolCatalogoService rolCatalogoService, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -85,29 +85,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
 
 
-        //[HttpPost]
-        //[Authorize(Roles = RolesCatalog.Sysadmin)]
-        //public async Task<IActionResult> AssignRole(Models.ViewModels.Roles.AssignRoleViewModel model)
-        //{
-        //    var user = await _userManager.FindByIdAsync(model.UserId);
-        //    if (user == null) return NotFound();
-
-        //    if (!string.IsNullOrEmpty(model.SelectedRole))
-        //    {
-        //        var result = await _userManager.AddToRoleAsync(user, model.SelectedRole);
-        //        if (result.Succeeded)
-        //        {
-        //            TempData["SuccessMessage"] = $"Rol '{model.SelectedRole}' asignado a {user.UserName}.";
-        //        }
-        //        else
-        //        {
-        //            TempData["ErrorMessage"] = $"No se pudo asignar el rol '{model.SelectedRole}'.";
-        //        }
-        //    }
-
-        //    return RedirectToAction("MostrarUsuarios", model);
-        //}
-
+        
 
 
         [HttpPost]
@@ -140,35 +118,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
 
 
-        //[HttpPost]
-        //[Authorize(Roles = RolesCatalog.Sysadmin)]
-        //public async Task<IActionResult> RemoveRole(string userId, string roleName)
-        //{
-        //    var user = await _userManager.FindByIdAsync(userId);
-        //    if (user == null)
-        //    {
-        //        TempData["ErrorMessage"] = "Usuario no encontrado.";
-        //        return RedirectToAction("MostrarUsuarios");
-        //    }
-
-        //    if (await _userManager.IsInRoleAsync(user, roleName))
-        //    {
-        //        var result = await _userManager.RemoveFromRoleAsync(user, roleName);
-        //        TempData["SuccessMessage"] = result.Succeeded
-        //            ? $"Rol '{roleName}' removido de {user.UserName}."
-        //            : $"No se pudo remover el rol '{roleName}'.";
-        //    }
-        //    else
-        //    {
-        //        TempData["ErrorMessage"] = $"El usuario {user.UserName} no tiene el rol '{roleName}'.";
-        //    }
-
-        //    return RedirectToAction("MostrarUsuarios");
-
-        //}
-
-
-
+        
         [HttpPost]
         [Authorize(Roles = RolesCatalog.Sysadmin)]
         public async Task<IActionResult> RemoveRole(string userId, string roleName)

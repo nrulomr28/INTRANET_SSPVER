@@ -9,7 +9,9 @@ public partial class DirectorioTelefonico
 
     public string Nombre { get; set; } = null!;
 
-    public string Area { get; set; } = null!;
+    public string? Area { get; set; }
 
     public string Extension { get; set; } = null!;
+
+    public int? IdArea { get; set; }
 }

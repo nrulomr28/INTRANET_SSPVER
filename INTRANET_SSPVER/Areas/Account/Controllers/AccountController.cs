@@ -45,9 +45,7 @@ namespace INTRANET_SSPVER.Areas.Account.Controllers
             };
 
             return View(model);
-
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -118,8 +116,7 @@ namespace INTRANET_SSPVER.Areas.Account.Controllers
                 // Guardar mensaje en TempData
                 TempData["LoginInfo"] = $"Bienvenido {user.UserName}, has iniciado sesión con el perfil: {perfil}";
 
-
-                return RedirectToAction("Menu", "Index", new { area = "Inicio" });
+                return RedirectToAction("Index", "Menu", new { area = "Inicio" });
 
             }
 
@@ -151,6 +148,16 @@ namespace INTRANET_SSPVER.Areas.Account.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Salir()
+        {
+            await _signInManager.SignOutAsync();
+            //return RedirectToAction("Login");
+            return RedirectToAction("Index", "Menu", new { area = "Inicio" });
+        }
+
 
 
     }

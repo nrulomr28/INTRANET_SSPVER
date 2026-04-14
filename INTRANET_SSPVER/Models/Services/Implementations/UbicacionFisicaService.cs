@@ -26,6 +26,8 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                      Text = a.UbicacionFisica1
                  }).OrderBy(x => x.Text)
                  .ToList();
+
+
         }
 
 
