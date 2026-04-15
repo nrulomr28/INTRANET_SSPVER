@@ -18,7 +18,6 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             _context = context;
         }
 
-
         public List<DirectorioListVM> ObtenerDirectorio()
         {
             var query = from a in _context.DirectorioTelefonicos
@@ -47,7 +46,8 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                     Id = a.IdDirectorio,
                     Nombre = a.Nombre,
                     IdArea = a.IdArea,
-                    Ext = a.Extension
+                    Ext = a.Extension,
+                    Activo = a.Activo
                 })
                 .FirstOrDefault();
 
@@ -63,8 +63,9 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             {
                 Nombre = model.Nombre,
                 Extension = model.Ext,
-                IdArea = model.IdArea,
-                FechaActualizacion = DateTime.Now
+                IdArea = (int)model.IdArea,
+                FechaActualizacion = DateTime.Now,
+                Activo = model.Activo
             };
 
             _context.Add(entity);
@@ -79,8 +80,9 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
 
             entity.Nombre = model.Nombre;
             entity.Extension = model.Ext;
-            entity.IdArea = model.IdArea;
+            entity.IdArea = (int)model.IdArea;
             entity.FechaActualizacion = DateTime.Now;
+            entity.Activo = model.Activo;
 
             _context.SaveChanges();
         }
@@ -93,7 +95,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                 return false;
 
             _context.Remove(entity);
-            //_context.SaveChanges();
+            _context.SaveChanges();
 
             return true;
         }

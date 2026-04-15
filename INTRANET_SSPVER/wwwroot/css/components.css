@@ -304,3 +304,17 @@ body {
     background: linear-gradient( 90deg, transparent, #cfcfcf, #e5e5e5, #cfcfcf, transparent );
     border-radius: 10px;
 }
+
+
+
+/*ESTILOS HEADER PARA CADA VISTA*/
+#tablaDirectorio tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: 0.2s;
+}
+
+
+
+.headertitulo {
+    background-color: #6b1f2b !important;
+}

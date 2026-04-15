@@ -5,6 +5,13 @@
 	ViewData["Title"] = "Nuevo Registro";
 }
 
+<style>
+	.select2-container .select2-selection--single {
+		height: 38px;
+		padding: 5px;
+	}
+</style>
+
 <div class="container mt-4">
 
 	<h4 class="fw-bold mb-3">
@@ -18,26 +25,35 @@
 			<input asp-for="Nombre" class="form-control" />
 			<span asp-validation-for="Nombre" class="text-danger"></span>
 		</div>
-
-	
+			
 		<div class="mb-3">
-			<label class="form-label">Área</label>
 
+			<label class="form-label">Area</label>
 			<select asp-for="IdArea"
 					asp-items="Model.Areas"
-					class="form-select">
+					class="form-select select2">
 				<option value="">-- Selecciona un área --</option>
 			</select>
-
 			<span asp-validation-for="IdArea" class="text-danger"></span>
+
 		</div>
-		
+
 
 		<div class="mb-3">
 			<label class="form-label">Extensión</label>
 			<input asp-for="Ext" class="form-control" />
 			<span asp-validation-for="Ext" class="text-danger"></span>
 		</div>
+
+
+		<div class="mb-3">
+			<div class="form-check">
+				<input asp-for="Activo" class="form-check-input" />
+				<label asp-for="Activo" class="form-check-label">Activo</label>
+				<span asp-validation-for="Activo" class="text-danger"></span>
+			</div>
+		</div>
+
 
 		<div class="d-flex justify-content-between">
 			<a asp-action="Index" class="btn btn-secondary">
@@ -47,7 +63,24 @@
 			<button type="submit" class="btn btn-success">
 				<i class="bi bi-save"></i> Guardar
 			</button>
+
 		</div>
 
 	</form>
 </div>
+
+
+
+@section Scripts {
+	
+	<script>
+		$(document).ready(function () {
+		$('.select2').select2({
+		placeholder: "Selecciona un área",
+		allowClear: true,
+		width: '100%'
+		});
+		});
+	</script>
+
+}

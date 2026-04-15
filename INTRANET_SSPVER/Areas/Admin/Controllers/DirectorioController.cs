@@ -43,7 +43,8 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         {
             var model = new DirectorioFormVM
             {
-                Areas = CargarAreas()
+                Areas = CargarAreas(),
+                Activo = true
             };
 
             return View(model);

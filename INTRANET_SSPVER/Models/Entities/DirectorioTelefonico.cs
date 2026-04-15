@@ -14,4 +14,6 @@ public partial class DirectorioTelefonico
     public int IdArea { get; set; }
 
     public DateTime FechaActualizacion { get; set; }
+
+    public bool Activo { get; set; }
 }

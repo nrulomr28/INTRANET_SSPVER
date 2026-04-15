@@ -32,9 +32,7 @@ public partial class BdpagWebContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
     }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

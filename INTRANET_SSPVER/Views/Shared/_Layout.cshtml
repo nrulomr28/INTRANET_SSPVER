@@ -26,7 +26,7 @@
 
 	@* <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> *@
 
-@* 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> *@
+	@* 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> *@
 
 
 	<link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
@@ -107,7 +107,7 @@
 									</li>
 									<li>
 
-										<a class="dropdown-item" asp-area="Admin" asp-controller="Admin" asp-action="MostrarUsuarios">
+										<a class="dropdown-item" asp-area="Seguridad" asp-controller="Seguridad" asp-action="MostrarUsuarios">
 											<i class="bi bi-gear"></i> Administrador de Usuarios
 										</a>
 
@@ -133,7 +133,7 @@
 									</li>
 
 									<li>
-										<a class="dropdown-item" asp-area="Inicio" asp-controller="Directorio" asp-action="Index">
+										<a class="dropdown-item" asp-area="Admin" asp-controller="Directorio" asp-action="Index">
 											<i class="bi bi-gear"></i> Admon. directorio
 										</a>
 									</li>
@@ -213,18 +213,6 @@
 
 
 	@RenderBody()
-	
-
-	@* <footer class="border-top footer text-muted py-3 mt-auto">
-		<div class="container px-4 mx-auto d-flex align-items-center justify-content-center gap-3 flex-wrap text-center" style="max-width: 1200px;">
-			<img src="~/img/logo/FooterLogo.png" alt="Logo Veracruz" style="height: 150px;">
-				<span>
-					Sitio desarrollado por la Dirección de Tecnologías de la Información de la Secretaría de Seguridad Pública. <br>
-					Algunos derechos reservados a favor del Gobierno del Estado de Veracruz © @DateTime.Now.Year
-				</span>
-			</div>
-		</footer> *@
-
 	
 
 	<footer class="border-top footer text-muted py-3 mt-auto">

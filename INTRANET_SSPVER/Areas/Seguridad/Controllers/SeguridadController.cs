@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace INTRANET_SSPVER.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Seguridad")]
     public class SeguridadController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

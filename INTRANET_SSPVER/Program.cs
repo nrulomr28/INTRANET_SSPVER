@@ -24,6 +24,8 @@ options.UseSqlServer(conString));
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
+
+
 // 🔹 Identity y configuración de contraseñas
 //builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 //{
@@ -35,6 +37,8 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 //})
 //.AddEntityFrameworkStores<AuthDbContext>()
 //.AddDefaultTokenProviders();
+
+
 
 
 // Add services to the container.

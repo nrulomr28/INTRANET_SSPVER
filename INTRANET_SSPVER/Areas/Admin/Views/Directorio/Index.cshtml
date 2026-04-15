@@ -7,117 +7,136 @@
 
 
 
-
 <div class="container-fluid mt-4">
 
-	<!-- HEADER -->
-	<div class="d-flex justify-content-between align-items-center mb-3">
-		<h4 class="fw-bold">
-			<i class="bi bi-journal-text me-2"></i>
-			Administración de Directorio
-		</h4>
+	<div class="card shadow-sm border-0">
 
-		<a asp-area="Admin"
-			   asp-controller="Directorio"
-			   asp-action="Create"
-			   class="btn btn-success">
-			<i class="bi bi-plus-circle"></i> Nuevo Registro
-		</a>
-	</div>
+		<!-- HEADER -->
+		<div class="card-header text-white d-flex align-items-center justify-content-between headertitulo">
 
-	<!-- BUSCADOR -->
-	<div class="mb-3">
-		<input type="text" id="searchBox"
-			   class="form-control"
-			   placeholder="Buscar por nombre, área o extensión..." />
-	</div>
+			<!-- Botón regresar -->
+			<a href="/inicio" class="btn btn-sm btn-light shadow-sm">
+				<i class="bi bi-arrow-left"></i> Regresar
+			</a>
 
+			<!-- Título centrado -->
+			<div class="d-flex align-items-center mx-auto">
+				<i class="bi bi-journal-text me-2 fs-4"></i>
+				<h4 class="mb-0">Administración de Directorio</h4>
+			</div>
 
-	@if (TempData["Success"] != null)
-	{
-		<div id="alertSuccess" class="alert alert-success alert-dismissible fade show">
-			<i class="bi bi-check-circle me-2"></i>
-			@TempData["Success"]
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 		</div>
-	}
 
-	@if (TempData["Error"] != null)
-	{
-		<div id="alertError" class="alert alert-danger alert-dismissible fade show">
-			<i class="bi bi-exclamation-triangle me-2"></i>
-			@TempData["Error"]
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		<div class="card-body">
+
+			<!-- BOTÓN NUEVO -->
+			<div class="d-flex justify-content-end mb-3">
+				<a asp-area="Admin"
+					   asp-controller="Directorio"
+					   asp-action="Create"
+					   class="btn btn-success shadow-sm px-3 rounded-pill">
+					<i class="bi bi-plus-circle"></i> Nuevo Registro
+				</a>
+			</div>
+
+			<!-- BUSCADOR -->
+			<div class="mb-3 position-relative">
+				<i class="bi bi-search position-absolute"
+				   style="top:10px; left:10px; color:gray;"></i>
+
+				<input type="text" id="searchBox"
+					   class="form-control ps-4"
+					   placeholder="Buscar por nombre, área o extensión..." />
+			</div>
+
+			<!-- ALERTAS -->
+			@if (TempData["Success"] != null)
+			{
+				<div id="alertSuccess" class="alert alert-success alert-dismissible fade show shadow-sm">
+					<i class="bi bi-check-circle me-2"></i>
+					@TempData["Success"]
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				</div>
+			}
+
+			@if (TempData["Error"] != null)
+			{
+				<div id="alertError" class="alert alert-danger alert-dismissible fade show shadow-sm">
+					<i class="bi bi-exclamation-triangle me-2"></i>
+					@TempData["Error"]
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				</div>
+			}
+
+			<!-- TABLA -->
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover align-middle" id="tablaDirectorio">
+
+					<thead class="text-center" style="background-color:#f1f1f1;">
+						<tr>
+							<th style="width:5%">#</th>
+							<th>Nombre</th>
+							<th>Área</th>
+							<th style="width:15%">Extensión</th>
+							<th style="width:15%">Acciones</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						@{
+							int i = 1;
+						}
+
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td class="text-center">@i</td>
+								<td>@item.Nombre</td>
+								<td>@item.Area</td>
+								<td class="text-center">
+									<i class="bi bi-telephone me-1"></i> @item.Ext
+								</td>
+								<td class="text-center">
+
+									<!-- EDITAR -->
+									<a asp-area="Admin"
+										   asp-controller="Directorio"
+										   asp-action="Edit"
+										   asp-route-id="@item.Id"
+										   class="btn btn-sm btn-outline-secondary">
+										<i class="bi bi-pencil-square"></i>
+									</a>
+
+									<!-- ELIMINAR -->
+									<form asp-area="Admin"
+										  asp-controller="Directorio"
+										  asp-action="Delete"
+										  asp-route-id="@item.Id"
+										  method="post"
+										  style="display:inline;"
+										  onsubmit="return confirm('¿Deseas eliminar este registro?');">
+
+										@Html.AntiForgeryToken()
+
+										<button type="submit" class="btn btn-sm btn-outline-danger">
+											<i class="bi bi-trash"></i>
+										</button>
+
+									</form>
+
+								</td>
+							</tr>
+
+							i++;
+						}
+
+					</tbody>
+
+				</table>
+			</div>
+
 		</div>
-	}
 
-	<!-- TABLA -->
-	<div class="table-responsive">
-		<table class="table table-bordered table-hover table-sm align-middle" id="tablaDirectorio">
-
-			<thead class="table-dark text-center">
-				<tr>
-					<th style="width:5%">#</th>
-					<th>Nombre</th>
-					<th>Área</th>
-					<th style="width:15%">Extensión</th>
-					<th style="width:15%">Acciones</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				@{
-					int i = 1;
-				}
-
-				@foreach (var item in Model)
-				{
-					<tr>
-						<td class="text-center">@i</td>
-						<td>@item.Nombre</td>
-						<td>@item.Area</td>
-						<td class="text-center">
-							<i class="bi bi-telephone me-1"></i> @item.Ext
-						</td>
-						<td class="text-center">
-
-							<!-- EDITAR -->
-							<a asp-area="Admin"
-								   asp-controller="Directorio"
-								   asp-action="Edit"
-								   asp-route-id="@item.Id"
-								   class="btn btn-sm btn-primary">
-								<i class="bi bi-pencil-square"></i>
-							</a>
-
-							
-
-							<form asp-area="Admin"
-								  asp-controller="Directorio"
-								  asp-action="Delete"
-								  asp-route-id="@item.Id"
-								  method="post"
-								  style="display:inline;"
-								  onsubmit="return confirm('¿Deseas eliminar este registro?');">
-
-								@Html.AntiForgeryToken()
-
-								<button type="submit" class="btn btn-sm btn-danger">
-									<i class="bi bi-trash"></i>
-								</button>
-
-							</form>
-
-						</td>
-					</tr>
-
-					i++;
-				}
-
-
-			</tbody>
-
-		</table>
 	</div>
 
 </div>
