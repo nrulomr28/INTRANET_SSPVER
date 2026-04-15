@@ -32,6 +32,7 @@ public partial class BdpagWebContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+
     }
 
 
@@ -97,12 +98,10 @@ public partial class BdpagWebContext : DbContext
 
             entity.ToTable("DirectorioTelefonico");
 
-            entity.Property(e => e.Area)
-                .HasMaxLength(200)
-                .IsUnicode(false);
             entity.Property(e => e.Extension)
                 .HasMaxLength(15)
                 .IsUnicode(false);
+            entity.Property(e => e.FechaActualizacion).HasColumnType("datetime");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);

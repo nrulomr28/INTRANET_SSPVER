@@ -1,14 +1,11 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.Directorio
-@model List<DirectorioVM>
+@model List<DirectorioListVM>
 
 @{
 	ViewData["Title"] = "Administrar Directorio";
 }
 
 
-@{
-	Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 
 <div class="container-fluid mt-4">
@@ -34,6 +31,25 @@
 			   class="form-control"
 			   placeholder="Buscar por nombre, área o extensión..." />
 	</div>
+
+
+	@if (TempData["Success"] != null)
+	{
+		<div id="alertSuccess" class="alert alert-success alert-dismissible fade show">
+			<i class="bi bi-check-circle me-2"></i>
+			@TempData["Success"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
+
+	@if (TempData["Error"] != null)
+	{
+		<div id="alertError" class="alert alert-danger alert-dismissible fade show">
+			<i class="bi bi-exclamation-triangle me-2"></i>
+			@TempData["Error"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
 
 	<!-- TABLA -->
 	<div class="table-responsive">
@@ -69,29 +85,77 @@
 							<a asp-area="Admin"
 								   asp-controller="Directorio"
 								   asp-action="Edit"
-								   asp-route-id="@item.IdDirectorio"
+								   asp-route-id="@item.Id"
 								   class="btn btn-sm btn-primary">
 								<i class="bi bi-pencil-square"></i>
 							</a>
 
-							<!-- ELIMINAR -->
-							<a asp-area="Admin"
-								   asp-controller="Directorio"
-								   asp-action="Delete"
-								   asp-route-id="@item.IdDirectorio"
-								   class="btn btn-sm btn-danger"
-								   onclick="return confirm('¿Deseas eliminar este registro?');">
-								<i class="bi bi-trash"></i>
-							</a>
+							
+
+							<form asp-area="Admin"
+								  asp-controller="Directorio"
+								  asp-action="Delete"
+								  asp-route-id="@item.Id"
+								  method="post"
+								  style="display:inline;"
+								  onsubmit="return confirm('¿Deseas eliminar este registro?');">
+
+								@Html.AntiForgeryToken()
+
+								<button type="submit" class="btn btn-sm btn-danger">
+									<i class="bi bi-trash"></i>
+								</button>
+
+							</form>
 
 						</td>
 					</tr>
 
 					i++;
 				}
+
+
 			</tbody>
 
 		</table>
 	</div>
 
 </div>
+
+
+<script>
+	document.getElementById("searchBox").addEventListener("keyup", function () {
+		var value = this.value.toLowerCase();
+		var rows = document.querySelectorAll("#tablaDirectorio tbody tr");
+
+		let contador = 1;
+
+		rows.forEach(function (row) {
+			var text = row.textContent.toLowerCase();
+
+			if (text.includes(value)) {
+				row.style.display = "";
+				row.cells[0].textContent = contador;
+				contador++;
+			} else {
+				row.style.display = "none";
+			}
+		});
+	});
+</script>
+
+
+<script>
+	setTimeout(function () {
+		let success = document.getElementById("alertSuccess");
+		let error = document.getElementById("alertError");
+
+		[success, error].forEach(function (alert) {
+			if (alert) {
+				alert.classList.remove("show");
+				setTimeout(() => alert.remove(), 500);
+			}
+		});
+
+	}, 3000);
+</script>

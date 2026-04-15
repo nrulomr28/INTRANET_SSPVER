@@ -6,6 +6,7 @@ namespace INTRANET_SSPVER.Models.Services.Interfaces
     public interface ICaleaService
     {
         Task<List<AreaCaleaVM>> ObtenerAreasConDirectivas();
+
     }
 
 
