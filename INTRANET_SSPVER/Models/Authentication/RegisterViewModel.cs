@@ -12,12 +12,12 @@ namespace INTRANET_SSPVER.Models.Authentication
         public string UserName { get; set; }
 
 
-        [Required(ErrorMessage = "Correo electrónico es obligatorio.")]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Correo no válido")]
-        [StringLength(60, ErrorMessage = "Máximo 60 caracteres")]
-        [Display(Name = "Ingrese un correo para recibir folio del trámite")]
+        //[Required(ErrorMessage = "Correo electrónico es obligatorio.")]
+        //[RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Correo no válido")]
+        //[StringLength(60, ErrorMessage = "Máximo 60 caracteres")]
+        //[Display(Name = "Ingrese un correo para recibir folio del trámite")]
 
-        public string Email { get; set; }
+        //public string Email { get; set; }
 
 
         [Display(Name = "Nombre completo")]

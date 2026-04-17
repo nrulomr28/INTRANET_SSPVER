@@ -7,9 +7,13 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
     public class FormatosController : Controller
     {
         private readonly BdpagWebContext _context;
-        public FormatosController(BdpagWebContext context)
+
+        private readonly IConfiguration _config;
+
+        public FormatosController(BdpagWebContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
 
@@ -28,18 +32,40 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
         }
 
 
+        //public IActionResult Descargar(int id)
+        //{
+        //    var formato = _context.Formatos.FirstOrDefault(f => f.IdFormato == id && f.Activo);
+        //    if (formato == null) return NotFound();
+
+        //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", formato.RutaArchivo.TrimStart('/'));
+        //    if (!System.IO.File.Exists(filePath)) return NotFound();
+
+        //    var fileBytes = System.IO.File.ReadAllBytes(filePath);
+        //    return File(fileBytes, "application/pdf", Path.GetFileName(filePath));
+        //}
+
         public IActionResult Descargar(int id)
         {
             var formato = _context.Formatos.FirstOrDefault(f => f.IdFormato == id && f.Activo);
             if (formato == null) return NotFound();
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", formato.RutaArchivo.TrimStart('/'));
+            var basePath = _config["Rutas:RepositorioArchivos"];
+
+            if (string.IsNullOrEmpty(basePath))
+                return BadRequest("No está configurada la ruta de RepositorioArchivos");
+
+
+            var rutaRelativa = formato.RutaArchivo.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString());
+            var filePath = Path.Combine(basePath, rutaRelativa);
+
             if (!System.IO.File.Exists(filePath)) return NotFound();
 
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
-            return File(fileBytes, "application/pdf", Path.GetFileName(filePath));
-        }
 
+
+            return File(fileBytes, "application/pdf", Path.GetFileName(filePath));
+
+        }
 
     }
 

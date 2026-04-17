@@ -19,7 +19,6 @@ namespace INTRANET_SSPVER.Areas.Account.Controllers
 
         private readonly IUbFisicaService _areaSSPService;
 
-
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUbFisicaService areaSSPService)
         {
             _userManager = userManager;
@@ -56,7 +55,7 @@ namespace INTRANET_SSPVER.Areas.Account.Controllers
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
-                Email = model.Email,
+                //Email = model.Email,
                 NombreCompleto = model.NombreCompleto,
                 IdUbicacionFisica = model.IdUbicacionFisica
             };

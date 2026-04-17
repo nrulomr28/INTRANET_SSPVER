@@ -18,23 +18,43 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             _context = context;
         }
 
+        //public List<DirectorioListVM> ObtenerDirectorio()
+        //{
+        //    var query = from a in _context.DirectorioTelefonicos
+        //                join b in _context.AreaDirectorios
+        //                on a.IdArea equals b.IdArea
+        //                orderby a.Nombre
+        //                select new DirectorioListVM
+        //                {
+        //                    Id = a.IdDirectorio,
+        //                    Nombre = a.Nombre,
+        //                    Area = b.Area,
+        //                    Ext = a.Extension
+        //                };
+
+        //    return query.AsNoTracking().ToList();
+        //}
+
         public List<DirectorioListVM> ObtenerDirectorio()
         {
-            var query = from a in _context.DirectorioTelefonicos
-                        join b in _context.AreaDirectorios
-                        on a.IdArea equals b.IdArea
-                        orderby a.Nombre
-                        select new DirectorioListVM
-                        {
-                            Id = a.IdDirectorio,
-                            Nombre = a.Nombre,
-                            Area = b.Area,
-                            Ext = a.Extension
-                        };
+            return (from a in _context.DirectorioTelefonicos
+                    join b in _context.AreaDirectorios
+                    on a.IdArea equals b.IdArea
 
-            return query.AsNoTracking().ToList();
+                    //orderby a.Nivel, a.Orden, b.Area, a.Nombre
+                    orderby (a.Nivel ?? 999), (a.Orden ?? 999), b.Area, a.Nombre
+
+
+                    select new DirectorioListVM
+                    {
+                        Id = a.IdDirectorio,
+                        Nombre = a.Nombre,
+                        Area = b.Area,
+                        Ext = a.Extension
+                    })
+                    .AsNoTracking()
+                    .ToList();
         }
-
 
         // 🔹 OBTENER POR ID
         public DirectorioFormVM ObtenerPorId(int id)

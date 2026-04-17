@@ -16,4 +16,8 @@ public partial class DirectorioTelefonico
     public DateTime FechaActualizacion { get; set; }
 
     public bool Activo { get; set; }
+
+    public int? Nivel { get; set; }
+
+    public int? Orden { get; set; }
 }
