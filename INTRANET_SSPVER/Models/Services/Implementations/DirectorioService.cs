@@ -18,23 +18,6 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             _context = context;
         }
 
-        //public List<DirectorioListVM> ObtenerDirectorio()
-        //{
-        //    var query = from a in _context.DirectorioTelefonicos
-        //                join b in _context.AreaDirectorios
-        //                on a.IdArea equals b.IdArea
-        //                orderby a.Nombre
-        //                select new DirectorioListVM
-        //                {
-        //                    Id = a.IdDirectorio,
-        //                    Nombre = a.Nombre,
-        //                    Area = b.Area,
-        //                    Ext = a.Extension
-        //                };
-
-        //    return query.AsNoTracking().ToList();
-        //}
-
         public List<DirectorioListVM> ObtenerDirectorio()
         {
             return (from a in _context.DirectorioTelefonicos
@@ -67,13 +50,15 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                     Nombre = a.Nombre,
                     IdArea = a.IdArea,
                     Ext = a.Extension,
-                    Activo = a.Activo
+                    Activo = a.Activo,
+                    Nivel = a.Nivel,
+                    Orden = a.Orden
+
                 })
                 .FirstOrDefault();
 
             return data;
         }
-
 
 
         // 🔹 INSERTAR
@@ -85,7 +70,9 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                 Extension = model.Ext,
                 IdArea = (int)model.IdArea,
                 FechaActualizacion = DateTime.Now,
-                Activo = model.Activo
+                Activo = model.Activo,
+                Nivel = model.Nivel,
+                Orden = model.Orden
             };
 
             _context.Add(entity);
@@ -103,6 +90,8 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             entity.IdArea = (int)model.IdArea;
             entity.FechaActualizacion = DateTime.Now;
             entity.Activo = model.Activo;
+            entity.Nivel = model.Nivel;
+            entity.Orden = model.Orden;
 
             _context.SaveChanges();
         }

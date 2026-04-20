@@ -40,6 +40,32 @@
 
 
 		<div class="mb-3">
+			<label class="form-label">Nivel</label>
+
+			<select asp-for="Nivel" class="form-select">
+				<option value="">-- Selecciona nivel --</option>
+				<option value="1">Secretario General</option>
+				<option value="2">Director</option>
+				<option value="3">Jefe</option>
+				<option value="4">Analista</option>
+			</select>
+
+			<span asp-validation-for="Nivel" class="text-danger"></span>
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Orden (opcional)</label>
+
+			<input asp-for="Orden" type="number" class="form-control" />
+
+			<small class="text-muted">
+				Solo usar si quieres priorizar dentro del mismo nivel.
+			</small>
+		</div>
+
+
+
+		<div class="mb-3">
 			<label class="form-label">Extensión</label>
 			<input asp-for="Ext" class="form-control" />
 			<span asp-validation-for="Ext" class="text-danger"></span>

@@ -48,6 +48,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IDirectorioService, DirectorioService>();
 builder.Services.AddScoped<ICaleaService, CaleaService>();
 builder.Services.AddScoped<IUbFisicaService, UbicacionFisicaService>();
+builder.Services.AddScoped<ITransparenciaService, TransparenciaService>();
 builder.Services.AddScoped<IRolCatalogoService, RolCatalogoService>();
 builder.Services.AddScoped<RolesService>();
 

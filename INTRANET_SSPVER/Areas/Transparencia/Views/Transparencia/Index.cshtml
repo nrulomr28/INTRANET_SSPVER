@@ -1,0 +1,149 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Transparencia
+@model List<TransparenciaVM>
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* 
+<style>
+	.card-acceso {
+		display: block;
+		background: #c9a227;
+		color: white;
+		border-radius: 15px;
+		padding: 25px 15px;
+		text-align: center;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	}
+
+		.card-acceso i {
+			font-size: 40px;
+			margin-bottom: 10px;
+		}
+
+		.card-acceso h5 {
+			font-weight: bold;
+			margin-top: 10px;
+		}
+
+		.card-acceso p {
+			font-size: 14px;
+			opacity: 0.9;
+		}
+
+		.card-acceso:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+		}
+
+		/* 🔥 Tarjeta destacada */
+		.card-acceso.destacado {
+			background: #800000;
+		}
+</style>
+ *@
+
+
+<div class="container mt-4">
+
+	<div class="card shadow-lg border-0">
+				
+		<div class="card-header text-white d-flex align-items-center justify-content-between headertitulo">
+
+			<!-- Botón regresar -->
+			<a href="/inicio" class="btn btn-sm btn-light">
+				<i class="bi bi-arrow-left"></i> Regresar
+			</a>
+
+			<!-- Título centrado -->
+			<div class="d-flex align-items-center mx-auto">
+				<i class="bi bi-telephone-fill me-2 fs-4"></i>
+				<h4 class="mb-0">Comité Transparencia</h4>
+			</div>
+
+		</div>
+
+
+
+		<div class="card-body">
+			<p class="text-muted mb-3">
+				Consulta de extensiones internas de la Secretaría de Seguridad Pública.
+			</p>
+
+			<!-- 🔹 Cuadro de búsqueda -->
+			<div class="mb-3">
+				<input type="text" id="searchBox" class="form-control" placeholder="Buscar por nombre, área o ext.">
+			</div>
+
+			<table class="table table-bordered table-hover table-sm align-middle">
+				<thead class="table-thead text-dark text-center">
+					<tr>
+						<th style="width:10%">#</th>
+						<th style="width:40%">NumeroActa</th>
+						<th style="width:40%">Fecha</th>
+						<th style="width:20%">Url</th>
+					</tr>
+				</thead>
+
+				@* @{
+					int i = 1;
+				}
+ *@
+				<tbody>
+					@for (int i = 0; i < Model.Count; i++)
+					{
+						<tr>
+							<td class="text-center">@(i + 1)</td>
+							<td>@Model[i].NumeroActa</td>
+							<td>@Model[i].Fecha</td>
+							<td>@Model[i].Url</td>						
+						</tr>
+					}
+				</tbody>
+
+			</table>
+
+		</div>
+
+		
+		<div class="mt-3 text-center mb-3">
+			<a asp-area="Inicio" asp-controller="Directorio" asp-action="ExportPdf" class="btn btn-success me-2">
+				<i class="bi bi-file-earmark-pdf me-2"></i> Descargar PDF
+			</a>
+
+			<a asp-area="Inicio" asp-controller="Menu" asp-action="Index" class="btn btn-outline-danger">
+				<i class="bi bi-arrow-left-circle me-2"></i> Regresar al menú
+			</a>
+		</div>
+
+
+	</div>
+</div>
+
+
+
+<script>
+	document.getElementById("searchBox").addEventListener("keyup", function () {
+		var value = this.value.toLowerCase();
+		var rows = document.querySelectorAll("table tbody tr");
+
+		let contador = 1;
+
+		rows.forEach(function (row) {
+			var text = row.textContent.toLowerCase();
+
+			if (text.includes(value)) {
+				row.style.display = "";
+
+				//  actualizar número
+				row.cells[0].textContent = contador;
+
+				contador++;
+			} else {
+				row.style.display = "none";
+			}
+		});
+	});
+</script>

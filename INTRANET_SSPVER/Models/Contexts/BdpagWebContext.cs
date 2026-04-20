@@ -22,6 +22,10 @@ public partial class BdpagWebContext : DbContext
 
     public virtual DbSet<AreasCalea> AreasCaleas { get; set; }
 
+    public virtual DbSet<AvisoPrivacidad> AvisoPrivacidads { get; set; }
+
+    public virtual DbSet<ComiteTransparencium> ComiteTransparencia { get; set; }
+
     public virtual DbSet<DirectivaCalea> DirectivaCaleas { get; set; }
 
     public virtual DbSet<DirectorioTelefonico> DirectorioTelefonicos { get; set; }
@@ -31,9 +35,8 @@ public partial class BdpagWebContext : DbContext
     public virtual DbSet<UbicacionFisica> UbicacionFisicas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
+    { }
 
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -72,6 +75,26 @@ public partial class BdpagWebContext : DbContext
                 .HasForeignKey<AreasCalea>(d => d.IdAreaCalea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AreasCalea_DirectivaCalea");
+        });
+
+        modelBuilder.Entity<AvisoPrivacidad>(entity =>
+        {
+            entity.ToTable("AvisoPrivacidad");
+
+            entity.Property(e => e.Area).IsUnicode(false);
+            entity.Property(e => e.AvisoSimplificadoUrl).IsUnicode(false);
+            entity.Property(e => e.AvistoIntegralUrl).IsUnicode(false);
+            entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+            entity.Property(e => e.SistemaDatosUrl).IsUnicode(false);
+        });
+
+        modelBuilder.Entity<ComiteTransparencium>(entity =>
+        {
+            entity.HasKey(e => e.IdComite);
+
+            entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+            entity.Property(e => e.NumeroActa).HasMaxLength(50);
+            entity.Property(e => e.Url).HasMaxLength(300);
         });
 
         modelBuilder.Entity<DirectivaCalea>(entity =>

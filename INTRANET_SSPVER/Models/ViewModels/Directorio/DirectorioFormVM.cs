@@ -15,6 +15,10 @@ namespace INTRANET_SSPVER.Models.ViewModels.Directorio
         [Required(ErrorMessage = "Selecciona un área")]
         public int? IdArea { get; set; }
 
+        [Required(ErrorMessage = "Selecciona un nivel")]
+        public int? Nivel { get; set; }   
+        public int? Orden { get; set; }
+
         [Required(ErrorMessage = "Ingrese extensión")]
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Solo se permiten números")]
         [StringLength(10, ErrorMessage = "El número no puede exceder 10 dígitos")]
