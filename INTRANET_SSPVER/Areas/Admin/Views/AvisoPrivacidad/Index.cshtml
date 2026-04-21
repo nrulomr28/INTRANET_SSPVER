@@ -1,8 +1,8 @@
-﻿@using INTRANET_SSPVER.Models.ViewModels.Transparencia
-@model List<TransparenciaVM>
+﻿@using INTRANET_SSPVER.Models.ViewModels.AvisoPrivacidad
+@model List<AvisoPrivacidadVM>
 
 @{
-	ViewData["Title"] = "Administrar Comité de Transparencia";
+	ViewData["Title"] = "Administrar Aviso de Privacidad";
 }
 
 
@@ -12,6 +12,8 @@
 		transition: 0.2s;
 	}
 </style>
+
+
 
 <div class="container-fluid mt-4">
 
@@ -28,7 +30,7 @@
 			<!-- Título centrado -->
 			<div class="d-flex align-items-center mx-auto">
 				<i class="bi bi-journal-text me-2 fs-4"></i>
-				<h4 class="mb-0">Administración Comité de Transparencia</h4>
+				<h4 class="mb-0">Administración Aviso de Privacidad</h4>
 			</div>
 
 		</div>
@@ -38,7 +40,7 @@
 			<!-- BOTÓN NUEVO -->
 			<div class="d-flex justify-content-end mb-3">
 				<a asp-area="Admin"
-					   asp-controller="Transparencia"
+					   asp-controller="AvisoPrivacidad"
 					   asp-action="Create"
 					   class="btn btn-success shadow-sm px-3 rounded-pill">
 					<i class="bi bi-plus-circle"></i> Nuevo Registro
@@ -52,7 +54,7 @@
 
 				<input type="text" id="searchBox"
 					   class="form-control ps-4"
-					   placeholder="Buscar por número acta, fecha ó url" />
+					   placeholder="Buscar por área" />
 			</div>
 
 			<!-- ALERTAS -->
@@ -82,9 +84,10 @@
 					<thead class="text-center" style="background-color:#f1f1f1;">
 						<tr>
 							<th style="width:10%">#</th>
-							<th style="width:40%">Número Acta</th>
-							<th style="width:20%">Fecha</th>
-							<th style="width:20%">Url</th>
+							<th style="width:40%">Area</th>
+							<th style="width:20%">Aviso Integral</th>
+							<th style="width:20%">Aviso Simplificado</th>
+							<th style="width:10%">Sistema de Datos</th>
 							<th style="width:10%">Acciones</th>
 						</tr>
 					</thead>
@@ -97,32 +100,107 @@
 						@foreach (var item in Model)
 						{
 							<tr>
-								<td class="text-center">@i</td>
-								<td>@item.NumeroActa</td>
-								<td>@item.Fecha</td>
-								<td>
-									@* <a href="@item.Url">Ver PDF</a> *@
-									@item.Url
-								</td>
-													
 
-								<td class="text-center">
-									<div class="d-flex justify-content-center gap-2">
+								<td class="text-center align-middle">@i</td>
 
-										<a href="@item.Url" target="_blank"
+								<td class="text-center align-middle">@item.Area</td>
+
+								@* <td class="text-center align-middle">
+									<a href="@item.AvisoIntegralUrl" target="_blank"
+										   class="btn btn-sm btn-light border rounded-circle shadow-sm"
+										   title="Ver PDF">
+										<i class="bi bi-file-earmark-pdf text-primary"></i>
+									</a>
+								</td> *@
+
+								<td class="text-center align-middle">
+									@if (!string.IsNullOrEmpty(item.AvisoIntegralUrl))
+									{
+										<a href="@item.AvisoIntegralUrl" target="_blank"
 											   class="btn btn-sm btn-light border rounded-circle shadow-sm"
 											   title="Ver PDF">
 											<i class="bi bi-file-earmark-pdf text-primary"></i>
 										</a>
+									}
+									else
+									{
+										<button class="btn btn-sm btn-light border rounded-circle shadow-sm"
+												disabled
+												title="URL no disponible">
+											<i class="bi bi-file-earmark-pdf text-secondary"></i>
+										</button>
+									}
+								</td>
+			
 
-										<a asp-area="Admin" asp-controller="Transparencia" asp-action="Edit" asp-route-id="@item.IdComite"
+								<td class="text-center align-middle">
+									@if (!string.IsNullOrEmpty(item.AvisoSimplificadoUrl))
+									{
+										<a href="@item.AvisoSimplificadoUrl" target="_blank"
+											   class="btn btn-sm btn-light border rounded-circle shadow-sm"
+											   title="Ver PDF">
+											<i class="bi bi-file-earmark-pdf text-primary"></i>
+										</a>
+									}
+									else
+									{
+										<button class="btn btn-sm btn-light border rounded-circle shadow-sm"
+												disabled
+												title="URL no disponible">
+											<i class="bi bi-file-earmark-pdf text-secondary"></i>
+										</button>
+									}
+								</td>
+
+									
+								@* td class="text-center align-middle">
+									<a href="@item.AvisoSimplificadoUrl" target="_blank"
+										   class="btn btn-sm btn-light border rounded-circle shadow-sm"
+										   title="Ver PDF">
+										<i class="bi bi-file-earmark-pdf text-primary"></i>
+									</a>
+								</td> *@
+
+								@* 	<td class="text-center align-middle">
+									<a href="@item.SistemaDatosUrl" target="_blank"
+										   class="btn btn-sm btn-light border rounded-circle shadow-sm"
+										   title="Ver PDF">
+										<i class="bi bi-file-earmark-pdf text-primary"></i>
+									</a>
+								</td> *@
+
+								<td class="text-center align-middle">
+									@if (!string.IsNullOrEmpty(item.SistemaDatosUrl))
+									{
+										<a href="@item.SistemaDatosUrl" target="_blank"
+											   class="btn btn-sm btn-light border rounded-circle shadow-sm"
+											   title="Ver PDF">
+											<i class="bi bi-file-earmark-pdf text-primary"></i>
+										</a>
+									}
+									else
+									{
+										<button class="btn btn-sm btn-light border rounded-circle shadow-sm"
+												disabled
+												title="URL no disponible">
+											<i class="bi bi-file-earmark-pdf text-secondary"></i>
+										</button>
+									}
+								</td>
+								
+								
+
+								<td class="text-center">
+									<div class="d-flex justify-content-center gap-2">
+
+										<a asp-area="Admin" asp-controller="AvisoPrivacidad" asp-action="Edit" asp-route-id="@item.IdAvisoPrivacidad"
 											   class="btn btn-sm btn-light border rounded-circle shadow-sm"
 											   title="Editar">
 											<i class="bi bi-pencil-square text-secondary"></i>
 										</a>
 
-										<form asp-area="Admin" asp-controller="Transparencia" asp-action="Delete"
-											  asp-route-id="@item.IdComite"
+										<form asp-area="Admin" asp-controller="AvisoPrivacidad" asp-action="Delete"
+											  asp-route-id="@item.IdAvisoPrivacidad"
 											  method="post"
 											  onsubmit="return confirm('¿Eliminar?');">
 
@@ -155,7 +233,6 @@
 
 
 
-
 <script>
 	document.getElementById("searchBox").addEventListener("keyup", function () {
 		var value = this.value.toLowerCase();
@@ -176,6 +253,7 @@
 		});
 	});
 </script>
+
 										
 <script>
 	setTimeout(function () {

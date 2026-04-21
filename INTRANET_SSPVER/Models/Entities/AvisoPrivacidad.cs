@@ -5,11 +5,11 @@ namespace INTRANET_SSPVER.Models.Entities;
 
 public partial class AvisoPrivacidad
 {
-    public int AvisoPrivacidadId { get; set; }
+    public int IdAvisoPrivacidad { get; set; }
 
     public string Area { get; set; } = null!;
 
-    public string AvistoIntegralUrl { get; set; } = null!;
+    public string AvisoIntegralUrl { get; set; } = null!;
 
     public string AvisoSimplificadoUrl { get; set; } = null!;
 

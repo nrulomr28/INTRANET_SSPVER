@@ -4,46 +4,7 @@
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@* 
-<style>
-	.card-acceso {
-		display: block;
-		background: #c9a227;
-		color: white;
-		border-radius: 15px;
-		padding: 25px 15px;
-		text-align: center;
-		text-decoration: none;
-		transition: all 0.3s ease;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-	}
 
-		.card-acceso i {
-			font-size: 40px;
-			margin-bottom: 10px;
-		}
-
-		.card-acceso h5 {
-			font-weight: bold;
-			margin-top: 10px;
-		}
-
-		.card-acceso p {
-			font-size: 14px;
-			opacity: 0.9;
-		}
-
-		.card-acceso:hover {
-			transform: translateY(-6px);
-			box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-		}
-
-		/* 🔥 Tarjeta destacada */
-		.card-acceso.destacado {
-			background: #800000;
-		}
-</style>
- *@
 
 
 <div class="container mt-4">
@@ -87,10 +48,7 @@
 					</tr>
 				</thead>
 
-				@* @{
-					int i = 1;
-				}
- *@
+	
 				<tbody>
 					@for (int i = 0; i < Model.Count; i++)
 					{
@@ -98,7 +56,7 @@
 							<td class="text-center">@(i + 1)</td>
 							<td>@Model[i].NumeroActa</td>
 							<td>@Model[i].Fecha</td>
-							<td>@Model[i].Url</td>						
+							<td>@Model[i].Url</td>
 						</tr>
 					}
 				</tbody>

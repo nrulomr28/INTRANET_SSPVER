@@ -51,7 +51,6 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                 .FirstOrDefault();
         }
 
-
         public void Insertar(TransparenciaVM model)
         {
             var entity = new ComiteTransparencium
@@ -67,8 +66,6 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             _context.ComiteTransparencia.Add(entity);
             _context.SaveChanges();
         }
-
-
 
         public void Actualizar(TransparenciaVM model)
         {

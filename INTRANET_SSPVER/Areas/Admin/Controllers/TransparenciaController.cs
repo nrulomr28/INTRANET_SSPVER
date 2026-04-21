@@ -22,7 +22,6 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
             _transparenciaService = transparenciaService;
         }
 
-
         private List<SelectListItem> CargarAnios()
         {
             int anioActual = DateTime.Now.Year;
@@ -49,7 +48,10 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         {
             var model = new TransparenciaVM
             {
-                Años = CargarAnios()
+                Fecha = DateOnly.FromDateTime(DateTime.Today),
+                Años = CargarAnios(),
+                Activo = true
+
             };
 
             return View(model);
@@ -88,6 +90,25 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public IActionResult Edit(TransparenciaVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Años = CargarAnios();
+                return View(model);
+            }
+
+            _transparenciaService.Actualizar(model);
+
+            TempData["Success"] = "El registro se actualizó correctamente.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             var eliminado = _transparenciaService.Eliminar(id);
@@ -103,4 +124,6 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
 
     }
+
+
 }

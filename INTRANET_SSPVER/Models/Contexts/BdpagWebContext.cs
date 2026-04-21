@@ -35,7 +35,9 @@ public partial class BdpagWebContext : DbContext
     public virtual DbSet<UbicacionFisica> UbicacionFisicas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    { }
+    {
+
+    }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -79,11 +81,13 @@ public partial class BdpagWebContext : DbContext
 
         modelBuilder.Entity<AvisoPrivacidad>(entity =>
         {
+            entity.HasKey(e => e.IdAvisoPrivacidad);
+
             entity.ToTable("AvisoPrivacidad");
 
             entity.Property(e => e.Area).IsUnicode(false);
+            entity.Property(e => e.AvisoIntegralUrl).IsUnicode(false);
             entity.Property(e => e.AvisoSimplificadoUrl).IsUnicode(false);
-            entity.Property(e => e.AvistoIntegralUrl).IsUnicode(false);
             entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
             entity.Property(e => e.SistemaDatosUrl).IsUnicode(false);
         });
