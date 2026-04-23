@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using INTRANET_SSPVER.Models.Services.Implementations;
 using INTRANET_SSPVER.Models.Services.Interfaces;
+using INTRANET_SSPVER.Models.ViewModels.Transparencia;
 using Microsoft.AspNetCore.Mvc;
 
 namespace INTRANET_SSPVER.Areas.Transparencia.Controllers
@@ -10,27 +11,72 @@ namespace INTRANET_SSPVER.Areas.Transparencia.Controllers
     public class TransparenciaController : Controller
     {
         private readonly ITransparenciaService _service;
+        private readonly IFechaService _fechaService;
 
-        public TransparenciaController(ITransparenciaService service)
+        public TransparenciaController(ITransparenciaService service, IFechaService fechaService)
         {
             _service = service;
+            _fechaService = fechaService;
         }
 
-        //public IActionResult Index()
+
+
+
+
+
+        //public IActionResult ListadoEjercicio()
         //{
-        //    return View();
+        //    var anios = _fechaService.ObtenerAnios()
+        //                             .Select(x => int.Parse(x.Value))
+        //                             .ToList();
+
+        //    return View(anios);
         //}
 
-        public IActionResult Index()
-        
+
+
+        public IActionResult DetalleAnio(int anio)
         {
-            var model = _service.ObtenerTodos();
-            return View(model);
+            var lista = _service.ObtenerPorAnio(anio);
+
+            ViewBag.Anio = anio;
+
+            return View(lista);
         }
 
-        //public IActionResult ObtenerTodos()
+
+
+        //public IActionResult ListadoEjercicio()
         //{
-        //    return View();
+        //    var modelo = new ListadoEjercicioVM
+        //    {
+        //        var anios = _fechaService.ObtenerAnios()
+        //                            .Select(x => int.Parse(x.Value))
+        //                             .ToList();
+
+        //        AreaResponsable = "Unidad de Transparencia",
+        //        FechaActualizacion = DateTime.Now,
+        //        UrlDescarga = "/archivo.pdf"
+        //    };
+
+        //    return View(modelo);
         //}
+
+        public IActionResult ListadoEjercicio()
+        {
+            var modelo = new ListadoEjercicioVM
+            {
+                Anios = _fechaService.ObtenerAnios()
+                            .Select(x => int.Parse(x.Value))
+                            .ToList(),
+
+                AreaResponsable = "Unidad de Transparencia",
+                FechaActualizacion = DateTime.Now,
+                UrlDescarga = "/archivo.pdf"
+            };
+
+            return View(modelo);
+        }
+
     }
 }

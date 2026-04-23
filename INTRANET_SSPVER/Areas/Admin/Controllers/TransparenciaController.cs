@@ -16,24 +16,12 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
     public class TransparenciaController : Controller
     {
         private readonly ITransparenciaService _transparenciaService;
-
-        public TransparenciaController(ITransparenciaService transparenciaService)
+        private readonly IFechaService _fechaService;
+        public TransparenciaController(ITransparenciaService transparenciaService, IFechaService fechaService)
         {
             _transparenciaService = transparenciaService;
-        }
+            _fechaService = fechaService;
 
-        private List<SelectListItem> CargarAnios()
-        {
-            int anioActual = DateTime.Now.Year;
-
-            return Enumerable.Range(anioActual - 5, 6)
-                .OrderByDescending(x => x)
-                .Select(x => new SelectListItem
-                {
-                    Value = x.ToString(),
-                    Text = x.ToString()
-                })
-                .ToList();
         }
 
         public IActionResult Index()
@@ -49,7 +37,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
             var model = new TransparenciaVM
             {
                 Fecha = DateOnly.FromDateTime(DateTime.Today),
-                Años = CargarAnios(),
+                Años = _fechaService.ObtenerAnios(),
                 Activo = true
 
             };
@@ -64,7 +52,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Años = CargarAnios();
+                model.Años = _fechaService.ObtenerAnios();
                 return View(model);
             }
 
@@ -82,7 +70,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
             if (model == null)
                 return NotFound();
 
-            model.Años = CargarAnios();
+            model.Años = _fechaService.ObtenerAnios();
 
             return View(model);
         }
@@ -94,7 +82,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Años = CargarAnios();
+                model.Años = _fechaService.ObtenerAnios();
                 return View(model);
             }
 

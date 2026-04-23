@@ -35,6 +35,24 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
         }
 
 
+        public List<TransparenciaVM> ObtenerPorAnio(int anio)
+        {
+            return _context.ComiteTransparencia
+                .Where(x => x.Año == anio)
+                .OrderByDescending(x => x.Fecha)
+                .Select(x => new TransparenciaVM
+                {
+                    IdComite = x.IdComite,
+                    NumeroActa = x.NumeroActa,
+                    Fecha = x.Fecha,
+                    Url = x.Url,
+                    Año = x.Año,
+                    Activo = x.Activo
+                })
+                .AsNoTracking()
+                .ToList();
+        }
+
         public TransparenciaVM? ObtenerPorId(int id)
         {
             return _context.ComiteTransparencia
@@ -97,6 +115,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             return true;
 
         }
+
 
     }
 }

@@ -12,6 +12,8 @@ namespace INTRANET_SSPVER.Models.Services.Interfaces
 
         TransparenciaVM ObtenerPorId(int id);
 
+        List<TransparenciaVM> ObtenerPorAnio(int id);
+
         void Actualizar(TransparenciaVM model);
 
         bool Eliminar(int id);

@@ -1,9 +1,24 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.Transparencia
 @model List<TransparenciaVM>
-
+@* 
 @{
 	ViewData["Title"] = "Comité de Transparencia";
 }
+ *@
+
+@{
+	Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+
+
+@* 
+@{
+	// Esta línea desactiva el layout
+	Layout = null;
+} *@
+
+
 
 
 <style>
@@ -13,7 +28,7 @@
 	}
 </style>
 
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-0">
 
 	<div class="card shadow-sm border-0">
 
@@ -21,7 +36,12 @@
 		<div class="card-header text-white d-flex align-items-center justify-content-between headertitulo">
 
 			<!-- Botón regresar -->
-			<a href="/inicio" class="btn btn-sm btn-light shadow-sm">
+			@* <a href="/ListadoEjercicio" class="btn btn-sm btn-light shadow-sm">
+				<i class="bi bi-arrow-left"></i> Regresar
+			</a> *@
+
+	
+			<a href="javascript:history.back()" class="btn btn-sm btn-light shadow-sm">
 				<i class="bi bi-arrow-left"></i> Regresar
 			</a>
 

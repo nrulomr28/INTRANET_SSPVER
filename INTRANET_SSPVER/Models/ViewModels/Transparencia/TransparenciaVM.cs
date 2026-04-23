@@ -19,14 +19,14 @@ namespace INTRANET_SSPVER.Models.ViewModels.Transparencia
         [StringLength(300, ErrorMessage = "No puede exceder 300 caracteres")]
         [Required(ErrorMessage = "Url obligatorio")]
         public string Url { get; set; }
-
-        [Required(ErrorMessage = "Selecciona un año")]
-        public int? Año { get; set; }
-
+      
 
         [Required(ErrorMessage = "Selecciona un estatus")]
         public bool Activo { get; set; } = true;
 
+
+        [Required(ErrorMessage = "Selecciona un año")]
+        public int? Año { get; set; }
         public List<SelectListItem> Años { get; set; } = new();        
 
     }

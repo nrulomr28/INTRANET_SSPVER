@@ -49,6 +49,7 @@ builder.Services.AddScoped<IDirectorioService, DirectorioService>();
 builder.Services.AddScoped<ICaleaService, CaleaService>();
 builder.Services.AddScoped<IUbFisicaService, UbicacionFisicaService>();
 builder.Services.AddScoped<ITransparenciaService, TransparenciaService>();
+builder.Services.AddScoped<IFechaService, FechaService>();
 builder.Services.AddScoped<IAvisoPrivacidadService, AvisoPrivacidadService>();
 builder.Services.AddScoped<IRolCatalogoService, RolCatalogoService>();
 builder.Services.AddScoped<RolesService>();
