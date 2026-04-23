@@ -23,7 +23,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             return (from a in _context.DirectorioTelefonicos
                     join b in _context.AreaDirectorios
                     on a.IdArea equals b.IdArea
-
+                    where (a.Activo == true)
                     //orderby a.Nivel, a.Orden, b.Area, a.Nombre
                     orderby (a.Nivel ?? 999), (a.Orden ?? 999), b.Area, a.Nombre
 

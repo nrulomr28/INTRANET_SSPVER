@@ -10,5 +10,7 @@ namespace INTRANET_SSPVER.Areas.Inicio.Controllers
         {
             return View();
         }
+
+
     }
 }

@@ -81,5 +81,22 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var eliminado = _avisoPrivacidadService.Eliminar(id);
+
+            if (eliminado)
+                TempData["Success"] = "El registro se eliminó correctamente.";
+            else
+                TempData["Error"] = "No se pudo eliminar el registro.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

@@ -54,7 +54,20 @@ builder.Services.AddScoped<IRolCatalogoService, RolCatalogoService>();
 builder.Services.AddScoped<RolesService>();
 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
+
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    //Esta seccion se utiliza para hacer menos estrica la creación del password
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 4;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+})
+.AddEntityFrameworkStores<AuthDbContext>()
+.AddDefaultTokenProviders();
 
 
 
@@ -112,16 +125,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Inicio}/{controller=Menu}/{action=Index}/{id?}");
-
-// 🔹 Ruta para áreas (Admin, Account, etc.)
-
-//app.MapControllerRoute(
-//    name: "areas",
-//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{area=Account}/{controller=Account}/{action=Login}/{id?}");
 
 
 

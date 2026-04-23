@@ -10,7 +10,7 @@ namespace INTRANET_SSPVER.Models.Roles
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var existingRoles = roleManager.Roles.Select(r => r.Name).ToList();
 
-            var rolesToEnsure = new[] { "Sysadmin", "Administrador", "Captura", "Consulta" };
+            var rolesToEnsure = new[] { "Sysadmin", "Administrador", "AdminTransparencia", "AdminVinculacion", "Captura", "Consulta" };
 
             foreach (var role in rolesToEnsure)
             {
