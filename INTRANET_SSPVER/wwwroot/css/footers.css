@@ -1,0 +1,32 @@
+﻿
+
+
+.footer-transparencia {
+    background: linear-gradient(135deg, #f8f9fa, #eef1f5) !important;
+    /*   border-left: 5px solid #800020;  */
+    /* guinda institucional */
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.icono {
+    font-size: 20px !important;
+    color: #800020;
+}
+
+.btn-descargar {
+    background-color: #800020 !important;
+    color: white;
+    border-radius: 25px;
+    padding: 6px 15px;
+    transition: all 0.3s ease;
+}
+
+    .btn-descargar:hover {
+        background-color: #a00028 !important;
+        transform: translateY(-2px);
+    }

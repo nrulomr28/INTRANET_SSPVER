@@ -1,10 +1,16 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.AvisoPrivacidad
-@model List<AvisoPrivacidadFormVM>
+@model AvisoPrivacidadViewModel
+
+
 
 @{
 	ViewData["Title"] = "Administrar Aviso de Privacidad";
 }
 
+
+@{
+	Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
 
 <style>
 	.btn:hover {
@@ -23,29 +29,19 @@
 		<div class="card-header text-white d-flex align-items-center justify-content-between headertitulo">
 
 			<!-- Botón regresar -->
-			<a href="/inicio" class="btn btn-sm btn-light shadow-sm">
+			<a href="javascript:history.back()" class="btn btn-sm btn-light shadow-sm">
 				<i class="bi bi-arrow-left"></i> Regresar
 			</a>
 
 			<!-- Título centrado -->
 			<div class="d-flex align-items-center mx-auto">
 				<i class="bi bi-journal-text me-2 fs-4"></i>
-				<h4 class="mb-0">Administración Aviso de Privacidad</h4>
+				<h4 class="mb-0">Avisos de Privacidad</h4>
 			</div>
 
 		</div>
 
 		<div class="card-body">
-
-			<!-- BOTÓN NUEVO -->
-			<div class="d-flex justify-content-end mb-3">
-				<a asp-area="Admin"
-					   asp-controller="AvisoPrivacidad"
-					   asp-action="Create"
-					   class="btn btn-success shadow-sm px-3 rounded-pill">
-					<i class="bi bi-plus-circle"></i> Nuevo Registro
-				</a>
-			</div>
 
 			<!-- BUSCADOR -->
 			<div class="mb-3 position-relative">
@@ -88,7 +84,7 @@
 							<th style="width:20%">Aviso Integral</th>
 							<th style="width:20%">Aviso Simplificado</th>
 							<th style="width:10%">Sistema de Datos</th>
-							<th style="width:10%">Acciones</th>
+							
 						</tr>
 					</thead>
 
@@ -97,7 +93,7 @@
 							int i = 1;
 						}
 
-						@foreach (var item in Model)
+						@foreach (var item in Model.Lista)
 						{
 							<tr>
 
@@ -105,13 +101,7 @@
 
 								<td class="text-center align-middle">@item.Area</td>
 
-								@* <td class="text-center align-middle">
-									<a href="@item.AvisoIntegralUrl" target="_blank"
-										   class="btn btn-sm btn-light border rounded-circle shadow-sm"
-										   title="Ver PDF">
-										<i class="bi bi-file-earmark-pdf text-primary"></i>
-									</a>
-								</td> *@
+							
 
 								<td class="text-center align-middle">
 									@if (!string.IsNullOrEmpty(item.AvisoIntegralUrl))
@@ -131,8 +121,8 @@
 										</button>
 									}
 								</td>
-			
 
+			
 								<td class="text-center align-middle">
 									@if (!string.IsNullOrEmpty(item.AvisoSimplificadoUrl))
 									{
@@ -153,21 +143,7 @@
 								</td>
 
 									
-								@* td class="text-center align-middle">
-									<a href="@item.AvisoSimplificadoUrl" target="_blank"
-										   class="btn btn-sm btn-light border rounded-circle shadow-sm"
-										   title="Ver PDF">
-										<i class="bi bi-file-earmark-pdf text-primary"></i>
-									</a>
-								</td> *@
-
-								@* 	<td class="text-center align-middle">
-									<a href="@item.SistemaDatosUrl" target="_blank"
-										   class="btn btn-sm btn-light border rounded-circle shadow-sm"
-										   title="Ver PDF">
-										<i class="bi bi-file-earmark-pdf text-primary"></i>
-									</a>
-								</td> *@
+								
 
 								<td class="text-center align-middle">
 									@if (!string.IsNullOrEmpty(item.SistemaDatosUrl))
@@ -187,32 +163,10 @@
 										</button>
 									}
 								</td>
+
 								
 								
-
-								<td class="text-center">
-									<div class="d-flex justify-content-center gap-2">
-
-										<a asp-area="Admin" asp-controller="AvisoPrivacidad" asp-action="Edit" asp-route-id="@item.IdAvisoPrivacidad"
-											   class="btn btn-sm btn-light border rounded-circle shadow-sm"
-											   title="Editar">
-											<i class="bi bi-pencil-square text-secondary"></i>
-										</a>
-
-										<form asp-area="Admin" asp-controller="AvisoPrivacidad" asp-action="Delete"
-											  asp-route-id="@item.IdAvisoPrivacidad"
-											  method="post"
-											  onsubmit="return confirm('¿Eliminar?');">
-
-											<button type="submit"
-													class="btn btn-sm btn-light border rounded-circle shadow-sm"
-													title="Eliminar">
-												<i class="bi bi-trash text-danger"></i>
-											</button>
-										</form>
-
-									</div>
-								</td>
+								
 
 							</tr>
 
@@ -224,11 +178,63 @@
 				</table>
 			</div>
 
+
+		
+			<div class="footer-transparencia mt-2 p-4 shadow-sm rounded mb-3">
+
+				<div class="row text-center justify-content-center align-items-center">
+
+					<!-- Área -->
+					<div class="col-md-4 mb-3 mb-md-0">
+						<div class="info-item d-flex flex-column align-items-center">
+							<i class="bi bi-building mb-1 icono"></i>
+							<span>
+								<strong>Área responsable:</strong><br />
+								@Model.Footer.AreaResponsable
+							</span>
+						</div>
+					</div>
+
+					<!-- Fecha -->
+					<div class="col-md-4 mb-3 mb-md-0">
+						<div class="info-item d-flex flex-column align-items-center">
+							<i class="bi bi-calendar-check mb-1 icono"></i>
+							<span>
+								<strong>Última actualización:</strong><br />
+								@(Model.Footer.FechaActualizacion?.ToString("dd MMMM yyyy") ?? "N/A")
+							</span>
+						</div>
+					</div>
+
+					<!-- Botón -->
+				@* 	<div class="col-md-4">
+						<div class="d-flex justify-content-center">
+							<a href="@Model.Footer.UrlDescarga"
+								   class="btn btn-descargar"
+								   target="_blank">
+								<i class="bi bi-download me-1"></i>
+								Descargar listado
+							</a>
+						</div>
+					</div> *@
+
+				</div>
+
+			</div>
+
+
 		</div>
 
 	</div>
 
+
+
+
+
+
 </div>
+
+
 
 
 
@@ -268,4 +274,4 @@
 		});
 
 	}, 3000);
-</script> 
+</script>

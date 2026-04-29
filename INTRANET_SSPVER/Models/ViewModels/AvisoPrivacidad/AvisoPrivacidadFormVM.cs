@@ -2,7 +2,7 @@
 
 namespace INTRANET_SSPVER.Models.ViewModels.AvisoPrivacidad
 {
-    public class AvisoPrivacidadVM
+    public class AvisoPrivacidadFormVM
     {
         public int IdAvisoPrivacidad { get; set; }
 

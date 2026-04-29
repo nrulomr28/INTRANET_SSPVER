@@ -5,13 +5,14 @@ namespace INTRANET_SSPVER.Models.Services.Interfaces
 {
     public interface IAvisoPrivacidadService
     {
-        List<AvisoPrivacidadVM> ObtenerTodos();
+        //List<AvisoPrivacidadVM> ObtenerTodos();
+        List<ListadoPrivacidadVM> ObtenerTodos();
 
-        void Insertar(AvisoPrivacidadVM model);
+        void Insertar(AvisoPrivacidadFormVM model);
 
-        AvisoPrivacidadVM? ObtenerPorId(int id);       
+        AvisoPrivacidadFormVM? ObtenerPorId(int id);
 
-        void Actualizar(AvisoPrivacidadVM model);
+        void Actualizar(AvisoPrivacidadFormVM model);
 
         bool Eliminar(int id);
 

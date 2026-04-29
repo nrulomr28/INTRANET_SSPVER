@@ -21,7 +21,6 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         {
             _transparenciaService = transparenciaService;
             _fechaService = fechaService;
-
         }
 
         public IActionResult Index()

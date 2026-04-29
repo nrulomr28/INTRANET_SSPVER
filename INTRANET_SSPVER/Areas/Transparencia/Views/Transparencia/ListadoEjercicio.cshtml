@@ -7,41 +7,6 @@
 }
 
 
-<style>
-	.footer-transparencia {
-		background: linear-gradient(135deg, #f8f9fa, #eef1f5);
-		/*   border-left: 5px solid #800020;  */
-		/* guinda institucional */
-	}
-
-	.info-item {
-		display: flex;
-		align-items: center;
-		font-size: 14px;
-	}
-
-	.icono {
-		font-size: 20px;
-		color: #800020;
-	}
-
-	.btn-descargar {
-		background-color: #800020;
-		color: white;
-		border-radius: 25px;
-		padding: 6px 15px;
-		transition: all 0.3s ease;
-	}
-
-		.btn-descargar:hover {
-			background-color: #a00028;
-			transform: translateY(-2px);
-		}
-</style>
-
-
-
-
 <div class="text-center mb-4">
 	<h2 class="fw-bold titulo-principal">
 		Comité de Transparencia
@@ -79,7 +44,7 @@
     
 	<div class="footer-transparencia mt-2 p-4 shadow-sm rounded mb-3">
 
-		<div class="row align-items-center text-center text-md-start">
+		<div class="row text-center justify-content-center align-items-center">
 
 			<!-- Área -->
 			<div class="col-md-4 mb-2 mb-md-0">
@@ -101,14 +66,14 @@
 			</div>
 
 			<!-- Botón -->
-			<div class="col-md-4 text-md-end">
+			@* <div class="col-md-4 text-md-end">
 				<a href="@Model.UrlDescarga"
 					   class="btn btn-descargar"
 					   target="_blank">
 					<i class="bi bi-download me-1"></i>
 					Descargar listado
 				</a>
-			</div>
+			</div> *@
 
 		</div>
 

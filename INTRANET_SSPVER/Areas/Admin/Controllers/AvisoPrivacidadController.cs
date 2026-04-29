@@ -26,7 +26,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         // 🔹 CREATE GET
         public IActionResult Create()
         {
-            var model = new AvisoPrivacidadVM
+            var model = new AvisoPrivacidadFormVM
             {
                 Activo = true
             };
@@ -37,7 +37,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(AvisoPrivacidadVM model)
+        public IActionResult Create(AvisoPrivacidadFormVM model)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(AvisoPrivacidadVM model)
+        public IActionResult Edit(AvisoPrivacidadFormVM model)
         {
             if (!ModelState.IsValid)
             {

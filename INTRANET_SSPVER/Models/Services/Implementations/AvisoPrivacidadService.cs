@@ -17,30 +17,31 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             _context = context;
         }
 
-        public List<AvisoPrivacidadVM> ObtenerTodos()
+
+        public List<ListadoPrivacidadVM> ObtenerTodos()
         {
             return _context.AvisoPrivacidads
               .OrderByDescending(x => x.IdAvisoPrivacidad)
               .ThenByDescending(x => x.FechaCreacion)
-              .Select(x => new AvisoPrivacidadVM
+              .Select(x => new ListadoPrivacidadVM
               {
                   IdAvisoPrivacidad = x.IdAvisoPrivacidad,
                   Area = x.Area,
                   AvisoIntegralUrl = x.AvisoIntegralUrl,
                   AvisoSimplificadoUrl = x.AvisoSimplificadoUrl,
                   SistemaDatosUrl = x.SistemaDatosUrl,
-                  Activo = x.Activo
+                  FechaCreacion = DateOnly.FromDateTime(x.FechaCreacion)
+
               })
               .AsNoTracking()
               .ToList();
         }
 
-
-        public AvisoPrivacidadVM? ObtenerPorId(int id)
+        public AvisoPrivacidadFormVM? ObtenerPorId(int id)
         {
             return _context.AvisoPrivacidads
                 .Where(x => x.IdAvisoPrivacidad == id)
-                .Select(x => new AvisoPrivacidadVM
+                .Select(x => new AvisoPrivacidadFormVM
                 {
                     IdAvisoPrivacidad = x.IdAvisoPrivacidad,
                     Area = x.Area,
@@ -54,7 +55,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
         }
 
 
-        public void Insertar(AvisoPrivacidadVM model)
+        public void Insertar(AvisoPrivacidadFormVM model)
         {
             var entity = new AvisoPrivacidad
             {
@@ -71,7 +72,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
 
         }
 
-        public void Actualizar(AvisoPrivacidadVM model)
+        public void Actualizar(AvisoPrivacidadFormVM model)
         {
             var entity = _context.AvisoPrivacidads.FirstOrDefault(x => x.IdAvisoPrivacidad == model.IdAvisoPrivacidad);
 

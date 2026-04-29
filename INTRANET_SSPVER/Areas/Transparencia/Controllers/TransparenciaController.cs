@@ -20,21 +20,6 @@ namespace INTRANET_SSPVER.Areas.Transparencia.Controllers
         }
 
 
-
-
-
-
-        //public IActionResult ListadoEjercicio()
-        //{
-        //    var anios = _fechaService.ObtenerAnios()
-        //                             .Select(x => int.Parse(x.Value))
-        //                             .ToList();
-
-        //    return View(anios);
-        //}
-
-
-
         public IActionResult DetalleAnio(int anio)
         {
             var lista = _service.ObtenerPorAnio(anio);
@@ -44,23 +29,6 @@ namespace INTRANET_SSPVER.Areas.Transparencia.Controllers
             return View(lista);
         }
 
-
-
-        //public IActionResult ListadoEjercicio()
-        //{
-        //    var modelo = new ListadoEjercicioVM
-        //    {
-        //        var anios = _fechaService.ObtenerAnios()
-        //                            .Select(x => int.Parse(x.Value))
-        //                             .ToList();
-
-        //        AreaResponsable = "Unidad de Transparencia",
-        //        FechaActualizacion = DateTime.Now,
-        //        UrlDescarga = "/archivo.pdf"
-        //    };
-
-        //    return View(modelo);
-        //}
 
         public IActionResult ListadoEjercicio()
         {
