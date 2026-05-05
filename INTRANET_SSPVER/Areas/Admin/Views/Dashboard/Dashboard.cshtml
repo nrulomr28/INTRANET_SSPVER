@@ -1,0 +1,131 @@
+﻿@using INTRANET_SSPVER.Models.ViewModels.Dashboard
+@model DashboardVM
+
+<div class="container mt-4">
+
+	<h4 class="mb-4">📊 Dashboard de Uso</h4>
+
+	<!-- 🔍 FILTROS -->
+	<form method="get" class="row g-2 mb-4">
+
+		<div class="col-md-3">
+			<input type="date" name="fechaInicio" class="form-control"
+				   value="@Model.FechaInicio?.ToString("yyyy-MM-dd")" />
+		</div>
+
+		<div class="col-md-3">
+			<input type="date" name="fechaFin" class="form-control"
+				   value="@Model.FechaFin?.ToString("yyyy-MM-dd")" />
+		</div>
+
+		<div class="col-md-3">
+			<select name="modulo" class="form-select">
+				<option value="">Todos los módulos</option>
+				@foreach (var m in Model.Modulos.Distinct())
+				{
+					<option value="@m" selected="@(m == Model.ModuloFiltro)">
+						@m
+					</option>
+				}
+			</select>
+		</div>
+
+		<div class="col-md-3">
+			<button class="btn btn-primary w-100">Filtrar</button>
+		</div>
+
+	</form>
+
+	<!-- 🔥 KPI -->
+	<div class="row text-center mb-4">
+
+		<div class="col-md-4">
+			<div class="card shadow-sm p-3">
+				<h6>Total accesos</h6>
+				<h3>@Model.TotalAccesos</h3>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card shadow-sm p-3">
+				<h6>Accesos hoy</h6>
+				<h3>@Model.AccesosHoy</h3>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card shadow-sm p-3">
+				<h6>Usuarios únicos</h6>
+				<h3>@Model.UsuariosUnicos</h3>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- 📊 GRÁFICAS -->
+	<div class="row">
+		<div class="col-md-6">
+			<canvas id="chartModulos"></canvas>
+		</div>
+
+		<div class="col-md-6">
+			<canvas id="chartDias"></canvas>
+		</div>
+	</div>
+
+	<!-- 📋 TABLA -->
+	<div class="mt-4">
+		<h5>Últimos accesos</h5>
+
+		<table class="table table-sm">
+			<thead>
+				<tr>
+					<th>Módulo</th>
+					<th>Usuario</th>
+					<th>IP</th>
+					<th>Fecha</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.UltimosAccesos)
+				{
+					<tr>
+						<td>@item.Modulo</td>
+						<td>@item.Usuario</td>
+						<td>@item.Ip</td>
+						<td>@item.Fecha</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+	new Chart(document.getElementById('chartModulos'), {
+	type: 'bar',
+	data: {
+	labels: @Html.Raw(Json.Serialize(Model.Modulos)),
+	datasets: [{
+	label: 'Accesos por módulo',
+	data: @Html.Raw(Json.Serialize(Model.Cantidades))
+	}]
+	}
+	});
+
+	new Chart(document.getElementById('chartDias'), {
+	type: 'line',
+	data: {
+	labels: @Html.Raw(Json.Serialize(Model.Fechas)),
+	datasets: [{
+	label: 'Accesos por día',
+	data: @Html.Raw(Json.Serialize(Model.AccesosPorDia))
+	}]
+	}
+	});
+</script>

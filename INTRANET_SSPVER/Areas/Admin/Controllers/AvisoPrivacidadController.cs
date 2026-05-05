@@ -16,11 +16,31 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
             _avisoPrivacidadService = avisoPrivacidadService;
         }
 
+        //public IActionResult Index()
+        //{
+        //    var model = _avisoPrivacidadService.ObtenerTodos();
+        //    return View(model);
+        //}
+
+
         public IActionResult Index()
         {
-            var model = _avisoPrivacidadService.ObtenerTodos();
+            var lista = _avisoPrivacidadService.ObtenerTodos();
+
+            var model = new AvisoPrivacidadViewModel
+            {
+                Lista = lista,
+                //Footer = new AvisoPrivacidadFooterVM
+                //{
+                //    AreaResponsable = "Unidad de Transparencia",
+                //    FechaActualizacion = DateTime.Now,
+                //    UrlDescarga = "/docs/aviso.pdf"
+                //}
+            };
+
             return View(model);
         }
+
 
 
         // 🔹 CREATE GET

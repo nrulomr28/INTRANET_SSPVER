@@ -32,13 +32,13 @@ public partial class BdpagWebContext : DbContext
 
     public virtual DbSet<Formato> Formatos { get; set; }
 
+    public virtual DbSet<LogAcceso> LogAccesos { get; set; }
+
     public virtual DbSet<UbicacionFisica> UbicacionFisicas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
     }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -85,7 +85,9 @@ public partial class BdpagWebContext : DbContext
 
             entity.ToTable("AvisoPrivacidad");
 
-            entity.Property(e => e.Area).IsUnicode(false);
+            entity.Property(e => e.Area)
+                .HasMaxLength(100)
+                .IsUnicode(false);
             entity.Property(e => e.AvisoIntegralUrl).IsUnicode(false);
             entity.Property(e => e.AvisoSimplificadoUrl).IsUnicode(false);
             entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
@@ -147,6 +149,22 @@ public partial class BdpagWebContext : DbContext
                 .HasForeignKey(d => d.IdArea)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Formato_Area1");
+        });
+
+        modelBuilder.Entity<LogAcceso>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__LogAcces__3214EC074E2817C9");
+
+            entity.ToTable("LogAcceso");
+
+            entity.Property(e => e.Equipo).HasMaxLength(100);
+            entity.Property(e => e.Fecha).HasColumnType("datetime");
+            entity.Property(e => e.Ip)
+                .HasMaxLength(50)
+                .HasColumnName("IP");
+            entity.Property(e => e.Modulo).HasMaxLength(100);
+            entity.Property(e => e.SessionId).HasMaxLength(50);
+            entity.Property(e => e.Usuario).HasMaxLength(100);
         });
 
         modelBuilder.Entity<UbicacionFisica>(entity =>

@@ -64,7 +64,7 @@ namespace INTRANET_SSPVER.Areas.Account.Controllers
             if (result.Succeeded)
             {
                 //await _signInManager.SignInAsync(user, false);   EF cierra la sesión actual y abre sesión con el nuevo usuario recién creado.             
-                return RedirectToAction("MostrarUsuarios", "Admin", new { area = "Admin" });
+                return RedirectToAction("MostrarUsuarios", "Seguridad", new { area = "Seguridad" });
             }
 
             foreach (var error in result.Errors)

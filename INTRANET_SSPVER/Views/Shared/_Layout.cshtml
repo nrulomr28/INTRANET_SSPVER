@@ -51,7 +51,7 @@
 
 				<!-- LOGO -->
 				<a class="navbar-brand d-flex align-items-center gap-2"
-					   asp-controller="Proceso" asp-action="Inicio">
+					   asp-area="Inicio" asp-controller="Menu" asp-action="Index">
 					<img src="~/img/logo/Veracruz2026.png" height="40" />
 				</a>
 
@@ -126,19 +126,25 @@
 									</a>
 									<ul class="dropdown-menu">
 										<li>
-
-											<a class="dropdown-item" asp-area="Transparencia" asp-controller="Transparencia" asp-action="Index">
-												<i class="bi bi-card-checklist"></i>Comité de Transparencia
+											<a class="dropdown-item" asp-area="Transparencia" asp-controller="Transparencia" asp-action="ListadoEjercicio">
+												<i class="bi bi-card-checklist"></i> Comité de Transparencia
 											</a>
 
 											<a class="dropdown-item" asp-area="Admin" asp-controller="Transparencia" asp-action="Index">
-												<i class="bi bi-gear"></i>Admon. Comité de Transparencia
+												<i class="bi bi-gear"></i> Admon. Comité de Transparencia
 											</a>
 										</li>
 										<li>
+
+											<a class="dropdown-item" asp-area="AvisoPrivacidad" asp-controller="AvisoPrivacidad" asp-action="Index">
+												<i class="bi bi-card-checklist"></i> Aviso de privacidad
+											</a>
+
+
 											<a class="dropdown-item" asp-area="Admin" asp-controller="AvisoPrivacidad" asp-action="Index">
 												<i class="bi bi-gear"></i> Admon. Aviso de privacidad
 											</a>
+
 										</li>
 									</ul>
 								</li>
@@ -208,8 +214,8 @@
 										<i class="bi bi-clipboard2-data-fill"></i> Transparencia
 									</a>
 									<ul class="dropdown-menu">
-										
 
+										
 
 										<li>
 											<a class="dropdown-item" asp-area="Admin" asp-controller="Transparencia" asp-action="Index">

@@ -6,7 +6,7 @@ namespace INTRANET_SSPVER.Models.ViewModels.AvisoPrivacidad
     {
         public int IdAvisoPrivacidad { get; set; }
 
-        [StringLength(50, ErrorMessage = "No puede exceder 50 caracteres")]
+        [StringLength(100, ErrorMessage = "No puede exceder 100 caracteres")]
         [Required(ErrorMessage = "Número de acta obligatorio")]
         public string Area { get; set; } = null!;
 
@@ -29,9 +29,9 @@ namespace INTRANET_SSPVER.Models.ViewModels.AvisoPrivacidad
 
         public DateTime FechaCreacion { get; set; }
 
-
-
     }
+
+
 
 
 }

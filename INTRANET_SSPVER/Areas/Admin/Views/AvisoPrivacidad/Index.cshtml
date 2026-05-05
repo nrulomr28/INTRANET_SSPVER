@@ -1,5 +1,6 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.AvisoPrivacidad
-@model List<AvisoPrivacidadFormVM>
+@* @model List<AvisoPrivacidadFormVM> *@
+@model AvisoPrivacidadViewModel
 
 @{
 	ViewData["Title"] = "Administrar Aviso de Privacidad";
@@ -97,7 +98,7 @@
 							int i = 1;
 						}
 
-						@foreach (var item in Model)
+						@foreach (var item in Model.Lista)
 						{
 							<tr>
 

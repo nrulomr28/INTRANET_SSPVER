@@ -1,6 +1,7 @@
 ﻿using INTRANET_SSPVER.Models.Authentication;
 using INTRANET_SSPVER.Models.Contexts;
 using INTRANET_SSPVER.Models.Entities;
+using INTRANET_SSPVER.Models.Filters;
 using INTRANET_SSPVER.Models.Roles;
 using INTRANET_SSPVER.Models.Services.Implementations;
 using INTRANET_SSPVER.Models.Services.Interfaces;
@@ -51,11 +52,19 @@ builder.Services.AddScoped<IUbFisicaService, UbicacionFisicaService>();
 builder.Services.AddScoped<ITransparenciaService, TransparenciaService>();
 builder.Services.AddScoped<IFechaService, FechaService>();
 builder.Services.AddScoped<IAvisoPrivacidadService, AvisoPrivacidadService>();
+builder.Services.AddScoped<ILogService, LogService>();
+builder.Services.AddScoped<LogActionFilter>();
 builder.Services.AddScoped<IRolCatalogoService, RolCatalogoService>();
 builder.Services.AddScoped<RolesService>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 
-//builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<LogActionFilter>();
+});
 
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -72,13 +81,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
 
 
-
-
+var app = builder.Build();
 
 // Configurar licencia de QuestPDF
 QuestPDF.Settings.License = LicenseType.Community;
 
-var app = builder.Build();
+
+
+
 
 
 // 🔹 Inicialización de roles
@@ -111,6 +121,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession(); // ✔ AQUÍ
 
 app.UseAuthentication();
 app.UseAuthorization();
