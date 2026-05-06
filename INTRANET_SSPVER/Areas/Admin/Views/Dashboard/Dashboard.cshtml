@@ -6,7 +6,13 @@
 	<h4 class="mb-4">📊 Dashboard de Uso</h4>
 
 	<!-- 🔍 FILTROS -->
-	<form method="get" class="row g-2 mb-4">
+	@* 	<form method="get" class="row g-2 mb-4"> *@
+
+	<form asp-area="Admin"
+		  asp-controller="Dashboard"
+		  asp-action="Dashboard"
+		  method="get"
+		  class="row g-2 mb-4">
 
 		<div class="col-md-3">
 			<input type="date" name="fechaInicio" class="form-control"
@@ -30,8 +36,15 @@
 			</select>
 		</div>
 
-		<div class="col-md-3">
+		@* 	<div class="col-md-3">
 			<button class="btn btn-primary w-100">Filtrar</button>
+		</div> *@
+
+
+		<div class="col-md-3">
+			<button type="submit" class="btn btn-primary w-100">
+				Filtrar
+			</button>
 		</div>
 
 	</form>
@@ -82,6 +95,7 @@
 				<tr>
 					<th>Módulo</th>
 					<th>Usuario</th>
+					<th>Equipo</th>
 					<th>IP</th>
 					<th>Fecha</th>
 				</tr>
@@ -92,6 +106,7 @@
 					<tr>
 						<td>@item.Modulo</td>
 						<td>@item.Usuario</td>
+						<td>@item.Equipo</td>
 						<td>@item.Ip</td>
 						<td>@item.Fecha</td>
 					</tr>

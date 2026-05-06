@@ -25,15 +25,29 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
 
 
 
+        //[HttpPost]
         public async Task<IActionResult> Dashboard(DateTime? fechaInicio, DateTime? fechaFin, string modulo)
         {
             var query = _context.LogAccesos.AsQueryable();
 
             if (fechaInicio.HasValue)
-                query = query.Where(x => x.Fecha >= fechaInicio);
+            {
+                var fechaInicioReal = fechaInicio.Value.Date;
+
+                query = query.Where(x =>
+                    x.Fecha.HasValue &&
+                    x.Fecha.Value >= fechaInicioReal);
+            }
 
             if (fechaFin.HasValue)
-                query = query.Where(x => x.Fecha <= fechaFin);
+            {
+                var fechaFinReal = fechaFin.Value.Date.AddDays(1).AddTicks(-1);
+
+                query = query.Where(x =>
+                    x.Fecha.HasValue &&
+                    x.Fecha.Value <= fechaFinReal);
+            }
+
 
             if (!string.IsNullOrEmpty(modulo))
                 query = query.Where(x => x.Modulo == modulo);
