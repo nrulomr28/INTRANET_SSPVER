@@ -38,8 +38,9 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
         public List<TransparenciaVM> ObtenerPorAnio(int anio)
         {
             return _context.ComiteTransparencia
-                .Where(x => x.Año == anio)
+                .Where(x => x.Año == anio)                
                 .OrderByDescending(x => x.Fecha)
+                .OrderByDescending(x => x.NumeroActa)
                 .Select(x => new TransparenciaVM
                 {
                     IdComite = x.IdComite,
