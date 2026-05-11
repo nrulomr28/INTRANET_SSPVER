@@ -30,6 +30,20 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         {
             var query = _context.LogAccesos.AsQueryable();
 
+            query = query.Where(x => x.Modulo != "Inicio/Menu/Index");
+
+
+            //Implementar más adelante si se desea excluir
+            //            var excluir = new[]
+            //           {
+            //    "Inicio/Menu/Index",
+            //    "Account/Account/Login",
+            //    "Account/Account/Salir"
+            //};
+
+            //query = query.Where(x => !excluir.Contains(x.Modulo));
+
+
             if (fechaInicio.HasValue)
             {
                 var fechaInicioReal = fechaInicio.Value.Date;
