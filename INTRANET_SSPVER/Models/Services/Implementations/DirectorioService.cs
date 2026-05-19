@@ -24,8 +24,8 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                     join b in _context.AreaDirectorios
                     on a.IdArea equals b.IdArea
                     where (a.Activo == true)
-                    //orderby a.Nivel, a.Orden, b.Area, a.Nombre
-                    orderby (a.Nivel ?? 999), (a.Orden ?? 999), b.Area, a.Nombre
+                    //orderby (a.Nivel ?? 999), (a.Orden ?? 999), b.Area, a.Nombre
+                    orderby (a.Orden ?? 999), (a.Nivel ?? 999), b.Area, a.Nombre
 
 
                     select new DirectorioListVM
@@ -33,7 +33,10 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                         Id = a.IdDirectorio,
                         Nombre = a.Nombre,
                         Area = b.Area,
-                        Ext = a.Extension
+                        Ext = a.Extension,
+                        Orden = a.Orden,
+                        Nivel = a.Nivel
+
                     })
                     .AsNoTracking()
                     .ToList();
@@ -72,7 +75,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                 FechaActualizacion = DateTime.Now,
                 Activo = model.Activo,
                 Nivel = model.Nivel,
-                Orden = model.Orden
+                Orden = (int)model.Orden
             };
 
             _context.Add(entity);
@@ -91,7 +94,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             entity.FechaActualizacion = DateTime.Now;
             entity.Activo = model.Activo;
             entity.Nivel = model.Nivel;
-            entity.Orden = model.Orden;
+            entity.Orden = (int)model.Orden;
 
             _context.SaveChanges();
         }
@@ -120,6 +123,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                     NombreArea = x.Area
                 })
                 .OrderBy(x => x.NombreArea).ToList();
+
         }
 
 

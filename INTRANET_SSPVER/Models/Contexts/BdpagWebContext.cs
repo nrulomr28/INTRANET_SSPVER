@@ -36,10 +36,7 @@ public partial class BdpagWebContext : DbContext
 
     public virtual DbSet<UbicacionFisica> UbicacionFisicas { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-    }
-
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Modern_Spanish_CI_AS");

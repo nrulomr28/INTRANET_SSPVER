@@ -9,10 +9,6 @@ public partial class DirectivaCalea
 
     public string NombreDirectiva { get; set; } = null!;
 
-    public byte[]? ImagenDirectiva { get; set; }
-
-    public byte[]? ArchivoDirectiva { get; set; }
-
     public string? ExtencionArchivo { get; set; }
 
     public int? IdAreaCalea { get; set; }

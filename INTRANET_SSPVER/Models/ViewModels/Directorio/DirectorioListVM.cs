@@ -17,7 +17,14 @@ namespace INTRANET_SSPVER.Models.ViewModels.Directorio
 
         public string Ext { get; set; }
 
+        public bool Activo { get; set; }
+
+        public int? Nivel { get; set; }
         
+
+        public int? Orden { get; set; }
+
+
     }
 
 

@@ -1,4 +1,5 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.Directorio
+@using INTRANET_SSPVER.Helpers
 @model DirectorioFormVM
 
 @{
@@ -25,7 +26,7 @@
 			<input asp-for="Nombre" class="form-control" />
 			<span asp-validation-for="Nombre" class="text-danger"></span>
 		</div>
-			
+
 		<div class="mb-3">
 
 			<label class="form-label">Area</label>
@@ -42,12 +43,20 @@
 		<div class="mb-3">
 			<label class="form-label">Nivel</label>
 
-			<select asp-for="Nivel" class="form-select">
+			@* <select asp-for="Nivel" class="form-select">
 				<option value="">-- Selecciona nivel --</option>
 				<option value="1">Secretario General</option>
 				<option value="2">Director</option>
 				<option value="3">Jefe</option>
 				<option value="4">Analista</option>
+			</select> *@
+
+			<select asp-for="Nivel"
+					asp-items="NivelDirectorioHelper.ObtenerNiveles()"
+					class="form-select">
+
+				<option value="">-- Selecciona nivel --</option>
+
 			</select>
 
 			<span asp-validation-for="Nivel" class="text-danger"></span>
@@ -98,7 +107,7 @@
 
 
 @section Scripts {
-	
+
 	<script>
 		$(document).ready(function () {
 		$('.select2').select2({

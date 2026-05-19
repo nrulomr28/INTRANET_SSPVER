@@ -29,6 +29,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
         }
 
 
+
         public IActionResult ExportPdf()
         {
             var modelo = _service.ObtenerDirectorio();
@@ -38,58 +39,172 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4);
-                    page.Margin(2, Unit.Centimetre);
 
-                    
-                    page.Header().Background("#6A1B1B").Padding(10).AlignCenter().Text("Directorio Telefónico SSP")
-                        .FontSize(20).Bold().FontColor("#FFFFFF");
+                    page.Margin(1.3f, Unit.Centimetre);
 
-                    
-                    page.Content().Table(table =>
+                    page.DefaultTextStyle(x =>
+                        x.FontFamily("Arial")
+                         .FontSize(10)
+                    );
+
+                    // 🔥 HEADER
+                    page.Header().Column(header =>
                     {
-                        table.ColumnsDefinition(columns =>
-                        {
-                            columns.RelativeColumn(1); 
-                            columns.RelativeColumn(3); 
-                            columns.RelativeColumn(3); 
-                            columns.RelativeColumn(2); 
-                        });
+                        header.Item()
+                            .Background("#7B1E2B")
+                            .PaddingVertical(2)
+                            .AlignCenter()
+                            .Text("Directorio Telefónico SSP")
+                            .FontColor("#FFFFFF")
+                            .FontSize(20)
+                            .Bold();
 
-                        // Encabezado 
-                        table.Header(header =>
-                        {
-                            header.Cell().Background("#F2C94C").AlignCenter().Text("#").Bold().FontSize(12).FontColor("#6A1B1B");
-                            header.Cell().Background("#F2C94C").AlignCenter().Text("Nombre").Bold().FontSize(12).FontColor("#6A1B1B");
-                            header.Cell().Background("#F2C94C").AlignCenter().Text("Área").Bold().FontSize(12).FontColor("#6A1B1B");
-                            header.Cell().Background("#F2C94C").AlignCenter().Text("Extensión").Bold().FontSize(12).FontColor("#6A1B1B");
-                        });
-
-                        // Filas con numeración y contenido centrado
-                        int i = 1;
-                        foreach (var item in modelo)
-                        {
-                            table.Cell().AlignCenter().Text(i++.ToString()).FontSize(10);
-                            table.Cell().AlignCenter().Text(item.Nombre).FontSize(10);
-                            table.Cell().AlignCenter().Text(item.Area).FontSize(10);
-                            table.Cell().AlignCenter().Text(item.Ext).FontSize(10);
-                        }
+                        header.Item()
+                            .PaddingTop(6)
+                            .AlignCenter()
+                            .Text("Secretaría de Seguridad Pública del Estado de Veracruz")
+                            .FontSize(9)
+                            .FontColor("#666666");
                     });
 
-                    // Footer
-                    page.Footer().AlignCenter().Text(text =>
-                    {
-                        text.Span("Secretaría de Seguridad Pública - Veracruz")
-                            .FontSize(9).FontColor("#6A1B1B");
-                    });
+                    // 🔥 CONTENIDO
+                    page.Content()
+                        .PaddingTop(15)
+                        .Column(column =>
+                        {
+                            string areaPrincipal = "";
+                            string subAreaActual = "";
+
+                            foreach (var item in modelo)
+                            {
+                                // 🔥 NIVEL PRINCIPAL (1 y 2)
+                                if (item.Nivel == 1 || item.Nivel == 2)
+                                {
+                                    areaPrincipal = item.Area;
+                                    subAreaActual = "";
+
+                                    column.Item()
+                                        .PaddingTop(12)
+                                        .PaddingBottom(6)
+                                        .Column(areaCol =>
+                                        {
+                                            areaCol.Item()
+                                                .LineHorizontal(1)
+                                                .LineColor("#7B1E2B");
+
+                                            areaCol.Item()
+                                                .PaddingVertical(4)
+                                                .AlignCenter()
+                                                .Text(areaPrincipal.ToUpper())
+                                                .Bold()
+                                                .FontSize(11)
+                                                .FontColor("#7B1E2B");
+
+                                            areaCol.Item()
+                                                .LineHorizontal(1)
+                                                .LineColor("#7B1E2B");
+                                        });
+                                }
+                                else
+                                {
+                                    // 🔹 SUBÁREA
+                                    if (subAreaActual != item.Area)
+                                    {
+                                        subAreaActual = item.Area;
+
+                                        column.Item()
+                                            .PaddingTop(8)
+                                            .PaddingBottom(3)
+                                            .Text(subAreaActual)
+                                            .SemiBold()
+                                            .FontSize(9)
+                                            .FontColor("#666666");
+                                    }
+                                }
+
+                                // 🔥 RESALTAR FILA NIVEL 1 Y 2
+                                bool destacar = item.Nivel == 1 || item.Nivel == 2;
+
+                                column.Item()
+                                    .PaddingVertical(4)
+                                    .Row(row =>
+                                    {
+                                        // 👤 NOMBRE
+                                        row.RelativeItem(6)
+                                            .Text(text =>
+                                            {
+                                                var span = text.Span(item.Nombre);
+
+                                                if (destacar)
+                                                {
+                                                    span.Bold()
+                                                        .FontColor("#000000")
+                                                        .FontSize(10.5f);
+                                                }
+                                                else
+                                                {
+                                                    span.FontSize(10)
+                                                        .FontColor("#333333");
+                                                }
+                                            });
+
+                                        // 📞 EXTENSIÓN
+                                        row.ConstantItem(80)
+                                            .AlignRight()
+                                            .Text(text =>
+                                            {
+                                                var ext = text.Span($"Ext. {item.Ext}");
+
+                                                if (destacar)
+                                                {
+                                                    ext.Bold()
+                                                       .FontColor("#000000")
+                                                       .FontSize(10.5f);
+                                                }
+                                                else
+                                                {
+                                                    ext.FontSize(10)
+                                                       .FontColor("#555555");
+                                                }
+                                            });
+                                    });
+
+                                // 🔹 LÍNEA DIVISORIA SUAVE
+                                column.Item()
+                                    .PaddingTop(2)
+                                    .LineHorizontal(0.5f)
+                                    .LineColor("#E5E5E5");
+                            }
+                        });
+
+                    // 🔥 FOOTER
+                    page.Footer()
+                        .PaddingTop(10)
+                        .AlignCenter()
+                        .Text(text =>
+                        {
+                            text.Span("Documento generado automáticamente • SSP Veracruz")
+                                .FontSize(8)
+                                .FontColor("#888888");
+                        });
                 });
             });
 
             var pdfBytes = document.GeneratePdf();
-            return File(pdfBytes, "application/pdf", "DirectorioSSP.pdf");
+
+            return File(
+                pdfBytes,
+                "application/pdf",
+                $"DirectorioSSP_{DateTime.Now:yyyyMMdd}.pdf"
+            );
         }
 
 
-        //Revisar
+
+
+
+
+
 
     }
 

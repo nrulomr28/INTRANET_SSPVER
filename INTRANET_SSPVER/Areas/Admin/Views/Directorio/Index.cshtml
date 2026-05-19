@@ -1,5 +1,7 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.Directorio
+@using INTRANET_SSPVER.Helpers
 @model List<DirectorioListVM>
+
 
 @{
 	ViewData["Title"] = "Administrar Directorio";
@@ -32,9 +34,9 @@
 			<!-- BOTÓN NUEVO -->
 			<div class="d-flex justify-content-end mb-3">
 				<a asp-area="Admin"
-					   asp-controller="Directorio"
-					   asp-action="Create"
-					   class="btn btn-success shadow-sm px-3 rounded-pill">
+				   asp-controller="Directorio"
+				   asp-action="Create"
+				   class="btn btn-success shadow-sm px-3 rounded-pill">
 					<i class="bi bi-plus-circle"></i> Nuevo Registro
 				</a>
 			</div>
@@ -75,14 +77,19 @@
 					<thead class="text-center" style="background-color:#f1f1f1;">
 						<tr>
 							<th style="width:5%">#</th>
+							<th>Nivel</th>
+							
+
 							<th>Nombre</th>
 							<th>Área</th>
+							<th>Orden</th>
+							
 							<th style="width:15%">Extensión</th>
 							<th style="width:15%">Acciones</th>
 						</tr>
 					</thead>
 
-					<tbody>
+					@* 		<tbody>
 						@{
 							int i = 1;
 						}
@@ -125,6 +132,87 @@
 									</form>
 
 								</td>
+							</tr>
+
+							i++;
+						}
+
+					</tbody> *@
+
+					<tbody>
+
+						@{
+							int i = 1;
+						}
+
+						@foreach (var item in Model)
+						{
+							var claseFila = NivelDirectorioHelper.ObtenerClase(item.Nivel);
+
+							<tr class="@claseFila">
+
+								<td class="text-center">
+									@i
+								</td>
+
+								
+								<td>
+									<span class="badge bg-secondary">
+										@NivelDirectorioHelper.ObtenerNombreNivel(item.Nivel)
+									</span>
+								</td>
+
+								
+
+								<td>
+									@item.Nombre
+								</td>
+
+								<td>
+									@item.Area
+								</td>
+
+								<td>
+									@item.Orden
+								</td>
+
+
+								<td class="text-center">
+									<i class="bi bi-telephone me-1"></i>
+									@item.Ext
+								</td>
+
+								<td class="text-center">
+
+									<!-- EDITAR -->
+									<a asp-area="Admin"
+									   asp-controller="Directorio"
+									   asp-action="Edit"
+									   asp-route-id="@item.Id"
+									   class="btn btn-sm btn-outline-secondary">
+										<i class="bi bi-pencil-square"></i>
+									</a>
+
+									<!-- ELIMINAR -->
+									<form asp-area="Admin"
+										  asp-controller="Directorio"
+										  asp-action="Delete"
+										  asp-route-id="@item.Id"
+										  method="post"
+										  style="display:inline;"
+										  onsubmit="return confirm('¿Deseas eliminar este registro?');">
+
+										@Html.AntiForgeryToken()
+
+										<button type="submit"
+												class="btn btn-sm btn-outline-danger">
+											<i class="bi bi-trash"></i>
+										</button>
+
+									</form>
+
+								</td>
+
 							</tr>
 
 							i++;
