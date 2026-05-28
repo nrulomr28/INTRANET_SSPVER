@@ -7,6 +7,8 @@ namespace INTRANET_SSPVER.Models.Services.Interfaces
     {
         Task<List<AreaCaleaVM>> ObtenerAreasConDirectivas();
 
+        Task<DirectivaCalea?> ObtenerDirectivaPorId(int id);
+
     }
 
 

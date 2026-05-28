@@ -30,12 +30,11 @@
 
   <ItemGroup>
     <Folder Include="Models\Contexts\" />
-    <Folder Include="wwwroot\Calea\Formatos\" />
-    <Folder Include="wwwroot\Calea\Tecnologias\" />
     <Folder Include="wwwroot\Calea\Videos\" />
     <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\FormatosTecnologias\" />
     <Folder Include="wwwroot\img\veracruz\" />
+    <Folder Include="wwwroot\lib\sweetalert\" />
   </ItemGroup>
 
 </Project>

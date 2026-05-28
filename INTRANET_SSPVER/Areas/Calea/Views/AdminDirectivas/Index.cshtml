@@ -1,6 +1,15 @@
 ﻿@using INTRANET_SSPVER.Models.ViewModels.Calea
 @model List<DirectivaVM>
 
+
+
+
+
+
+
+
+
+
 <div class="container-fluid mt-2">
 
 	
@@ -94,15 +103,34 @@
 						<td>@d.NombreArea</td>
 
 						<td>
-							<a href="@Url.Content(d.UrlArchivo)" target="_blank"
-								   class="btn btn-outline-secondary btn-sm">
+
+							@* <a asp-area="Calea"
+							   asp-controller="Archivo"
+							   asp-action="VerPdf"
+							   asp-route-id="@d.IdDirectiva"
+							   asp-route-returnUrl="@Context.Request.Path"
+							   target="_blank"
+							   class="btn btn-outline-danger btn-sm">
+
 								<i class="bi bi-file-earmark-pdf"></i>
-							</a>
+							</a> *@
+
+							<button type="button"
+									class="btn btn-outline-danger btn-sm btn-pdf"
+									data-id="@d.IdDirectiva">
+
+								<i class="bi bi-file-earmark-pdf"></i>
+
+							</button>
+
+
+							
+
 						</td>
 
 						<td class="text-end">
 							<a asp-action="Editar" asp-route-id="@d.IdDirectiva"
-								   class="btn btn-outline-primary btn-sm">
+							   class="btn btn-outline-primary btn-sm">
 								<i class="bi bi-pencil"></i>
 							</a>
 
@@ -171,4 +199,45 @@
 			if (alert) alert.style.display = 'none';
 		}, 3000);
 	</script>
+
+
+
+	<script>
+
+		document.querySelectorAll(".btn-pdf")
+			.forEach(btn => {
+
+			btn.addEventListener("click", async function () {
+
+				const id = this.dataset.id;
+
+				const response = await fetch(
+					`/Calea/Archivo/ExistePdf?id=${id}`
+				);
+
+				const existe = await response.json();
+
+				if (existe)
+				{
+					window.open(
+						`/Calea/Archivo/VerPdf?id=${id}`,
+						'_blank'
+					);
+				}
+				else
+				{
+					Swal.fire({
+						icon: 'error',
+						title: 'Archivo no disponible',
+						text: 'El archivo no existe en el repositorio.',
+						confirmButtonColor: '#6A1B1B'
+					});
+				}
+
+			});
+
+		});
+
+	</script>
+
 }

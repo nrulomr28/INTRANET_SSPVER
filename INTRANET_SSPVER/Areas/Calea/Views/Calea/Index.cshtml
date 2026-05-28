@@ -6,14 +6,38 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@* <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> *@
 
 
+
+
+@if (TempData["Error"] != null)
+{
+	<script>
+		Swal.fire({
+		icon: 'error',
+		title: 'Error...',
+		text: '@TempData["Error"]',
+		confirmButtonColor: '#6A1B1B'
+		});
+	</script>
+}
+
+@if (TempData["Success"] != null)
+{
+	<script>
+		Swal.fire({
+		icon: 'success',
+		title: 'Correcto',
+		text: '@TempData["Success"]',
+		timer: 2500,
+		showConfirmButton: false
+		});
+	</script>
+}
 
 
 <div class="container mb-2 mt-3">
-
-
-	
 
 
 	<div class="card-header text-center text-white d-flex align-items-center justify-content-between headertitulo">
@@ -102,35 +126,61 @@
 				<div class="accordion-body">
 
 					<div class="row">
+						
 						@foreach (var d in area.Directivas)
 						{
 							<div class="col-md-6 mb-3">
 
-								<a href="@d.UrlArchivo"
-									   target="_blank"
-									   class="archivo-card d-flex align-items-center">
+								@if (d.ArchivoDisponible)
+								{
+									<button type="button"
+											class="archivo-card d-flex align-items-center border-0 w-100 text-start btn-pdf"
+											data-id="@d.IdDirectiva">
 
-									<div class="icono">
-										<i class="bi bi-file-earmark-pdf"></i>
-									</div>
-
-									<div class="info flex-grow-1">
-										<div class="titulo">
-											@d.NombreDirectiva
+										<div class="icono">
+											<i class="bi bi-file-earmark-pdf"></i>
 										</div>
-										<div class="sub">
-											Descargar archivo
+
+										<div class="info flex-grow-1">
+											<div class="titulo">
+												@d.NombreDirectiva
+											</div>
+
+											<div class="sub">
+												Descargar archivo
+											</div>
 										</div>
-									</div>
 
-									<div class="descarga">
-										<i class="bi bi-download"></i>
-									</div>
+										<div class="descarga">
+											<i class="bi bi-download"></i>
+										</div>
 
-								</a>
+									</button>
+								}
+								else
+								{
+									<div class="archivo-card d-flex align-items-center opacity-50">
+
+										<div class="icono">
+											<i class="bi bi-file-earmark-x"></i>
+										</div>
+
+										<div class="info flex-grow-1">
+											<div class="titulo">
+												@d.NombreDirectiva
+											</div>
+
+											<div class="sub text-danger">
+												Archivo no disponible
+											</div>
+										</div>
+
+									</div>
+								}
 
 							</div>
 						}
+
 					</div>
 				</div>
 			</div>
@@ -138,3 +188,48 @@
 	}
 
 </div>
+
+								
+
+@section Scripts {
+	<script>
+
+				document.querySelectorAll(".btn-pdf")
+			.forEach(btn => {
+
+			btn.addEventListener("click", async function () {
+
+				const id = this.dataset.id;
+
+				const response = await fetch(
+					`/Calea/Archivo/ExistePdf?id=${id}`
+				);
+
+				const existe = await response.json();
+
+				if (existe)
+				{
+					window.open(
+						`/Calea/Archivo/VerPdf?id=${id}`,
+						'_blank'
+					);
+				}
+				else
+				{
+					Swal.fire({
+						icon: 'error',
+						title: 'Archivo no disponible',
+						text: 'El archivo no existe en el repositorio.',
+						confirmButtonColor: '#6A1B1B'
+					});
+				}
+
+			});
+
+		});
+
+	</script>
+
+}
+
+									

@@ -38,19 +38,66 @@
             </select>
         </div>
 
-        <!-- Archivo actual -->
-        <div class="mb-3">
-            <label class="form-label">Archivo actual</label><br />
+     
+
+      @*   <div class="mb-3">
+
+            <label class="form-label">
+                Archivo actual
+            </label>
+
+            <br />
+
             @if (!string.IsNullOrEmpty(Model.UrlActual))
             {
-                <a href="@Url.Content(Model.UrlActual)" target="_blank" class="btn btn-outline-secondary btn-sm">
-                    <i class="bi bi-file-earmark-pdf"></i> Ver archivo
+                <a asp-area="Calea"
+                   asp-controller="Calea"
+                   asp-action="VerPdf"
+                   asp-route-id="@Model.IdDirectiva"
+                   target="_blank"
+                   class="btn btn-outline-secondary btn-sm">
+
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    Ver archivo
+
                 </a>
             }
             else
             {
-                <span class="text-muted">Sin archivo</span>
+                <span class="text-muted">
+                    Sin archivo
+                </span>
             }
+
+        </div> *@
+
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Archivo actual
+            </label>
+
+            <br />
+
+            @if (!string.IsNullOrWhiteSpace(Model.UrlActual))
+            {
+                <button type="button"
+                        class="btn btn-outline-secondary btn-sm btn-pdf"
+                        data-id="@Model.IdDirectiva">
+
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    Ver archivo
+
+                </button>
+            }
+            else
+            {
+                <span class="text-muted">
+                    Sin archivo
+                </span>
+            }
+
         </div>
 
         <!-- Nuevo archivo -->
@@ -75,3 +122,44 @@
 
 </div>
 
+
+@section Scripts
+{
+    <script>
+
+        document.querySelectorAll(".btn-pdf")
+            .forEach(btn => {
+
+            btn.addEventListener("click", async function () {
+
+                const id = this.dataset.id;
+
+                const response = await fetch(
+                    `/Calea/Archivo/ExistePdf?id=${id}`
+                );
+
+                const existe = await response.json();
+
+                if (existe)
+                {
+                    window.open(
+                        `/Calea/Archivo/VerPdf?id=${id}`,
+                        '_blank'
+                    );
+                }
+                else
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Archivo no disponible',
+                        text: 'El archivo no existe en el repositorio.',
+                        confirmButtonColor: '#6A1B1B'
+                    });
+                }
+
+            });
+
+        });
+
+    </script>
+}

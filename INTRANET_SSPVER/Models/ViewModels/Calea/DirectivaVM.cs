@@ -7,12 +7,15 @@ namespace INTRANET_SSPVER.Models.ViewModels.Calea
 
         public int IdDirectiva { get; set; }
         public string NombreDirectiva { get; set; }
-        public string? UrlImg { get; set; }
+        
         public string? UrlArchivo { get; set; }
 
-        //public virtual AreasCalea? AreasCalea { get; set; }
 
-        public string NombreArea { get; set; } // 🔥 CAMBIO CLAVE
+        public string NombreArea { get; set; } 
+
+        public bool TieneArchivo { get; set; }
+
+        public bool ArchivoDisponible { get; set; }
 
     }
 }
