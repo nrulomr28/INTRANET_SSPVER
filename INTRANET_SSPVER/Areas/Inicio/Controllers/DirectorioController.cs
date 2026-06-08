@@ -47,7 +47,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                          .FontSize(10)
                     );
 
-                    // 🔥 HEADER
+                    // HEADER
                     page.Header().Column(header =>
                     {
                         header.Item()
@@ -67,7 +67,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                             .FontColor("#666666");
                     });
 
-                    // 🔥 CONTENIDO
+                    //  CONTENIDO
                     page.Content()
                         .PaddingTop(15)
                         .Column(column =>
@@ -77,7 +77,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
 
                             foreach (var item in modelo)
                             {
-                                // 🔥 NIVEL PRINCIPAL (1 y 2)
+                                //  NIVEL PRINCIPAL (1 y 2)
                                 if (item.Nivel == 1 || item.Nivel == 2)
                                 {
                                     areaPrincipal = item.Area;
@@ -105,31 +105,32 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                                                 .LineColor("#7B1E2B");
                                         });
                                 }
-                                else
-                                {
-                                    // 🔹 SUBÁREA
-                                    if (subAreaActual != item.Area)
-                                    {
-                                        subAreaActual = item.Area;
+                                //else
+                                //{
+                                //    // SUBÁREA (QUITAMOS PORQUE YA NO SE REQUIERE)
+                                //    if (subAreaActual != item.Area)
+                                //    {
+                                //        subAreaActual = item.Area;
 
-                                        column.Item()
-                                            .PaddingTop(8)
-                                            .PaddingBottom(3)
-                                            .Text(subAreaActual)
-                                            .SemiBold()
-                                            .FontSize(9)
-                                            .FontColor("#666666");
-                                    }
-                                }
+                                //        column.Item()
+                                //            .PaddingTop(8)
+                                //            .PaddingBottom(3)
+                                //            .Text(subAreaActual)
+                                //            .SemiBold()
+                                //            .FontSize(9)
+                                //            .FontColor("#666666");
+                                //    }
 
-                                // 🔥 RESALTAR FILA NIVEL 1 Y 2
+                                //}
+
+                                // RESALTAR FILSA NIVEL 1 Y 2
                                 bool destacar = item.Nivel == 1 || item.Nivel == 2;
 
                                 column.Item()
                                     .PaddingVertical(4)
                                     .Row(row =>
                                     {
-                                        // 👤 NOMBRE
+                                        //  NOMBRE
                                         row.RelativeItem(6)
                                             .Text(text =>
                                             {
@@ -148,7 +149,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                                                 }
                                             });
 
-                                        // 📞 EXTENSIÓN
+                                        //  EXTENSIÓN
                                         row.ConstantItem(80)
                                             .AlignRight()
                                             .Text(text =>
@@ -169,7 +170,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                                             });
                                     });
 
-                                // 🔹 LÍNEA DIVISORIA SUAVE
+                                // LÍNEA DIVISORIA 
                                 column.Item()
                                     .PaddingTop(2)
                                     .LineHorizontal(0.5f)
@@ -177,7 +178,7 @@ namespace INTRANET_SSPVER.Areas.Home.Controllers
                             }
                         });
 
-                    // 🔥 FOOTER
+                    //  FOOTER
                     page.Footer()
                         .PaddingTop(10)
                         .AlignCenter()

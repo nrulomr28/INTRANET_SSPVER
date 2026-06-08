@@ -23,7 +23,7 @@ options.UseSqlServer(conString));
 
 // 🔹 Base de datos para autenticación
 builder.Services.AddDbContext<AuthDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
 
 
