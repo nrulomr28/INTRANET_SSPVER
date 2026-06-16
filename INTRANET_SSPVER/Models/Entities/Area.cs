@@ -9,6 +9,8 @@ public partial class Area
 
     public string Nombre { get; set; } = null!;
 
+    public string Slug { get; set; } = null!;
+
     public bool Activo { get; set; }
 
     public virtual ICollection<Formato> Formatos { get; set; } = new List<Formato>();

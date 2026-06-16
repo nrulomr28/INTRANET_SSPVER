@@ -50,6 +50,9 @@ public partial class BdpagWebContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(150)
                 .IsUnicode(false);
+            entity.Property(e => e.Slug)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<AreaDirectorio>(entity =>
@@ -69,6 +72,9 @@ public partial class BdpagWebContext : DbContext
 
             entity.Property(e => e.IdAreaCalea).ValueGeneratedOnAdd();
             entity.Property(e => e.NombreAreaCalea).HasMaxLength(200);
+            entity.Property(e => e.Slug)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdAreaCaleaNavigation).WithOne(p => p.AreasCalea)
                 .HasForeignKey<AreasCalea>(d => d.IdAreaCalea)
@@ -114,6 +120,7 @@ public partial class BdpagWebContext : DbContext
                 .HasMaxLength(250)
                 .IsUnicode(false);
             entity.Property(e => e.UrlArchivoDirectiva).IsUnicode(false);
+            entity.Property(e => e.UrlArchivoDirectiva2).IsUnicode(false);
             entity.Property(e => e.UrlImgDirectiva).IsUnicode(false);
         });
 

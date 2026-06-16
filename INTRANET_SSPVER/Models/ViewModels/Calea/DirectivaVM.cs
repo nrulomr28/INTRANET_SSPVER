@@ -17,5 +17,7 @@ namespace INTRANET_SSPVER.Models.ViewModels.Calea
 
         public bool ArchivoDisponible { get; set; }
 
+        public string Slug { get; set; }
+
     }
 }

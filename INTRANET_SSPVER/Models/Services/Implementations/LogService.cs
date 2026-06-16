@@ -22,7 +22,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
         {
             var session = httpContext.Session;
 
-            // 🔹 1. SessionId
+            
             if (string.IsNullOrEmpty(session.GetString("SessionId")))
             {
                 session.SetString("SessionId", Guid.NewGuid().ToString());
@@ -30,12 +30,12 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
 
             var sessionId = session.GetString("SessionId");
 
-            // 🔹 2. Usuario
+            
             var usuario = httpContext.User?.Identity?.IsAuthenticated == true
                 ? httpContext.User.Identity.Name
                 : "Anonimo";
 
-            // 🔹 3. IP (mejorada)
+            
             var ipAddress = httpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
 
             if (string.IsNullOrEmpty(ipAddress))
@@ -49,12 +49,12 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             }
 
             if (ipAddress == "::1")
-                ipAddress = "127.0.0.1";
+                ipAddress = "127.0.0.1"; //local
 
             if (string.IsNullOrEmpty(ipAddress))
                 ipAddress = "Desconocido";
 
-            // 🔹 4. 🔥 NOMBRE DEL EQUIPO (DNS)
+            
             string equipo = ipAddress;
 
             try
@@ -66,10 +66,10 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             }
             catch
             {
-                // si falla DNS, se queda la IP
+                
             }
 
-            // 🔹 5. 🔥 EVITAR DUPLICADOS (1 minuto)
+            // Evitar duplicados en rango de (1 minuto)
             var existe = await _context.LogAccesos.AnyAsync(x =>
                 x.SessionId == sessionId &&
                 x.Modulo == modulo &&
@@ -79,14 +79,14 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             if (existe)
                 return;
 
-            // 🔹 6. Guardar
+            
             var log = new LogAcceso
             {
                 Modulo = modulo ?? "Desconocido",
                 Fecha = DateTime.Now,
                 Ip = ipAddress,
                 Usuario = usuario,
-                Equipo = equipo, // 🔥 AQUÍ YA INTEGRADO
+                Equipo = equipo, 
                 SessionId = sessionId
             };
 
@@ -97,7 +97,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             }
             catch
             {
-                // nunca romper la app por logging
+                
             }
         }
 

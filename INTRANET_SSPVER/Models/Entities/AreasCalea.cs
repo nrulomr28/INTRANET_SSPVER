@@ -9,6 +9,8 @@ public partial class AreasCalea
 
     public string NombreAreaCalea { get; set; } = null!;
 
+    public string Slug { get; set; } = null!;
+
     public bool Activo { get; set; }
 
     public virtual DirectivaCalea IdAreaCaleaNavigation { get; set; } = null!;

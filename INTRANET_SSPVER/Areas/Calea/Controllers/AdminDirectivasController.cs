@@ -28,12 +28,20 @@ namespace INTRANET_SSPVER.Areas.Calea.Controllers
     {
         IdDirectiva = d.IdDirectiva,
         NombreDirectiva = d.NombreDirectiva,
+
         //UrlArchivo = d.UrlArchivoDirectiva,
 
         NombreArea = _context.AreasCaleas
             .Where(a => a.IdAreaCalea == d.IdAreaCalea)
             .Select(a => a.NombreAreaCalea)
+            .FirstOrDefault(),
+
+        Slug = _context.AreasCaleas
+            .Where(a => a.IdAreaCalea == d.IdAreaCalea)
+            .Select(a => a.Slug)
             .FirstOrDefault()
+
+
     })
     .ToListAsync();
 

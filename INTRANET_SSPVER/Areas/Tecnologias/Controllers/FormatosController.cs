@@ -17,32 +17,45 @@ namespace INTRANET_SSPVER.Areas.Tecnologias.Controllers
         }
 
 
-        public IActionResult Index(int IdArea_)
+        //public IActionResult Index(int IdArea_)
+        //{
+        //    var categoria = _context.Areas
+        //        .FirstOrDefault(c => c.IdArea == IdArea_);
+
+        //    var formatos = _context.Formatos
+        //        .Where(f => f.IdArea == IdArea_)
+        //        .ToList();
+
+        //    ViewBag.NombreCategoria = categoria?.Nombre;
+
+        //    return View(formatos);
+        //}
+
+        [Route("Tecnologias/Formatos/{slug}")]
+        public IActionResult Index(string slug)
         {
             var categoria = _context.Areas
-                .FirstOrDefault(c => c.IdArea == IdArea_);
+                .FirstOrDefault(c => c.Slug == slug);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
 
             var formatos = _context.Formatos
-                .Where(f => f.IdArea == IdArea_)
+                .Where(f => f.IdArea == categoria.IdArea)
                 .ToList();
 
-            ViewBag.NombreCategoria = categoria?.Nombre;
+            ViewBag.NombreCategoria = categoria.Nombre;
 
             return View(formatos);
         }
 
 
-        //public IActionResult Descargar(int id)
-        //{
-        //    var formato = _context.Formatos.FirstOrDefault(f => f.IdFormato == id && f.Activo);
-        //    if (formato == null) return NotFound();
 
-        //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", formato.RutaArchivo.TrimStart('/'));
-        //    if (!System.IO.File.Exists(filePath)) return NotFound();
 
-        //    var fileBytes = System.IO.File.ReadAllBytes(filePath);
-        //    return File(fileBytes, "application/pdf", Path.GetFileName(filePath));
-        //}
+
+
 
         public IActionResult Descargar(int id)
         {

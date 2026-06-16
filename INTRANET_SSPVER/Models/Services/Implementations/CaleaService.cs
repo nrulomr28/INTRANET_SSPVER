@@ -21,7 +21,7 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
             _configuration = configuration;
         }
 
-        
+
 
         public async Task<DirectivaCalea?> ObtenerDirectivaPorId(int id)
         {
@@ -41,6 +41,8 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
 
                     NombreArea = a.NombreAreaCalea,
 
+                    Slug = a.Slug,
+
                     Directivas = _context.DirectivaCaleas
                         .Where(d =>
                             d.IdAreaCalea == a.IdAreaCalea)
@@ -48,13 +50,13 @@ namespace INTRANET_SSPVER.Models.Services.Implementations
                         {
                             IdDirectiva = d.IdDirectiva,
 
-                            NombreDirectiva =
-                                d.NombreDirectiva,
+                            NombreDirectiva = d.NombreDirectiva,
 
-                            UrlArchivo =
-                                d.UrlArchivoDirectiva,
+                            UrlArchivo = d.UrlArchivoDirectiva,
 
-                            // 🔥 Validar NULL, vacío y espacios
+                            
+
+                            // Validar NULL, vacío y espacios
                             ArchivoDisponible =
                                 !string.IsNullOrWhiteSpace(
                                     d.UrlArchivoDirectiva != null

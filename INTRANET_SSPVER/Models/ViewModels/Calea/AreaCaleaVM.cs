@@ -8,6 +8,7 @@
 
         public bool? Activo { get; set; }
 
+        public string Slug { get; set; }
         public List<DirectivaVM> Directivas { get; set; }
 
 

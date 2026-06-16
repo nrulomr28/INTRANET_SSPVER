@@ -104,20 +104,12 @@
 
 						<td>
 
-							@* <a asp-area="Calea"
-							   asp-controller="Archivo"
-							   asp-action="VerPdf"
-							   asp-route-id="@d.IdDirectiva"
-							   asp-route-returnUrl="@Context.Request.Path"
-							   target="_blank"
-							   class="btn btn-outline-danger btn-sm">
-
-								<i class="bi bi-file-earmark-pdf"></i>
-							</a> *@
+							
 
 							<button type="button"
 									class="btn btn-outline-danger btn-sm btn-pdf"
-									data-id="@d.IdDirectiva">
+									data-id="@d.IdDirectiva"
+									data-slug="@d.Slug">
 
 								<i class="bi bi-file-earmark-pdf"></i>
 
@@ -210,6 +202,7 @@
 			btn.addEventListener("click", async function () {
 
 				const id = this.dataset.id;
+					const slug = this.dataset.slug;
 
 				const response = await fetch(
 					`/Calea/Archivo/ExistePdf?id=${id}`
@@ -219,10 +212,10 @@
 
 				if (existe)
 				{
-					window.open(
-						`/Calea/Archivo/VerPdf?id=${id}`,
-						'_blank'
-					);
+			window.open(
+			`/Calea/Archivo/${id}/${slug}`,
+			'_blank'
+		);
 				}
 				else
 				{

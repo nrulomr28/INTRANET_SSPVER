@@ -9,9 +9,7 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
     [Area("Admin")]
     public class DashboardController : Controller
     {
-
         private readonly BdpagWebContext _context;
-
 
         public DashboardController(BdpagWebContext context)
         {
@@ -24,24 +22,22 @@ namespace INTRANET_SSPVER.Areas.Admin.Controllers
         }
 
 
-
         //[HttpPost]
         public async Task<IActionResult> Dashboard(DateTime? fechaInicio, DateTime? fechaFin, string modulo)
         {
             var query = _context.LogAccesos.AsQueryable();
 
-            query = query.Where(x => x.Modulo != "Inicio/Menu/Index");
-
+            //query = query.Where(x => x.Modulo != "Inicio/Menu/Index");
 
             //Implementar más adelante si se desea excluir
-            //            var excluir = new[]
-            //           {
-            //    "Inicio/Menu/Index",
-            //    "Account/Account/Login",
-            //    "Account/Account/Salir"
-            //};
+            var excluir = new[]
+           {
+                "Inicio/Menu/Index"
+                //"Account/Account/Login",
+                //"Account/Account/Salir"
+            };
 
-            //query = query.Where(x => !excluir.Contains(x.Modulo));
+            query = query.Where(x => !excluir.Contains(x.Modulo));
 
 
             if (fechaInicio.HasValue)

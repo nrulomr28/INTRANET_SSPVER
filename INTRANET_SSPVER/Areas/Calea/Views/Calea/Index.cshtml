@@ -126,7 +126,7 @@
 				<div class="accordion-body">
 
 					<div class="row">
-						
+
 						@foreach (var d in area.Directivas)
 						{
 							<div class="col-md-6 mb-3">
@@ -135,7 +135,8 @@
 								{
 									<button type="button"
 											class="archivo-card d-flex align-items-center border-0 w-100 text-start btn-pdf"
-											data-id="@d.IdDirectiva">
+											data-id="@d.IdDirectiva"
+											data-slug="@area.Slug">
 
 										<div class="icono">
 											<i class="bi bi-file-earmark-pdf"></i>
@@ -195,38 +196,39 @@
 	<script>
 
 				document.querySelectorAll(".btn-pdf")
-			.forEach(btn => {
+					.forEach(btn => {
 
-			btn.addEventListener("click", async function () {
+					btn.addEventListener("click", async function () {
 
-				const id = this.dataset.id;
+						const id = this.dataset.id;
+						const slug = this.dataset.slug;
 
-				const response = await fetch(
-					`/Calea/Archivo/ExistePdf?id=${id}`
-				);
+						const response = await fetch(
+							`/Calea/Archivo/ExistePdf?id=${id}`
+						);
 
-				const existe = await response.json();
+						const existe = await response.json();
 
-				if (existe)
-				{
-					window.open(
-						`/Calea/Archivo/VerPdf?id=${id}`,
-						'_blank'
-					);
-				}
-				else
-				{
-					Swal.fire({
-						icon: 'error',
-						title: 'Archivo no disponible',
-						text: 'El archivo no existe en el repositorio.',
-						confirmButtonColor: '#6A1B1B'
+						if (existe)
+						{
+								window.open(
+			`/Calea/Archivo/${id}/${slug}`,
+			'_blank'
+		);
+				
+							
+						}
+						else
+						{
+							Swal.fire({
+								icon: 'error',
+								title: 'Archivo no disponible',
+								text: 'El archivo no existe en el repositorio.'
+							});
+						}
 					});
-				}
 
-			});
-
-		});
+				});
 
 	</script>
 
