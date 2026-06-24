@@ -58,3 +58,17 @@ html, body {
     padding: 0;
 }
 
+.error-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.error-card {
+    border-radius: 15px;
+}
+
+.error-code {
+    font-size: 7rem;
+    font-weight: 700;
+}

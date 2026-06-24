@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "404 - Página no encontrada";
+    ViewData["Title"] = "500 - Error interno";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,17 +13,20 @@
 
                 <div class="card-body text-center p-5">
 
-                    <h1 class="display-1 fw-bold text-secondary">
-                        404
+                    <h1 class="display-1 fw-bold text-danger">
+                        500
                     </h1>
 
                     <h2 class="mb-3">
-                        Página no encontrada
+                        Error interno del servidor
                     </h2>
 
                     <p class="lead text-muted">
-                        El recurso solicitado no existe,
-                        fue movido o la dirección es incorrecta.
+                        Ocurrió un error inesperado al procesar la solicitud.
+                    </p>
+
+                    <p class="text-muted">
+                        Intente nuevamente en unos momentos o contacte al administrador del sistema.
                     </p>
 
                     <hr />
