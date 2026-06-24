@@ -88,9 +88,6 @@ QuestPDF.Settings.License = LicenseType.Community;
 
 
 
-
-
-
 // 🔹 Inicialización de roles
 using (var scope = app.Services.CreateScope())
 {
@@ -107,12 +104,10 @@ using (var scope = app.Services.CreateScope())
 
 
 
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -122,12 +117,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
 app.UseSession(); // ✔ AQUÍ
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-
 
 
 app.MapControllerRoute(
@@ -138,8 +133,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Inicio}/{controller=Menu}/{action=Index}/{id?}");
-
-
 
 
 app.Run();
